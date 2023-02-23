@@ -13,6 +13,7 @@ function Button({children, onPress, mode, style}){
                 <View style={[styles.button, 
                     mode === 'flat' && styles.flat,
                     mode === 'half' && styles.half,
+                    mode === 'redInverse' && styles.redInverse,
                     ]}>
                     <Text
                     style={[styles.buttonText, mode === 'flat' && styles.flatText]}
@@ -53,5 +54,10 @@ const styles = StyleSheet.create({
         backgroundColor: GlobalStyles.colors.white,
         borderWidth: 4,
         borderColor: GlobalStyles.colors.primary400,
+    },
+    redInverse: {
+        backgroundColor: GlobalStyles.colors.white,
+        borderWidth: 4,
+        borderColor: GlobalStyles.colors.error500,
     }
 })

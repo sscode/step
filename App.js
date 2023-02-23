@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons'
 import { GlobalStyles } from './constants/styles';
 import NewWorkout from './components/newWorkout/NewWorkout';
+import User from './screens/User';
 
 
 export default function App() {
@@ -30,7 +31,11 @@ export default function App() {
           },
           headerLeft: () => {
             return (
-              <Ionicons name="person" size={24} color="black" style={{marginLeft: 10}}/>
+              <Ionicons name="person" size={24} color="black" style={{marginLeft: 10}}
+              onPress={() => {
+                navigation.navigate('User')
+              }}
+              />
             )
           },
           title: "Home",
@@ -52,6 +57,10 @@ export default function App() {
           <Stack.Screen 
           name="Feed" 
           component={Feed} />
+
+          <Stack.Screen 
+          name="User" 
+          component={User} />
 
           <Stack.Screen 
           name="NewWorkout" 

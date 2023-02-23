@@ -64,7 +64,7 @@ export default function CameraBlock({close}){
             res => res.json()
         ).then(
             data => {
-                console.log(data);
+                console.log(data.url);
             }
         )
         close()
