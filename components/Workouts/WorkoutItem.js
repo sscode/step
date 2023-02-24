@@ -2,9 +2,14 @@ import { Pressable, View, Text, StyleSheet } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 import { useNavigation } from "@react-navigation/native";
 import { formatDate } from "../../util/date";
+import { Ionicons } from "@expo/vector-icons";
+import IconButton from "../../UI/IconButton";
+import { deleteWorkout } from "../../util/firebase/http";
+import { workoutContext } from "../../store/workoutContext";
+import { useContext } from "react";
 
 function WorkoutItem({id, name, date}){
-    const navigation = useNavigation();
+    const workoutCtx = useContext(workoutContext)
 
     const formatedDate = formatDate(date)
     
@@ -12,6 +17,13 @@ function WorkoutItem({id, name, date}){
         // navigation.navigate("ManageExpense", {
         //     wId: id});
         console.log("Expense Pressed");
+    }
+
+    function deleteHandler(){
+        console.log("Delete Pressed");
+        deleteWorkout(id)
+        workoutCtx.deleteWorkout(id)
+        console.log(id);
     }
     
     return <Pressable
@@ -21,8 +33,13 @@ function WorkoutItem({id, name, date}){
         <View style={styles.workoutItem}>
             <View>
                 <Text style={[styles.textBase, styles.name]}>{name}</Text>
-                <Text style={styles.textBase}>{formatedDate}</Text>
-                
+                <Text style={styles.textBase}>{formatedDate}</Text>     
+            </View>
+            <View>
+                <IconButton icon="trash" size={24} 
+                color={GlobalStyles.colors.black} 
+                onPress={deleteHandler}/>
+                {/* <Ionicons name="trash" size={24} color="black" /> */}
             </View>
         </View>
     </Pressable>

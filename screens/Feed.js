@@ -18,7 +18,6 @@ function Feed(){
         //   setFetchingState(true);
           try {
             const workouts = await fetchWorkout();
-            console.log(workouts)
             workoutCtx.setWorkout(workouts)
           } catch (error) {
             setError('Could not fetch expenses')
