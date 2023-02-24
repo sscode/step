@@ -1,9 +1,9 @@
 import { useLayoutEffect } from "react";
 import { View, StyleSheet, Text } from "react-native";
-import { GlobalStyles } from "../../constants/styles";
-import CameraBlock from "../Camera/CameraBlock";
+import CameraBlock from "../components/Camera/CameraBlock";
 
-function NewWorkout({navigation}){
+
+function NewWorkoutScreen({navigation}){
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -23,7 +23,7 @@ function NewWorkout({navigation}){
     </View>)
 }
 
-export default NewWorkout;
+export default NewWorkoutScreen;
 
 const styles = StyleSheet.create({
     container: {
