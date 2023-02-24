@@ -6,7 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons'
 import { GlobalStyles } from './constants/styles';
-import NewWorkoutScreen from './screens/NewWorkout';
+import NewWorkout from './screens/NewWorkout';
 import User from './screens/User';
 import WorkoutContextProvider from './store/workoutContext';
 
@@ -27,7 +27,7 @@ export default function App() {
               return (
                 <Ionicons name="add" size={24} color="black" style={{marginRight: 10}}
                 onPress={() => {
-                  navigation.navigate('NewWorkoutScreen')
+                  navigation.navigate('NewWorkout')
                 }}/> 
               )
             },
@@ -66,7 +66,7 @@ export default function App() {
 
             <Stack.Screen 
             name="NewWorkout" 
-            component={NewWorkoutScreen}
+            component={NewWorkout}
             options={{
               presentation: 'modal',
             }}

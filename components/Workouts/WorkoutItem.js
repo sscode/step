@@ -6,42 +6,54 @@ import { Ionicons } from "@expo/vector-icons";
 import IconButton from "../../UI/IconButton";
 import { deleteWorkout } from "../../util/firebase/http";
 import { workoutContext } from "../../store/workoutContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 function WorkoutItem({id, name, date}){
     const workoutCtx = useContext(workoutContext)
-
     const formatedDate = formatDate(date)
-    
-    function expensePressHandler(){
-        // navigation.navigate("ManageExpense", {
-        //     wId: id});
-        console.log("Expense Pressed");
-    }
+
+    const [small, setSmall] = useState(true)
+
 
     function deleteHandler(){
-        console.log("Delete Pressed");
         deleteWorkout(id)
         workoutCtx.deleteWorkout(id)
         console.log(id);
     }
+
+    const innerComponent =
+            <>
+                <View>
+                    <Text style={[styles.textBase, styles.name]}>{name}</Text>
+                    <Text style={styles.textBase}>{formatedDate}</Text>     
+                </View>
+                {!small && 
+                <View>
+                    <IconButton icon="trash" size={24} 
+                    color={GlobalStyles.colors.black} 
+                    onPress={deleteHandler}/>
+                </View>
+                }
+            </>
+        
     
     return <Pressable
-    onPress={expensePressHandler}
+    onPress={() => setSmall(!small)}
     style={({pressed}) => pressed && styles.pressed}
     >
-        <View style={styles.workoutItem}>
-            <View>
-                <Text style={[styles.textBase, styles.name]}>{name}</Text>
-                <Text style={styles.textBase}>{formatedDate}</Text>     
-            </View>
-            <View>
-                <IconButton icon="trash" size={24} 
-                color={GlobalStyles.colors.black} 
-                onPress={deleteHandler}/>
-                {/* <Ionicons name="trash" size={24} color="black" /> */}
-            </View>
+        {small && 
+        <View style={[styles.workoutItem, styles.small]}>
+            {innerComponent}
         </View>
+        }
+        {!small && 
+        <View style={[styles.workoutItem, styles.expanded]}>
+            {innerComponent}
+        </View>
+        }
+
+        {/* <View style={[styles.workoutItem, styles.small]}> */}
+        
     </Pressable>
 }
 
@@ -68,20 +80,14 @@ const styles = StyleSheet.create({
         marginBottom: 4,
         fontWeight: 'bold',
     },
-    amountContainer: {
-        paddingHorizontal: 12,
-        paddingVertical: 4,
-        backgroundColor: GlobalStyles.colors.white,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 4,
-        minWidth: 90,
-    },
-    amount: {
-        color: GlobalStyles.colors.primary500,
-        fontWeight: 'bold',
-    },
     pressed: {
         opacity: 0.75
     },
+    small: {
+        backgroundColor: GlobalStyles.colors.primary50,
+    },
+    expanded: {
+        paddingBottom: 50,
+        backgroundColor: GlobalStyles.colors.primary500,
+    }
 })

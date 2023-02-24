@@ -49,7 +49,6 @@ export const workoutContext = createContext({
     }
 
     function setWorkout(workouts) {
-      console.log("SET WORKOUT: ", workouts)
       dispatch({ type: 'SET', payload: workouts });
     }
   

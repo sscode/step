@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from "react-native";
 import CameraBlock from "../components/Camera/CameraBlock";
 
 
-function NewWorkoutScreen({navigation}){
+function NewWorkout({navigation}){
 
     useLayoutEffect(() => {
         navigation.setOptions({

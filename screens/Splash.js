@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 import { GlobalStyles } from '../constants/styles';
 import Button from '../UI/Button';
 
@@ -13,11 +13,14 @@ const SplashScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <ImageBackground 
+      source={require('../assets/ergbg.png')} 
+      style={styles.image}>
         <Text style={styles.header}>Welcome to Ergbase</Text>
         <Button 
         onPress={enterHandler}
         >Enter</Button>
-      {/* <Image source={require('./splash.png')} style={styles.image} /> */}
+      </ImageBackground>
     </View>
   );
 };
@@ -25,24 +28,18 @@ const SplashScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-around',
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
     alignItems: 'center',
-    backgroundColor: GlobalStyles.colors.gray700
+    justifyContent: 'space-around',
   },
   header: {
     fontSize: 36,
     fontStyle: 'italic',
     color: GlobalStyles.colors.white,
-  },
-  buttons: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-},
-  image: {
-    width: '100%',
-    height: '100%',
-  },
+  }
 });
 
 export default SplashScreen;
