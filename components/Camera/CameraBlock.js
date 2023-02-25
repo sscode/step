@@ -1,15 +1,29 @@
 import { Camera, CameraType } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Button from '../../UI/Button';
 import { GlobalStyles } from '../../constants/styles';
+import {RNS3} from 'react-native-aws3';
+import LoadingOverlay from '../../UI/LoadingOverlay';
+import { makeid } from '../../util/random';
+import { storeWorkout } from '../../util/firebase/http';
+import { workoutContext } from '../../store/workoutContext';
+
+
 
 export default function CameraBlock({close}){
     const [hasPermission, setHasPermission] = useState(null);
+    const [newTaken, setNewTaken] = useState(false);
     const [image, setImage] = useState(null);
     const [imageFile, setImageFile] = useState(null);
+    const [imageName, setImageName] = useState("");
+    const cameraRef = useRef(null);
+    const [type, setType] = useState(CameraType.back);
+    const [fetching, setFetching] = useState(false);
+
+    const workoutCtx = useContext(workoutContext)
     
     // if (!permission)
     useEffect(() => {
@@ -21,11 +35,26 @@ export default function CameraBlock({close}){
         ()
     }, []);
 
+    const takePicture = async () => {
+        if(cameraRef){
+            try {
+                const data = await cameraRef.current.takePictureAsync();
+                setImageName(data.uri.slice(data.uri.length - 26, data.uri.length - 4))
+                setImage(data.uri);
+                setImageFile(data);
+                setNewTaken(true);
+            } catch (error) {
+                console.log(error);
+
+            }
+        }
+    }
+
     const savePicture = async () => {
         if(image){
             try {
                 await MediaLibrary.saveToLibraryAsync(image);
-                setImage(null);
+                // setImage(null);
             } catch (error) {
                 console.log(error);
             }
@@ -41,57 +70,109 @@ export default function CameraBlock({close}){
           quality: 1,
         });
         setImage(result.assets[0].uri);
-
-        const file = {
-            uri: result.assets[0].uri,
-            name: result.assets[0].fileName,
-            type: 'image/jpg'
-        }
-        setImageFile(file);
+        setImageName(result.assets[0].fileName)
+        setImageFile(result.assets[0])
     }
 
-    const uploadImage = () => {
 
-        const data = new FormData();
-        data.append('file', imageFile);
-        data.append('upload_preset', 'erg_photos_preset');
-        data.append('cloud_name', 'dfvcq2b');
+    const uploadImage = (asset) => {
 
-        fetch('https://api.cloudinary.com/v1_1/dfvcq2b/image/upload', {
-            method: 'post',
-            body: data
-        }).then(
-            res => res.json()
-        ).then(
-            data => {
-                console.log(data.url);
-            }
-        )
-        close()
+        setFetching(true);
+
+        {newTaken ? savePicture() : null}
+
+        const file = {
+            uri: asset.uri,
+            name: imageName,
+            type: 'image/jpg'
+        }
+        const options = {
+            keyPrefix: 'ergphotos/',
+            bucket: 'ergphotos',
+            region: 'us-west-2',
+            accessKey: 'AKIAWDF35LFWWTNSW4MU',
+            secretKey: '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',
+            successActionStatus: 201
+        }
+        
+        // // console.log(file)
+        RNS3.put(file, options)
+        .progress(event => {
+            console.log(`percent: ${event.percent}`);
+            console.log(event)
+        })
+        .then(response => {
+            console.log("RESPONSE: ", response.body.postResponse.location)
+            newWorkoutMaker(response.body.postResponse.location)
+            setFetching(false);
+            close()
+            if(response.status !== 201)
+                throw new Error('Failed to upload image to S3');
+        })
+    }
+
+    
+    const newWorkoutMaker = async (imgURL) => {
+        const data = {
+            name: makeid(6),
+            imgURL: imgURL,
+            date: new Date (),
+            userID: '55832'
+        }
+        const wId = await storeWorkout(data)
+    
+        //add to context
+        workoutCtx.addWorkout({...data, id: wId})
     }
 
     if(!hasPermission){
         return <Text>No access to camera</Text>
     }
+
+    if(fetching){
+        return <LoadingOverlay />
+      }
   
     return (
       <View style={styles.contrainer}>
-        {image ? 
-            <Image 
+        {image ?
+            <View style={styles.imageContainer}>
+                <Image 
+                style={styles.camera}
+                source={{uri: image}} />
+            </View>
+            :
+            <Camera 
+            ref={cameraRef}
             style={styles.camera}
-            source={{uri: image}} />
-        : null}
-        <View tyle={styles.buttonContainer}>
+            type={type}
+            >
+            </Camera>
+        }
+        <View style={styles.buttonContainer}>
             {!image ? 
+            <>
                 <Button
                 mode='half'
                 onPress={pickImage}
-                >Select</Button>
+                >Select Old</Button>
+                <Button
+                mode='half'
+                onPress={takePicture}
+                >Capture New</Button>
+            
+            </>
             : 
+                <>
+                <Button 
+                mode='half'
+                onPress={() => setImage(null)}
+                >Retake</Button>
                 <Button 
                 mode='flat'
-                onPress={uploadImage}
+                onPress={() => uploadImage(imageFile)}
                 >Upload</Button>
+                </>
             }
         </View>
         </View>
@@ -103,22 +184,21 @@ const styles = StyleSheet.create({
         flex: 1,
         marginBottom: 24,
     },
+    imageContainer: {
+        // flex: 1,
+        height: '80%',
+    },
     camera: {
         flex: 1,
-        // backgroundColor: 'red',
+        backgroundColor: 'red',
     },
     text: {
         color: 'white',
     },
     buttonContainer: {
-        marginTop: 8,
+        marginTop: 24,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
-
     }
-    // button:{
-    //     width: 100,
-    //     color: 'black',
-    // }
 })

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://ergbase-7c5d3-default-rtdb.firebaseio.com/'
+const baseURL = 'https://ergbase-7c5d3-default-rtdb.firebaseio.com/';
 
 export async function storeWorkout(workoutData){
     const response = await axios.post(`${baseURL}/workouts.json`, 

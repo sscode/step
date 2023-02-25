@@ -23,7 +23,7 @@ function NewWorkout({navigation}){
     </View>)
 }
 
-export default NewWorkoutScreen;
+export default NewWorkout;
 
 const styles = StyleSheet.create({
     container: {

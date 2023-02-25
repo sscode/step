@@ -43,9 +43,9 @@ function Feed(){
 
     return( 
         <View>
-            <Button
+            {/* <Button
             onPress={newWorkoutMaker}
-            >New Random Workout</Button>
+            >New Random Workout</Button> */}
             <WorkoutSummary workouts={workoutCtx.workouts}/>
         </View>
     )
