@@ -3,8 +3,10 @@ import { StyleSheet, Text, View } from 'react-native';
 import { GlobalStyles } from '../../constants/styles';
 import Button from '../../UI/Button';
 
-
 function Logout(){
+
+
+    const image = 'https://ergphotos.s3.amazonaws.com/ergphotos%2FIMG_7127.HEIC'
 
     const logoutHandler = () => {
         console.log('logout')

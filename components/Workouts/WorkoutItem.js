@@ -1,4 +1,4 @@
-import { Pressable, View, Text, StyleSheet } from "react-native";
+import { Pressable, View, Text, StyleSheet, Image } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 import { useNavigation } from "@react-navigation/native";
 import { formatDate } from "../../util/date";
@@ -8,7 +8,7 @@ import { deleteWorkout } from "../../util/firebase/http";
 import { workoutContext } from "../../store/workoutContext";
 import { useContext, useState } from "react";
 
-function WorkoutItem({id, name, date}){
+function WorkoutItem({id, name, date, imgURL}){
     const workoutCtx = useContext(workoutContext)
     const formatedDate = formatDate(date)
 
@@ -18,14 +18,15 @@ function WorkoutItem({id, name, date}){
     function deleteHandler(){
         deleteWorkout(id)
         workoutCtx.deleteWorkout(id)
-        console.log(id);
     }
 
     const innerComponent =
             <>
                 <View>
                     <Text style={[styles.textBase, styles.name]}>{name}</Text>
+                    <Text style={[styles.textBase, styles.name]}>{imgURL}</Text>
                     <Text style={styles.textBase}>{formatedDate}</Text>     
+                    <Image source={{uri: 'imgURL'}} style={{width: 100, height: 100}}/>
                 </View>
                 {!small && 
                 <View>
