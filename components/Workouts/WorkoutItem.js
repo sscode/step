@@ -24,9 +24,8 @@ function WorkoutItem({id, name, date, imgURL}){
             <>
                 <View>
                     <Text style={[styles.textBase, styles.name]}>{name}</Text>
-                    <Text style={[styles.textBase, styles.name]}>{imgURL}</Text>
                     <Text style={styles.textBase}>{formatedDate}</Text>     
-                    <Image source={{uri: 'imgURL'}} style={{width: 100, height: 100}}/>
+                    <Image source={{uri: imgURL}} style={{width: 100, height: 100}}/>
                 </View>
                 {!small && 
                 <View>

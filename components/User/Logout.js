@@ -4,12 +4,11 @@ import { GlobalStyles } from '../../constants/styles';
 import Button from '../../UI/Button';
 
 function Logout(){
-
-
     const image = 'https://ergphotos.s3.amazonaws.com/ergphotos%2FIMG_7127.HEIC'
 
-    const logoutHandler = () => {
+    const logoutHandler = async () => {
         console.log('logout')
+
     }
 
     return( 

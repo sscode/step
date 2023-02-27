@@ -14,7 +14,6 @@ import { workoutContext } from '../../store/workoutContext';
 import uploadCloudinary from '../../util/images/cloudinary';
 
 
-
 export default function CameraBlock({close}){
     const [hasPermission, setHasPermission] = useState(null);
     const [newTaken, setNewTaken] = useState(false);
@@ -25,9 +24,7 @@ export default function CameraBlock({close}){
     const [type, setType] = useState(CameraType.back);
     const [fetching, setFetching] = useState(false);
 
-    const workoutCtx = useContext(workoutContext)
 
-    
     
     // if (!permission)
     useEffect(() => {
@@ -87,8 +84,7 @@ export default function CameraBlock({close}){
         setImageFile(result.assets[0])
     }
 
-    const uploadImage = (asset) => {
-
+    const uploadImage = async (asset) => {
         setFetching(true);
 
         {newTaken ? savePicture() : null}
@@ -100,18 +96,19 @@ export default function CameraBlock({close}){
         }
 
         //cloudinary
-        const cloudURL = uploadCloudinary(file, setFetching)
+        const cloudURL = await uploadCloudinary(file, setFetching)
         newWorkoutMaker(cloudURL)
+        setFetching(false);
         close();
 
-        const options = {
-            keyPrefix: 'ergphotos/',
-            bucket: 'ergphotos',
-            region: 'us-west-2',
-            accessKey: 'AKIAWDF35LFWWTNSW4MU',
-            secretKey: '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',
-            successActionStatus: 201
-        }
+        // const options = {
+        //     keyPrefix: 'ergphotos/',
+        //     bucket: 'ergphotos',
+        //     region: 'us-west-2',
+        //     accessKey: 'AKIAWDF35LFWWTNSW4MU',
+        //     secretKey: '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',
+        //     successActionStatus: 201
+        // }
         
         // // console.log(file)
         // RNS3.put(file, options)
@@ -123,15 +120,17 @@ export default function CameraBlock({close}){
         //     console.log("RESPONSE: ", response.body.postResponse.location)
 
         //     newWorkoutMaker(response.body.postResponse.location)
-        //     setFetching(false);
+            // setFetching(false);
         //     close()
         //     if(response.status !== 201)
         //         throw new Error('Failed to upload image to S3');
         // })
     }
 
-    
+    const workoutCtx = useContext(workoutContext)
     const newWorkoutMaker = async (imgURL) => {
+        
+        console.log(imgURL)
         const data = {
             name: makeid(6),
             imgURL: imgURL,

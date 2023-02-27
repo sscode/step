@@ -17,7 +17,8 @@ export async function fetchWorkout(){
         workouts.push({
             id: key,
             date: response.data[key].date,
-            name: response.data[key].name
+            name: response.data[key].name,
+            imgURL: response.data[key].imgURL,
         })
     }
     return workouts;
