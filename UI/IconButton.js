@@ -1,13 +1,24 @@
 import { Pressable, View, StyleSheet } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 
-function IconButton({icon, size, color, onPress}){
+function IconButton({icon, size, color, onPress, iconType}){
+
+    let iconHolder = null
+
+    if(iconType === "AntDesign"){
+        iconHolder = <AntDesign name={icon} size={size} color={color}/>
+    }
+    if(iconType === "Ionicons"){
+        iconHolder = <Ionicons name={icon} size={size} color={color}/>
+    }
+
     return (
     <Pressable 
     style={({pressed}) => pressed && styles.pressed}
     onPress={onPress}>
         <View style={styles.buttonContainer}>
-            <Ionicons name={icon} size={size} color={color}/>
+            {iconHolder}
+            {/* <Ionicons name={icon} size={size} color={color}/> */}
         </View>
     </Pressable>)
 }

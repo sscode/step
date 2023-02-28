@@ -2,23 +2,24 @@ import { Pressable, View, Text, StyleSheet, Image } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 import { useNavigation } from "@react-navigation/native";
 import { formatDate } from "../../util/date";
-import { Ionicons } from "@expo/vector-icons";
 import IconButton from "../../UI/IconButton";
-import { deleteWorkout } from "../../util/firebase/http";
-import { workoutContext } from "../../store/workoutContext";
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 function WorkoutItem({id, name, date, imgURL}){
-    const workoutCtx = useContext(workoutContext)
+    const navigation = useNavigation();
     const formatedDate = formatDate(date)
-
+    
     const [small, setSmall] = useState(true)
+    
 
-
-    function deleteHandler(){
-        deleteWorkout(id)
-        workoutCtx.deleteWorkout(id)
+    function editHandler(){
+        navigation.navigate('EditWorkout', 
+        {name: name,
+        date: date,
+        id: id,
+        imgURL: imgURL})
     }
+
 
     const innerComponent =
             <>
@@ -29,9 +30,11 @@ function WorkoutItem({id, name, date, imgURL}){
                 </View>
                 {!small && 
                 <View>
-                    <IconButton icon="trash" size={24} 
+                    <IconButton 
+                    iconType="AntDesign"
+                    icon="edit" size={24} 
                     color={GlobalStyles.colors.black} 
-                    onPress={deleteHandler}/>
+                    onPress={editHandler}/>
                 </View>
                 }
             </>

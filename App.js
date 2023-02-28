@@ -9,6 +9,7 @@ import { GlobalStyles } from './constants/styles';
 import NewWorkout from './screens/NewWorkout';
 import User from './screens/User';
 import WorkoutContextProvider from './store/workoutContext';
+import EditWorkout from './screens/EditWorkout';
 
 
 export default function App() {
@@ -63,6 +64,10 @@ export default function App() {
             <Stack.Screen 
             name="User" 
             component={User} />
+
+            <Stack.Screen 
+            name="EditWorkout" 
+            component={EditWorkout} />
 
             <Stack.Screen 
             name="NewWorkout" 
