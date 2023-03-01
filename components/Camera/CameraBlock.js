@@ -12,6 +12,7 @@ import { makeid } from '../../util/random';
 import { storeWorkout } from '../../util/firebase/http';
 import { workoutContext } from '../../store/workoutContext';
 import uploadCloudinary from '../../util/images/cloudinary';
+import textract from '../../util/images/textract';
 
 
 export default function CameraBlock({close}){
@@ -96,7 +97,9 @@ export default function CameraBlock({close}){
         }
 
         //cloudinary
-        const cloudURL = await uploadCloudinary(file, setFetching)
+        const cloudURL = await uploadCloudinary(file)
+        const getText = await textract(file)
+        console.log(getText)
         newWorkoutMaker(cloudURL)
         setFetching(false);
         close();
