@@ -3,7 +3,7 @@ import { GlobalStyles } from "../../constants/styles";
 import { useNavigation } from "@react-navigation/native";
 import { formatDate } from "../../util/date";
 import IconButton from "../../UI/IconButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TableOne from "../../UI/Table";
 import Expanded from "./Expanded";
 
@@ -22,7 +22,6 @@ function WorkoutItem({id, name, date, imgURL, ergData}){
         ergData: ergData,
         imgURL: imgURL})
     }
-
 
     const innerComponent =
             <View style={styles.container}>
@@ -54,7 +53,7 @@ function WorkoutItem({id, name, date, imgURL, ergData}){
                 {!small && 
                 <View style={styles.innerDetails}>
                     {/* <TableOne /> */}
-                    {/* <Expanded ergData={ergData}/> */}
+                    <Expanded ergData={ergData}/>
                     <View style={styles.iconHolder}>
                         <IconButton 
                         iconType="AntDesign"

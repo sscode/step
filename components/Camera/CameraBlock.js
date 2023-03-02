@@ -12,7 +12,6 @@ import { makeid } from '../../util/random';
 import { storeWorkout } from '../../util/firebase/http';
 import { workoutContext } from '../../store/workoutContext';
 import uploadCloudinary from '../../util/images/cloudinary';
-import textract from '../../util/images/textract';
 
 
 export default function CameraBlock({close}){
@@ -100,7 +99,6 @@ export default function CameraBlock({close}){
         const cloudURL = await uploadCloudinary(file)
         setImgURL(cloudURL)
         textract(file)
-        // newWorkoutMaker(cloudURL)
         // const options = {
         //     keyPrefix: 'ergphotos/',
         //     bucket: 'ergphotos',
