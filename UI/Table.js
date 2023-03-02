@@ -12,26 +12,7 @@ function TableOne(data){
         (item) => item.id !== 0
     )
 
-    console.log(body)
-
     const item = ({item}) => (
-        <View style={styles.itemRow}>
-            <View style={[styles.column, styles.column1]}>
-                <Text style={styles.text}>{item.time}</Text>
-            </View>
-            <View style={[styles.column, styles.column2]}>
-                <Text style={styles.text}>{item.distance}</Text>
-            </View>
-            <View style={[styles.column, styles.column3]}>
-                <Text style={styles.text}>{item.watts}</Text>
-            </View>
-            <View style={[styles.column, styles.column3]}>
-                <Text style={styles.text}>{item.spm}</Text>
-            </View>
-        </View>
-    )
-
-    const totals = ({item}) => (
         <View style={styles.itemRow}>
             <View style={[styles.column, styles.column1]}>
                 <Text style={styles.text}>{item.time}</Text>
