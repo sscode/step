@@ -24,9 +24,9 @@ export default function CameraBlock({close}){
     const cameraRef = useRef(null);
     const [type, setType] = useState(CameraType.back);
     const [fetching, setFetching] = useState(false);
+    const [ergText, setErgText] = useState(null);
+    const [imgURL, setImgURL] = useState(null);
 
-
-    
     // if (!permission)
     useEffect(() => {
         (async () => {
@@ -98,12 +98,9 @@ export default function CameraBlock({close}){
 
         //cloudinary
         const cloudURL = await uploadCloudinary(file)
-        const getText = await textract(file)
-        console.log(getText)
-        newWorkoutMaker(cloudURL)
-        setFetching(false);
-        close();
-
+        setImgURL(cloudURL)
+        textract(file)
+        // newWorkoutMaker(cloudURL)
         // const options = {
         //     keyPrefix: 'ergphotos/',
         //     bucket: 'ergphotos',
@@ -130,14 +127,42 @@ export default function CameraBlock({close}){
         // })
     }
 
+    async function textract(imageFile) {
+        const formData = new FormData();
+        formData.append('file', imageFile);
+        const headers = {
+        'Content-Type': 'multipart/form-data',
+        };
+        const req = fetch('https://erg.stusim.repl.co/get-text', {
+        method: 'POST',
+        body: formData,
+        headers: headers,
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            setErgText(data)
+        })
+        .catch(error => {
+            // handle error
+            console.log("error", error);
+        });
+    };
+
+    useEffect(() => {
+        if(ergText){
+            newWorkoutMaker(imgURL, ergText)
+            setFetching(false);
+            close();
+        }
+    }, [ergText])
+
     const workoutCtx = useContext(workoutContext)
-    const newWorkoutMaker = async (imgURL) => {
-        
-        console.log(imgURL)
+    const newWorkoutMaker = async (imgURL, ergText) => {
         const data = {
             name: makeid(6),
             imgURL: imgURL,
             date: new Date (),
+            ergData: ergText,
             userID: '55832'
         }
         const wId = await storeWorkout(data)

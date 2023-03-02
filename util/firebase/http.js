@@ -19,6 +19,7 @@ export async function fetchWorkout(){
             date: response.data[key].date,
             name: response.data[key].name,
             imgURL: response.data[key].imgURL,
+            ergData: response.data[key].ergData,
         })
     }
     return workouts;

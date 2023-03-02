@@ -5,8 +5,9 @@ import { formatDate } from "../../util/date";
 import IconButton from "../../UI/IconButton";
 import { useState } from "react";
 import TableOne from "../../UI/Table";
+import Expanded from "./Expanded";
 
-function WorkoutItem({id, name, date, imgURL}){
+function WorkoutItem({id, name, date, imgURL, ergData}){
     const navigation = useNavigation();
     const formatedDate = formatDate(date)
     
@@ -18,6 +19,7 @@ function WorkoutItem({id, name, date, imgURL}){
         {name: name,
         date: date,
         id: id,
+        ergData: ergData,
         imgURL: imgURL})
     }
 
@@ -51,7 +53,8 @@ function WorkoutItem({id, name, date, imgURL}){
                 </View>
                 {!small && 
                 <View style={styles.innerDetails}>
-                    <TableOne />
+                    {/* <TableOne /> */}
+                    {/* <Expanded ergData={ergData}/> */}
                     <View style={styles.iconHolder}>
                         <IconButton 
                         iconType="AntDesign"

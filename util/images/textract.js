@@ -27,12 +27,13 @@ export default async function textract(imageFile) {
       .then(res => {
         console.log("successfully get")
         // console.log("text", res.text())
-        // console.log("text", res.json())
+        // console.log("json", res.json())
         return res.json()
       })
-      .then(data => {
-        return data
-      })
+      // .then(data => {
+      //   console.log("data", data)
+      //   return data
+      // })
       .catch(error => {
         // handle error
         console.log("error", error);
