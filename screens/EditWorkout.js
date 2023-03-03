@@ -37,14 +37,16 @@ function EditWorkout({route, navigation}){
     }
     async function saveHandler(){
         console.log(selectedWorkout)
-        // workoutCtx.updateWorkout(route.params?.id, {name: newName})
-        // await updateWorkout(route.params?.id, {name: newName})
+        const workoutUpdate = {
+            name: newName,
+            date: selectedWorkout.date,
+            imgURL: selectedWorkout.imgURL,
+            ergData: selectedWorkout.ergData,
+        }
+        workoutCtx.updateWorkout(route.params?.id, workoutUpdate)
+        await updateWorkout(route.params?.id, workoutUpdate)
         // closeHandler()
     }
-
-
-
-    const editing = route.params?.name;
 
     return (
     <View style={styles.container}>

@@ -12,6 +12,9 @@ import { makeid } from '../../util/random';
 import { storeWorkout } from '../../util/firebase/http';
 import { workoutContext } from '../../store/workoutContext';
 import uploadCloudinary from '../../util/images/cloudinary';
+import {Dimensions} from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
 
 
 export default function CameraBlock({close}){
@@ -25,6 +28,8 @@ export default function CameraBlock({close}){
     const [fetching, setFetching] = useState(false);
     const [ergText, setErgText] = useState(null);
     const [imgURL, setImgURL] = useState(null);
+
+
 
     // if (!permission)
     useEffect(() => {
@@ -76,7 +81,6 @@ export default function CameraBlock({close}){
         let result = await ImagePicker.launchImageLibraryAsync({
           mediaTypes: ImagePicker.MediaTypeOptions.All,
           allowsEditing: true,
-          aspect: [4, 3],
           quality: .7,
         });
         setImage(result.assets[0].uri);
@@ -180,7 +184,7 @@ export default function CameraBlock({close}){
     return (
       <View style={styles.contrainer}>
         {image ?
-            <View style={styles.imageContainer}>
+            <View style={[styles.imageContainer]}>
                 <Image 
                 style={styles.camera}
                 source={{uri: image}} />
@@ -227,10 +231,12 @@ const styles = StyleSheet.create({
     contrainer: {
         flex: 1,
         marginBottom: 24,
+        alignItems: 'center',
     },
     imageContainer: {
         // flex: 1,
-        height: '80%',
+        height: windowWidth,
+        width: windowWidth,
     },
     camera: {
         flex: 1,
@@ -242,7 +248,8 @@ const styles = StyleSheet.create({
     buttonContainer: {
         marginTop: 24,
         flexDirection: 'row',
-        alignItems: 'center',
+        width: '100%',
+        // alignItems: 'center',
         justifyContent: 'space-around',
     }
 })
