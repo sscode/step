@@ -2,17 +2,34 @@ function isLetter(str) {
     return str.length === 1 && str.match(/[a-z]/i);
   }
 
+function wattsOrSplit(str){
+    if(str.includes(":") || str.includes(".") || str.includes(",")){
+        console.log("split")
+        return "split"
+    } else {
+        console.log("watts")
+        return "watts"
+    }
+}
+
 export default function tableDataFormatter(fullData){
 
     const headers = ["tableData"];
-    const labels = ["time", "distance", "watts", "spm"]
+    // const labels = ["time", "distance"]
+    let labels = []
     let id = 0;
 
     const fullDict = []
 
     if(isLetter(fullData.tableHead[0].charAt(0))){
         // console.log("True String Header and not values")
+        // console.log("tableHead: ", fullData.tableHead)
+        labels = fullData.tableHead
+        // console.log("labels: ", labels)
     } else {
+        //see if third value contains : or . or ,
+        const thirdValue = wattsOrSplit(fullData.tableData[0][2])
+        labels = ["time", "distance", thirdValue, "spm"]
         // console.log("False String Header and instead is #")
         //read this and add it to fullDict
         const header = "tableHead"
@@ -25,7 +42,6 @@ export default function tableDataFormatter(fullData){
         fullDict.push(myDict)
     }
 
-
     const header = headers[0]
     //for each row
     for(let j = 0; j < fullData[header].length; j++){
@@ -37,6 +53,8 @@ export default function tableDataFormatter(fullData){
         fullDict.push(myDict)
     }
 
+    labels.push("id")
+
     // console.log("tableDataFormatter: ", fullDict)
-    return fullDict
+    return [fullDict, labels]
 }

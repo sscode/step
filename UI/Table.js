@@ -3,13 +3,13 @@ import React from 'react'
 import { GlobalStyles } from '../constants/styles'
 import moment from 'moment'
 
-function TableOne(data){
+function TableOne(props){
 
-    const fullWorkout = data.data.filter(
+    const fullWorkout = props.data.filter(
         (item) => item.id === 0
     )
 
-    const body = data.data.filter(
+    const body = props.data.filter(
         (item) => item.id !== 0
     )
 
@@ -30,19 +30,19 @@ function TableOne(data){
         </View>
     )
 
-    const headerList = () => (
+    const headerList = (
         <View style={[styles.itemRow, styles.headerRow]}>
             <View style={[styles.column, styles.header]}>
-                <Text style={[styles.text, styles.headerCell]}>Time</Text>
+                <Text style={[styles.text, styles.headerCell]}>{props.headers[0]}</Text>
             </View>
             <View style={[styles.column, styles.header]}>
-                <Text style={[styles.text, styles.headerCell]}>Distance</Text>
+                <Text style={[styles.text, styles.headerCell]}>{props.headers[1]}</Text>
             </View>
             <View style={[styles.column, styles.header]}>
-                <Text style={[styles.text, styles.headerCell]}>Watts</Text>
+                <Text style={[styles.text, styles.headerCell]}>{props.headers[2]}</Text>
             </View>
             <View style={[styles.column, styles.header]}>
-                <Text style={[styles.text, styles.headerCell]}>spm</Text>
+                <Text style={[styles.text, styles.headerCell]}>{props.headers[3]}</Text>
             </View>
         </View>
     )
@@ -50,12 +50,12 @@ function TableOne(data){
 
     return (
         <View style={styles.container}>
+            {headerList}
             <FlatList
                 listKey={moment().valueOf().toString() + "123213"}
                 data={fullWorkout}
                 renderItem={item}
                 keyExtractor={item => item.id}
-                ListHeaderComponent={headerList}
             />
             <FlatList
                 listKey={moment().valueOf().toString()}
