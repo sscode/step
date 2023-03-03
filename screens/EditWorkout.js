@@ -45,7 +45,7 @@ function EditWorkout({route, navigation}){
         }
         workoutCtx.updateWorkout(route.params?.id, workoutUpdate)
         await updateWorkout(route.params?.id, workoutUpdate)
-        // closeHandler()
+        closeHandler()
     }
 
     return (

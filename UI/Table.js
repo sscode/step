@@ -1,6 +1,7 @@
 import { FlatList, Text, View, StyleSheet } from 'react-native'
 import React from 'react'
 import { GlobalStyles } from '../constants/styles'
+import moment from 'moment'
 
 function TableOne(data){
 
@@ -50,14 +51,14 @@ function TableOne(data){
     return (
         <View style={styles.container}>
             <FlatList
-                listKey={0}
+                listKey={moment().valueOf().toString() + "123213"}
                 data={fullWorkout}
                 renderItem={item}
                 keyExtractor={item => item.id}
                 ListHeaderComponent={headerList}
             />
             <FlatList
-                listKey={1}
+                listKey={moment().valueOf().toString()}
                 data={body}
                 renderItem={item}
                 keyExtractor={item => item.id}

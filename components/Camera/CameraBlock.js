@@ -235,8 +235,8 @@ const styles = StyleSheet.create({
     },
     imageContainer: {
         // flex: 1,
-        height: windowWidth,
-        width: windowWidth,
+        height: windowWidth * .8,
+        width: windowWidth * .8,
     },
     camera: {
         flex: 1,
