@@ -29,18 +29,11 @@ function TableOne({data, headers}){
 
     const headerList = (
         <View style={[styles.itemRow, styles.headerRow]}>
+        {headers.map((header) => (
             <View style={[styles.column, styles.header]}>
-                <Text style={[styles.text, styles.headerCell]}>{headers[0]}</Text>
-            </View>
-            <View style={[styles.column, styles.header]}>
-                <Text style={[styles.text, styles.headerCell]}>{headers[1]}</Text>
-            </View>
-            <View style={[styles.column, styles.header]}>
-                <Text style={[styles.text, styles.headerCell]}>{headers[2]}</Text>
-            </View>
-            <View style={[styles.column, styles.header]}>
-                <Text style={[styles.text, styles.headerCell]}>{headers[3]}</Text>
-            </View>
+                <Text style={[styles.text, styles.headerCell]}>{header}</Text>
+            </View>))
+        }
         </View>
     )
 

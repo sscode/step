@@ -6,7 +6,6 @@ import tableDataFormatter from "../../util/dataFormats/tableFormatter";
 function Expanded(jsonData){
 
     const tableData = tableDataFormatter(jsonData.ergData)
-    console.log("tableData", tableData[1])
 
     return (
         <TableOne data={tableData[0]} headers={tableData[1]}/>

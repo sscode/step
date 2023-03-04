@@ -4,10 +4,8 @@ function isLetter(str) {
 
 function wattsOrSplit(str){
     if(str.includes(":") || str.includes(".") || str.includes(",")){
-        console.log("split")
         return "split"
     } else {
-        console.log("watts")
         return "watts"
     }
 }
