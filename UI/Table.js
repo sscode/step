@@ -3,46 +3,43 @@ import React from 'react'
 import { GlobalStyles } from '../constants/styles'
 import moment from 'moment'
 
-function TableOne(props){
+function TableOne({data, headers}){
 
-    const fullWorkout = props.data.filter(
+    const fullWorkout = data.filter(
         (item) => item.id === 0
     )
 
-    const body = props.data.filter(
+    const body = data.filter(
         (item) => item.id !== 0
     )
 
-    const item = ({item}) => (
+    const item = ({item}) => { 
+
+        return (
         <View style={styles.itemRow}>
-            <View style={[styles.column, styles.column1]}>
-                <Text style={styles.text}>{item.time}</Text>
-            </View>
-            <View style={[styles.column, styles.column2]}>
-                <Text style={styles.text}>{item.distance}</Text>
-            </View>
-            <View style={[styles.column, styles.column3]}>
-                <Text style={styles.text}>{item.watts}</Text>
-            </View>
-            <View style={[styles.column, styles.column3]}>
-                <Text style={styles.text}>{item.spm}</Text>
-            </View>
+                  {Object.keys(item).map((key) => (
+                    <View style={styles.column}>
+                        <Text 
+                        style={styles.text}
+                        key={key}>{item[key]}</Text>
+                    </View>
+                ))}
         </View>
-    )
+    )}
 
     const headerList = (
         <View style={[styles.itemRow, styles.headerRow]}>
             <View style={[styles.column, styles.header]}>
-                <Text style={[styles.text, styles.headerCell]}>{props.headers[0]}</Text>
+                <Text style={[styles.text, styles.headerCell]}>{headers[0]}</Text>
             </View>
             <View style={[styles.column, styles.header]}>
-                <Text style={[styles.text, styles.headerCell]}>{props.headers[1]}</Text>
+                <Text style={[styles.text, styles.headerCell]}>{headers[1]}</Text>
             </View>
             <View style={[styles.column, styles.header]}>
-                <Text style={[styles.text, styles.headerCell]}>{props.headers[2]}</Text>
+                <Text style={[styles.text, styles.headerCell]}>{headers[2]}</Text>
             </View>
             <View style={[styles.column, styles.header]}>
-                <Text style={[styles.text, styles.headerCell]}>{props.headers[3]}</Text>
+                <Text style={[styles.text, styles.headerCell]}>{headers[3]}</Text>
             </View>
         </View>
     )
