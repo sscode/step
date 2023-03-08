@@ -4,7 +4,7 @@ function isLetter(str) {
 
 function wattsOrSplit(str){
     if(str.includes(":") || str.includes(".") || str.includes(",")){
-        return "split"
+        return "500m"
     } else {
         return "watts"
     }

@@ -8,7 +8,6 @@ function WorkoutSummary({workouts}){
 
     if(workouts.length > 0){
         content = <WorkoutList workouts={workouts} />
-    
     }
     
     return (

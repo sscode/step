@@ -13,6 +13,7 @@ import { storeWorkout } from '../../util/firebase/http';
 import { workoutContext } from '../../store/workoutContext';
 import uploadCloudinary from '../../util/images/cloudinary';
 import {Dimensions} from 'react-native';
+import clean from '../../util/dataFormats/clean';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -152,7 +153,9 @@ export default function CameraBlock({close}){
 
     useEffect(() => {
         if(ergText){
-            newWorkoutMaker(imgURL, ergText)
+            //cleanup workout here
+            const cleanText = clean(ergText)
+            newWorkoutMaker(imgURL, cleanText)
             setFetching(false);
             close();
         }
