@@ -13,6 +13,7 @@ import { workoutContext } from '../../store/workoutContext';
 import uploadCloudinary from '../../util/images/cloudinary';
 import {Dimensions} from 'react-native';
 import clean from '../../util/dataFormats/clean';
+import WorkoutInput from './WorkoutInputs';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -28,6 +29,8 @@ export default function CameraBlock({close}){
     const [fetching, setFetching] = useState(false);
     const [ergText, setErgText] = useState(null);
     const [imgURL, setImgURL] = useState(null);
+    const [date, setDate] = useState(null);
+    const [name, setName] = useState(null);
 
     // if (!permission)
     useEffect(() => {
@@ -159,9 +162,9 @@ export default function CameraBlock({close}){
     const workoutCtx = useContext(workoutContext)
     const newWorkoutMaker = async (imgURL, ergText) => {
         const data = {
-            name: makeid(6),
+            name: name,
             imgURL: imgURL,
-            date: new Date (),
+            date: date,
             ergData: ergText,
             userID: '55832'
         }
@@ -169,6 +172,10 @@ export default function CameraBlock({close}){
     
         //add to context
         workoutCtx.addWorkout({...data, id: wId})
+    }
+
+    if(!name){
+        return <WorkoutInput close={close} setName={setName} setDate={setDate} />
     }
 
     if(!hasPermission){
@@ -232,10 +239,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     imageContainer: {
-        backgroundColor: 'red',
         // flex: 1,
-        // height: windowWidth * .8,
-        // width: windowWidth * .8,
+        height: windowWidth * .8,
+        width: windowWidth * .8,
     },
     camera: {
         // flex: 1,
