@@ -6,6 +6,7 @@ import IconButton from "../../UI/IconButton";
 import { useEffect, useState } from "react";
 import TableOne from "../../UI/Table";
 import Expanded from "./Expanded";
+import splitOrWatts from "../../util/dataFormats/splitorwatts";
 
 function WorkoutItem({id, name, date, imgURL, ergData}){
     const navigation = useNavigation();
@@ -23,6 +24,15 @@ function WorkoutItem({id, name, date, imgURL, ergData}){
         imgURL: imgURL})
     }
 
+    let splitwatts = null;
+    if(splitOrWatts(ergData.tableData[0][2]) === 'watts'){
+        splitwatts = ergData.tableData[0][4]
+    } else {
+        splitwatts = ergData.tableData[0][2]
+    }
+
+
+
     const innerComponent =
             <View style={styles.container}>
                 <View style={styles.innerContainer}>
@@ -33,17 +43,17 @@ function WorkoutItem({id, name, date, imgURL, ergData}){
                             <Text style={[styles.textBase, styles.soft]}>{formatedDate.slice(0,10)}</Text>
                     </View>
                     <View style={styles.footerContainer}>
-                        <Text style={styles.footerHeader}>18,500</Text>
+                        <Text style={styles.footerHeader}>{parseInt(ergData.tableData[0][1]).toLocaleString('en-US')}m</Text>
                         <View style={styles.footerSub}>
                             <View style={styles.footerSubGroup}>
-                                <Text style={styles.footerDetailMain}>2:37</Text>
+                                <Text style={styles.footerDetailMain}>{splitwatts}</Text>
                                 <Text style={styles.footerDetailSub}>/500m</Text>
                             </View>
                             <View>
-                                <Text style={styles.footerDetailMain}>40:57.85</Text>
+                                <Text style={styles.footerDetailMain}>{ergData.tableData[0][0]}</Text>
                             </View>
                             <View style={styles.footerSubGroup}>
-                                <Text style={styles.footerDetailMain}>22</Text>
+                                <Text style={styles.footerDetailMain}>{ergData.tableData[0][3]}</Text>
                                 <Text style={styles.footerDetailSub}>spm</Text>
                             </View>
                         </View>
