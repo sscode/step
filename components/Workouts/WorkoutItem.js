@@ -58,7 +58,6 @@ function WorkoutItem({id, name, date, imgURL, ergData}){
                             </View>
                         </View>
                     </View>
-                    {/* <Image source={{uri: imgURL}} style={{width: 100, height: 100}}/> */}
                 </View>
                 {!small && 
                 <View style={styles.innerDetails}>
