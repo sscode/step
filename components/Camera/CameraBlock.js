@@ -6,7 +6,6 @@ import * as ImagePicker from 'expo-image-picker';
 import * as ImageManipulator from 'expo-image-manipulator';
 import Button from '../../UI/Button';
 import { GlobalStyles } from '../../constants/styles';
-import {RNS3} from 'react-native-aws3';
 import LoadingOverlay from '../../UI/LoadingOverlay';
 import { makeid } from '../../util/random';
 import { storeWorkout } from '../../util/firebase/http';
@@ -29,8 +28,6 @@ export default function CameraBlock({close}){
     const [fetching, setFetching] = useState(false);
     const [ergText, setErgText] = useState(null);
     const [imgURL, setImgURL] = useState(null);
-
-
 
     // if (!permission)
     useEffect(() => {
@@ -63,8 +60,6 @@ export default function CameraBlock({close}){
             }
         }
     }
-
-
 
     const savePicture = async () => {
         if(image){
@@ -237,13 +232,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     imageContainer: {
+        backgroundColor: 'red',
         // flex: 1,
-        height: windowWidth * .8,
-        width: windowWidth * .8,
+        // height: windowWidth * .8,
+        // width: windowWidth * .8,
     },
     camera: {
-        flex: 1,
+        // flex: 1,
         backgroundColor: 'red',
+        width: windowWidth * .8,
+        height: windowWidth * .8,
     },
     text: {
         color: 'white',
