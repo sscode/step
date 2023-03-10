@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = `${process.env.REACT_APP_FIREBASE}`;
+const baseURL = `${process.env.REACT_APP_FIREBASE_databaseURL}`;
 
 export async function storeWorkout(workoutData){
     const response = await axios.post(`${baseURL}/workouts.json`, 

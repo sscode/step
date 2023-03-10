@@ -6,6 +6,11 @@ import Button from '../UI/Button';
 const SplashScreen = ({navigation}) => {
 
 
+  const loginHandler = () => {
+    navigation.navigate('Login')
+    console.log('enter')
+  }
+
   const enterHandler = () => {
     navigation.navigate('Feed')
     console.log('enter')
@@ -17,9 +22,14 @@ const SplashScreen = ({navigation}) => {
       source={require('../assets/ergbg.png')} 
       style={styles.image}>
         <Text style={styles.header}>Welcome to Ergbase</Text>
-        <Button 
-        onPress={enterHandler}
-        >Enter</Button>
+        <View style={styles.buttonContainer}>
+          <Button 
+          onPress={enterHandler}
+          >Enter</Button>
+          <Button 
+          onPress={loginHandler}
+          >Login</Button>
+        </View>
       </ImageBackground>
     </View>
   );
@@ -39,6 +49,13 @@ const styles = StyleSheet.create({
     fontSize: 36,
     fontStyle: 'italic',
     color: GlobalStyles.colors.white,
+  },
+  buttonContainer: {
+    height: '30%',
+    flexDirection: 'column',
+    // alignItems: 'center',
+    justifyContent: 'space-around',
+
   }
 });
 

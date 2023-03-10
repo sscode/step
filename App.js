@@ -10,6 +10,7 @@ import NewWorkout from './screens/NewWorkout';
 import User from './screens/User';
 import WorkoutContextProvider from './store/workoutContext';
 import EditWorkout from './screens/EditWorkout';
+import LoginScreen from './screens/LoginScreen';
 
 
 export default function App() {
@@ -56,6 +57,11 @@ export default function App() {
             screenOptions={{headerShown: false}}
             options={{headerShown: false}}
             component={SplashScreen} />
+
+            <Stack.Screen name="Login" 
+            screenOptions={{headerShown: false}}
+            options={{headerShown: false}}
+            component={LoginScreen} />
             
             <Stack.Screen 
             name="Feed" 

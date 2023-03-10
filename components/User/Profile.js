@@ -1,10 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { GlobalStyles } from '../../constants/styles';
-import Button from '../../UI/Button';
+import { workoutContext } from '../../store/workoutContext';
+
 
 
 function Profile(){
+    const workoutCtx = useContext(workoutContext)
+    
+    console.log("wrk : ", workoutCtx)
 
     return( 
         <View style={styles.container}>

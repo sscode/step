@@ -2,6 +2,7 @@ import { createContext, useReducer } from "react";
 
 
 export const workoutContext = createContext({
+    user: [],
     workouts: [],
     addWorkout: ({ description, date }) => {},
     setWorkout: (workouts) => {},
@@ -11,6 +12,8 @@ export const workoutContext = createContext({
   
   function workoutReducer(state, action) {
     switch (action.type) {
+      case 'SET_USER':
+        return { user: action.payload };
       case 'ADD':
         return [ action.payload, ...state];
       case 'UPDATE':
@@ -35,6 +38,10 @@ export const workoutContext = createContext({
   
   function WorkoutContextProvider({ children }) {
     const [workoutState, dispatch] = useReducer(workoutReducer, []);
+
+    function setUser(user) {
+      dispatch({ type: 'SET_USER', payload: user });
+    }
   
     function addWorkout(workoutData) {
       dispatch({ type: 'ADD', payload: workoutData });
@@ -53,6 +60,7 @@ export const workoutContext = createContext({
     }
   
     const value = {
+      setUser: setUser,
       workouts: workoutState,
       setWorkout: setWorkout,
       addWorkout: addWorkout,
