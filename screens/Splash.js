@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 import { GlobalStyles } from '../constants/styles';
 import Button from '../UI/Button';

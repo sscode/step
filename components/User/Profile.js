@@ -1,14 +1,10 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { GlobalStyles } from '../../constants/styles';
-import { workoutContext } from '../../store/workoutContext';
-
-
+import { userContext } from '../../store/userContext';
 
 function Profile(){
-    const workoutCtx = useContext(workoutContext)
-    
-    console.log("wrk : ", workoutCtx)
+    const userCtx = useContext(userContext)
 
     return( 
         <View style={styles.container}>
@@ -19,6 +15,8 @@ function Profile(){
             </View>
             <View style={styles.textContainer}>
                 <Text style={styles.text}>Stuart Sim</Text>
+                <Text style={styles.textSmall}>ID: {userCtx.user[0].uid}</Text>
+                <Text style={styles.textSmall}>Email: {userCtx.user[0].email}</Text>
                 <Text style={styles.textSmall}>Paid status: Free</Text>
                 <Text style={styles.textSmall}>Member since: 2023</Text>
             </View>

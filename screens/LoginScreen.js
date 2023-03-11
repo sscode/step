@@ -4,12 +4,12 @@ import Button from '../UI/Button'
 import { GlobalStyles } from '../constants/styles'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../util/firebase/firebase'
-import { workoutContext } from '../store/workoutContext'
+import { userContext } from '../store/userContext'
 
 
 
 const LoginScreen = ({navigation}) => {
-    const workoutCtx = useContext(workoutContext)
+    const userCtx = useContext(userContext)
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -22,13 +22,12 @@ const LoginScreen = ({navigation}) => {
         .catch((error) => {
             console.log(error)
         })
-        console.log("signup")
     }
 
     const handleLogin = () => {
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            workoutCtx.setUser(userCredential.user)
+            userCtx.addUser(userCredential.user)
             navigation.navigate('Feed')
         })
         .catch((error) => {

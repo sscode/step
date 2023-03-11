@@ -7,13 +7,13 @@ import * as ImageManipulator from 'expo-image-manipulator';
 import Button from '../../UI/Button';
 import { GlobalStyles } from '../../constants/styles';
 import LoadingOverlay from '../../UI/LoadingOverlay';
-import { makeid } from '../../util/random';
 import { storeWorkout } from '../../util/firebase/http';
 import { workoutContext } from '../../store/workoutContext';
 import uploadCloudinary from '../../util/images/cloudinary';
 import {Dimensions} from 'react-native';
 import clean from '../../util/dataFormats/clean';
 import WorkoutInput from './WorkoutInputs';
+import { userContext } from '../../store/userContext';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -159,14 +159,17 @@ export default function CameraBlock({close}){
         }
     }, [ergText])
 
+    const userCtx = useContext(userContext)
     const workoutCtx = useContext(workoutContext)
+    
     const newWorkoutMaker = async (imgURL, ergText) => {
+
         const data = {
             name: name,
             imgURL: imgURL,
             date: date,
             ergData: ergText,
-            userID: '55832'
+            userID: userCtx.user[0].uid,
         }
         const wId = await storeWorkout(data)
     

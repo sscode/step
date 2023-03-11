@@ -2,12 +2,9 @@ import { useNavigation } from '@react-navigation/native';
 import { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import WorkoutSummary from '../components/Workouts/WorkoutSummary';
-import Summary from '../components/Workouts/WorkoutSummary';
 import { GlobalStyles } from '../constants/styles';
 import { workoutContext } from '../store/workoutContext';
-import Button from '../UI/Button';
 import { fetchWorkout, storeWorkout } from '../util/firebase/http';
-import { makeid } from '../util/random';
 
 
 function Feed(){

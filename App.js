@@ -1,14 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import SplashScreen from './screens/Splash';
-import Feed from './screens/Feed';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons'
 import { GlobalStyles } from './constants/styles';
-import NewWorkout from './screens/NewWorkout';
-import User from './screens/User';
+
 import WorkoutContextProvider from './store/workoutContext';
+import UserContextProvider from './store/userContext';
+
+import NewWorkout from './screens/NewWorkout';
+import SplashScreen from './screens/Splash';
+import Feed from './screens/Feed';
+import User from './screens/User';
 import EditWorkout from './screens/EditWorkout';
 import LoginScreen from './screens/LoginScreen';
 
@@ -20,6 +23,7 @@ export default function App() {
   return (
     <>
       <StatusBar style="auto" />
+      <UserContextProvider>
       <WorkoutContextProvider>
         <NavigationContainer>
           <Stack.Navigator
@@ -85,6 +89,7 @@ export default function App() {
           </Stack.Navigator>
         </NavigationContainer>
       </WorkoutContextProvider>
+      </UserContextProvider>
     </>
   );
 }
