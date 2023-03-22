@@ -9,6 +9,8 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+.env
+AuthKey_86Q72CVC5P.p8
 
 # macOS
 .DS_Store

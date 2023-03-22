@@ -23,6 +23,12 @@
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "appleId": "stuartsim.aus@gmail.com",
+        "ascAppId": "6446604086",
+        "appleTeamId": "S6N2A47Q82"
+      }
+    }
   }
 }

@@ -6,7 +6,6 @@ import { GlobalStyles } from '../constants/styles';
 import { workoutContext } from '../store/workoutContext';
 import { fetchWorkout, storeWorkout } from '../util/firebase/http';
 
-
 function Feed(){
 
     const workoutCtx = useContext(workoutContext)

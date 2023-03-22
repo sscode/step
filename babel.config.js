@@ -9,8 +9,6 @@ module.exports = function(api) {
               "path": ".env",
             }
           ]
-
     ]
-
   }
 };

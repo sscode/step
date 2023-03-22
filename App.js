@@ -15,6 +15,11 @@ import User from './screens/User';
 import EditWorkout from './screens/EditWorkout';
 import LoginScreen from './screens/LoginScreen';
 
+import { NativeModules } from 'react-native';
+
+NativeModules.DevSettings.setIsDebuggingRemotely(true);
+
+
 
 export default function App() {
 
