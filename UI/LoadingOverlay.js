@@ -6,7 +6,7 @@ function LoadingOverlay({ show, children }) {
   return (
 
     <View style={styles.container}>
-        <ActivityIndicator size="large" color="red" />
+        <ActivityIndicator size="large" color={GlobalStyles.colors.gray200} />
     </View>
   );
 }
@@ -19,6 +19,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 24,
-        backgroundColor: GlobalStyles.colors.primary800
+        backgroundColor: GlobalStyles.colors.gray700
     }
 })

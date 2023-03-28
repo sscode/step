@@ -9,6 +9,9 @@ function WorkoutInput({setName, setDate}){
     const [newDate, setNewDate] = useState(new Date().toISOString().slice(0, 10))
 
     const saveHandler = () => {
+        if(newName === ''){
+            alert('Please name your workout')
+        }
         setName(newName)
         setDate(newDate)
     }
