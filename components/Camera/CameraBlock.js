@@ -10,11 +10,7 @@ import LoadingOverlay from '../../UI/LoadingOverlay';
 import { storeWorkout } from '../../util/firebase/http';
 import { workoutContext } from '../../store/workoutContext';
 import uploadCloudinary from '../../util/images/cloudinary';
-<<<<<<< HEAD
-import {Dimensions} from 'react-native';
-=======
 import { Dimensions } from 'react-native';
->>>>>>> repo2/main
 import clean from '../../util/dataFormats/clean';
 import WorkoutInput from './WorkoutInputs';
 import { userContext } from '../../store/userContext';
@@ -22,11 +18,7 @@ import { userContext } from '../../store/userContext';
 const windowWidth = Dimensions.get('window').width;
 
 
-<<<<<<< HEAD
-export default function CameraBlock({close}){
-=======
 export default function CameraBlock({ close }) {
->>>>>>> repo2/main
     const [hasPermission, setHasPermission] = useState(null);
     const [newTaken, setNewTaken] = useState(false);
     const [image, setImage] = useState(null);
@@ -40,6 +32,8 @@ export default function CameraBlock({ close }) {
     const [date, setDate] = useState(null);
     const [name, setName] = useState(null);
 
+    //remove conflict
+
     // if (!permission)
     useEffect(() => {
         (async () => {
@@ -47,30 +41,18 @@ export default function CameraBlock({ close }) {
             const { status } = await Camera.requestCameraPermissionsAsync();
             setHasPermission(status === 'granted');
         })
-<<<<<<< HEAD
-        ()
-    }, []);
-
-    const takePicture = async () => {
-        if(cameraRef){
-=======
             ()
     }, []);
 
     const takePicture = async () => {
         if (cameraRef) {
->>>>>>> repo2/main
             try {
                 const data1 = await cameraRef.current.takePictureAsync();
                 const data = await ImageManipulator.manipulateAsync(
                     data1.uri,
                     [{ resize: { width: 300 } }],
                     { compress: 0.7, format: 'jpeg' }
-<<<<<<< HEAD
-                  );
-=======
                 );
->>>>>>> repo2/main
                 setImageName(data.uri.slice(data.uri.length - 26, data.uri.length - 4))
                 setImage(data.uri);
                 // const blob = await data.blob()
@@ -85,11 +67,7 @@ export default function CameraBlock({ close }) {
     }
 
     const savePicture = async () => {
-<<<<<<< HEAD
-        if(image){
-=======
         if (image) {
->>>>>>> repo2/main
             try {
                 await MediaLibrary.saveToLibraryAsync(image);
                 // setImage(null);
@@ -102,15 +80,9 @@ export default function CameraBlock({ close }) {
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
-<<<<<<< HEAD
-          mediaTypes: ImagePicker.MediaTypeOptions.All,
-          allowsEditing: true,
-          quality: .7,
-=======
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             quality: .7,
->>>>>>> repo2/main
         });
         setImage(result.assets[0].uri);
         setImageName(result.assets[0].fileName)
@@ -120,11 +92,7 @@ export default function CameraBlock({ close }) {
     const uploadImage = async (asset) => {
         setFetching(true);
 
-<<<<<<< HEAD
-        {newTaken ? savePicture() : null}
-=======
         { newTaken ? savePicture() : null }
->>>>>>> repo2/main
 
         const file = {
             uri: asset.uri,
@@ -144,11 +112,6 @@ export default function CameraBlock({ close }) {
         //     secretKey: 'qNTzAJKVeJ/iZ+wg97HBuB7jnXbMRK3LMJNm19fn',
         //     successActionStatus: 201
         // }
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> repo2/main
         // // console.log(file)
         // RNS3.put(file, options)
         // .progress(event => {
@@ -159,11 +122,7 @@ export default function CameraBlock({ close }) {
         //     console.log("RESPONSE: ", response.body.postResponse.location)
 
         //     newWorkoutMaker(response.body.postResponse.location)
-<<<<<<< HEAD
-            // setFetching(false);
-=======
         // setFetching(false);
->>>>>>> repo2/main
         //     close()
         //     if(response.status !== 201)
         //         throw new Error('Failed to upload image to S3');
@@ -174,27 +133,6 @@ export default function CameraBlock({ close }) {
         const formData = new FormData();
         formData.append('file', imageFile);
         const headers = {
-<<<<<<< HEAD
-        'Content-Type': 'multipart/form-data',
-        };
-        const req = fetch('https://erg.stusim.repl.co/get-text', {
-        method: 'POST',
-        body: formData,
-        headers: headers,
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            setErgText(data)
-        })
-        .catch(error => {
-            // handle error
-            console.log("error", error);
-        });
-    };
-
-    useEffect(() => {
-        if(ergText){
-=======
             'Content-Type': 'multipart/form-data',
         };
         const req = fetch('https://erg.stusim.repl.co/get-text', {
@@ -214,7 +152,6 @@ export default function CameraBlock({ close }) {
 
     useEffect(() => {
         if (ergText) {
->>>>>>> repo2/main
             //cleanup workout here
             const cleanText = clean(ergText)
             newWorkoutMaker(imgURL, cleanText)
@@ -225,11 +162,6 @@ export default function CameraBlock({ close }) {
 
     const userCtx = useContext(userContext)
     const workoutCtx = useContext(workoutContext)
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> repo2/main
     const newWorkoutMaker = async (imgURL, ergText) => {
 
         const data = {
@@ -240,67 +172,6 @@ export default function CameraBlock({ close }) {
             userID: userCtx.user[0].uid,
         }
         const wId = await storeWorkout(data)
-<<<<<<< HEAD
-    
-        //add to context
-        workoutCtx.addWorkout({...data, id: wId})
-    }
-
-    if(!name){
-        return <WorkoutInput close={close} setName={setName} setDate={setDate} />
-    }
-
-    if(!hasPermission){
-        return <Text>No access to camera</Text>
-    }
-
-    if(fetching){
-        return <LoadingOverlay />
-      }
-  
-    return (
-      <View style={styles.contrainer}>
-        {image ?
-            <View style={[styles.imageContainer]}>
-                <Image 
-                style={styles.camera}
-                source={{uri: image}} />
-            </View>
-            :
-            <Camera 
-            ref={cameraRef}
-            style={styles.camera}
-            type={type}
-            >
-            </Camera>
-        }
-        <View style={styles.buttonContainer}>
-            {!image ? 
-            <>
-                <Button
-                mode='half'
-                onPress={pickImage}
-                >Select Old</Button>
-                <Button
-                mode='half'
-                onPress={takePicture}
-                >Capture New</Button>
-            
-            </>
-            : 
-                <>
-                <Button 
-                mode='half'
-                onPress={() => setImage(null)}
-                >Retake</Button>
-                <Button 
-                mode='flat'
-                onPress={() => uploadImage(imageFile)}
-                >Upload</Button>
-                </>
-            }
-        </View>
-=======
 
         //add to context
         workoutCtx.addWorkout({ ...data, id: wId })
@@ -360,7 +231,6 @@ export default function CameraBlock({ close }) {
                     </>
                 }
             </View>
->>>>>>> repo2/main
         </View>
     );
 }
