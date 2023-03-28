@@ -3,22 +3,15 @@ import { View, StyleSheet, Text } from "react-native";
 import CameraBlock from "../components/Camera/CameraBlock";
 
 
-<<<<<<< HEAD
-function NewWorkout({navigation}){
-=======
 function NewWorkout({ navigation }) {
->>>>>>> repo2/main
+
+    //remove header
 
     useLayoutEffect(() => {
         navigation.setOptions({
             title: 'New Workout',
-<<<<<<< HEAD
-            headerRight: () => {},
-            headerLeft: () => {},
-=======
             headerRight: () => { },
             headerLeft: () => { },
->>>>>>> repo2/main
         })
     }, [navigation])
 
@@ -27,15 +20,9 @@ function NewWorkout({ navigation }) {
     }
 
     return (
-<<<<<<< HEAD
-    <View style={styles.container}>
-        <CameraBlock close={closeHandler}/>
-    </View>)
-=======
         <View style={styles.container}>
             <CameraBlock close={closeHandler} />
         </View>)
->>>>>>> repo2/main
 }
 
 export default NewWorkout;
