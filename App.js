@@ -17,7 +17,7 @@ import LoginScreen from './screens/LoginScreen';
 
 import { NativeModules } from 'react-native';
 
-// NativeModules.DevSettings.setIsDebuggingRemotely(true);
+NativeModules.DevSettings.setIsDebuggingRemotely(false);
 LogBox.ignoreLogs(['AsyncStorage has been extracted'])
 
 
