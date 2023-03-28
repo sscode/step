@@ -19,7 +19,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.ergbase.mobile"
+      "bundleIdentifier": "com.ergbase.mobile",
+      "buildNumber": "1.0.3"
     },
     "android": {
       "adaptiveIcon": {
