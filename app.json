@@ -2,13 +2,7 @@
   "expo": {
     "name": "ergbase",
     "slug": "ergbase",
-<<<<<<< HEAD
-    "version": "1.0.3",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-=======
-    "version": "1.0.9",
+    "version": "1.0.10",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -22,7 +16,6 @@
         }
       ]
     ],
->>>>>>> repo2/main
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -36,12 +29,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-<<<<<<< HEAD
-      "bundleIdentifier": "com.ergbase.mobile",
-      "buildNumber": "1.0.3"
-=======
       "bundleIdentifier": "com.ergbase.mobile"
->>>>>>> repo2/main
     },
     "android": {
       "adaptiveIcon": {
@@ -58,8 +46,4 @@
       }
     }
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> repo2/main
