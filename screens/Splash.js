@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 import { GlobalStyles } from '../constants/styles';
 import Button from '../UI/Button';
 
-const SplashScreen = ({navigation}) => {
+const SplashScreenComp = ({navigation}) => {
 
 
   const loginHandler = () => {
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SplashScreen;
+export default SplashScreenComp;

@@ -9,13 +9,15 @@ import WorkoutContextProvider from './store/workoutContext';
 import UserContextProvider from './store/userContext';
 
 import NewWorkout from './screens/NewWorkout';
-import SplashScreen from './screens/Splash';
+import SplashScreenComp from './screens/Splash';
 import Feed from './screens/Feed';
 import User from './screens/User';
 import EditWorkout from './screens/EditWorkout';
 import LoginScreen from './screens/LoginScreen';
 
 import { NativeModules } from 'react-native';
+import * as SplashScreen from 'expo-splash-screen';
+import { useEffect } from 'react';
 
 NativeModules.DevSettings.setIsDebuggingRemotely(true);
 
@@ -24,6 +26,23 @@ NativeModules.DevSettings.setIsDebuggingRemotely(true);
 export default function App() {
 
   const Stack = createNativeStackNavigator();
+
+  useEffect(() => {
+    // Prevent the splash screen from auto-hiding
+    SplashScreen.preventAutoHideAsync()
+      .then(() => console.log('Splash screen auto-hide prevented'))
+      .catch(console.warn);
+    // Add your app's initialization logic here
+    // For example, load assets, check authentication status, etc.
+    // Once the app is ready, call SplashScreen.hideAsync()
+
+    // Simulating app initialization
+    setTimeout(() => {
+      SplashScreen.hideAsync()
+      .then(() => console.log('Splash screen hidden'))
+      .catch(console.warn);
+  }, 1000); // Replace the 3000ms delay with your actual app initialization duration
+}, []);
 
   return (
     <>
@@ -65,7 +84,7 @@ export default function App() {
             <Stack.Screen name="Splash" 
             screenOptions={{headerShown: false}}
             options={{headerShown: false}}
-            component={SplashScreen} />
+            component={SplashScreenComp} />
 
             <Stack.Screen name="Login" 
             screenOptions={{headerShown: false}}

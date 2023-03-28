@@ -28,7 +28,8 @@
     "react-native-dotenv": "^3.4.8",
     "react-native-fs": "^2.20.0",
     "react-native-image-picker": "^5.1.0",
-    "textract": "^2.5.0"
+    "textract": "^2.5.0",
+    "expo-splash-screen": "~0.17.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
