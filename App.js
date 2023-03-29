@@ -78,11 +78,15 @@ export default function App() {
 
               <Stack.Screen
                 name="User"
-                component={User} />
+                component={User} 
+                options={{ headerTintColor: 'black' }}
+                />
 
               <Stack.Screen
                 name="EditWorkout"
-                component={EditWorkout} />
+                component={EditWorkout} 
+                options={{ headerTintColor: 'black' }}
+                />
 
               <Stack.Screen
                 name="NewWorkout"

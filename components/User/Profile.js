@@ -11,11 +11,11 @@ function Profile(){
             <View>
                 <Image 
                 style={styles.image}
-                source={require('../../assets/lemon.png')}/>
+                source={require('../../assets/profile1.png')}/>
             </View>
             <View style={styles.textContainer}>
-                <Text style={styles.text}>Stuart Sim</Text>
-                <Text style={styles.textSmall}>ID: {userCtx.user[0].uid}</Text>
+                {/* <Text style={styles.text}>Stuart Sim</Text> */}
+                {/* <Text style={styles.textSmall}>ID: {userCtx.user[0].uid}</Text> */}
                 <Text style={styles.textSmall}>Email: {userCtx.user[0].email}</Text>
                 <Text style={styles.textSmall}>Paid status: Free</Text>
                 <Text style={styles.textSmall}>Member since: 2023</Text>

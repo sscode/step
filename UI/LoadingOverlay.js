@@ -4,7 +4,7 @@ import { GlobalStyles } from "../constants/styles";
 
 
 function LoadingOverlay({ show, children }) {
-  const [countdown, setCountdown] = useState(Math.floor(Math.random() * (49 - 34 + 1)) + 34);
+  const [countdown, setCountdown] = useState(Math.floor(Math.random() * (51 - 34 + 1)) + 34);
 
 
   const strings = ["coxswains loading excel", "transposing photo to csv", "uploading csv to server", "calling a coach. no stress."]
