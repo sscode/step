@@ -8,7 +8,7 @@ import { userContext } from '../store/userContext'
 
 
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = ({navigation = { navigate: () => {} }}) => {
     const userCtx = useContext(userContext)
 
     const [email, setEmail] = useState('')
@@ -78,15 +78,16 @@ export default LoginScreen
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        width: '60%',
         alignItems: 'center',
-        justifyContent: 'center',
-    },
-    inputContainer: {
-        width: '70%',
+        // justifyContent: 'center',
         // backgroundColor: GlobalStyles.colors.primary500,
     },
+    inputContainer: {
+        width: '100%',
+    },
     input: {
+        backgroundColor: GlobalStyles.colors.white,
         paddingVertical: 12,
         paddingHorizontal: 24,
         borderWidth: 1,
@@ -95,6 +96,7 @@ const styles = StyleSheet.create({
         marginVertical: 8,
     },
     buttonContainer: {
+        width: '50%',
         marginVertical: 24,
     },
     buttons: {

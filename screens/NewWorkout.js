@@ -1,6 +1,7 @@
 import { useLayoutEffect } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import CameraBlock from "../components/Camera/CameraBlock";
+import LoadingOverlay from "../UI/LoadingOverlay";
 
 
 function NewWorkout({ navigation }) {
@@ -29,7 +30,7 @@ export default NewWorkout;
 
 const styles = StyleSheet.create({
     container: {
-        padding: 24,
         flex: 1,
+        padding: 24,
     }
 })

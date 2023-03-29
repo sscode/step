@@ -186,7 +186,7 @@ export default function CameraBlock({ close }) {
     }
 
     if (fetching) {
-        return <LoadingOverlay />
+        return <LoadingOverlay show={true}/>
     }
 
     return (

@@ -1,15 +1,47 @@
-import { ActivityIndicator, View, StyleSheet } from "react-native";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, View, StyleSheet, Text } from "react-native";
 import { GlobalStyles } from "../constants/styles";
 
 
 function LoadingOverlay({ show, children }) {
-  return (
+  const [countdown, setCountdown] = useState(Math.floor(Math.random() * (49 - 34 + 1)) + 34);
 
+
+  const strings = ["coxswains loading excel", "transposing photo to csv", "uploading csv to server", "calling a coach. no stress."]
+
+  useEffect(() => {
+    if (show) {
+      const interval = setInterval(() => {
+        setCountdown(prevCountdown => prevCountdown > 0 ? prevCountdown - 1 : 0);
+      }, 1000);
+      
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [show]);
+
+  const getCurrentString = () => {
+    if (countdown > 31) {
+      return strings[0];
+    } else if (countdown > 19) {
+      return strings[1];
+    } else if (countdown > 3) {
+      return strings[2];
+    } else {
+      return strings[3];
+    }
+  };
+
+  return (
     <View style={styles.container}>
-        <ActivityIndicator size="large" color={GlobalStyles.colors.gray200} />
+      <ActivityIndicator size="large" color={GlobalStyles.colors.black} />
+      <Text style={styles.countdownText}>Est. time remaining: {countdown}sec</Text>
+      <Text style={styles.countdownTextSmall}>{getCurrentString()}</Text>
     </View>
   );
 }
+
 
 export default LoadingOverlay;
 
@@ -19,6 +51,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 24,
-        backgroundColor: GlobalStyles.colors.gray700
+    },
+    countdownText: {
+        marginTop: 24,
+        color: GlobalStyles.colors.black,
+    },
+    countdownTextSmall: {
+        marginTop: 8,
+        fontSize: 8,
     }
 })

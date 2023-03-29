@@ -2,34 +2,18 @@ import React, { useContext, useEffect } from 'react';
 import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 import { GlobalStyles } from '../constants/styles';
 import Button from '../UI/Button';
+import LoginScreen from './LoginScreen';
 
 const SplashScreen = ({navigation}) => {
-
-  //remove head
-
-  const loginHandler = () => {
-    navigation.navigate('Login')
-    console.log('enter')
-  }
-
-  const enterHandler = () => {
-    navigation.navigate('Feed')
-    console.log('enter')
-  }
 
   return (
     <View style={styles.container}>
       <ImageBackground 
       source={require('../assets/ergbg.png')} 
       style={styles.image}>
-        <Text style={styles.header}>Welcome to Ergbase</Text>
-        <View style={styles.buttonContainer}>
-          <Button 
-          onPress={enterHandler}
-          >Enter</Button>
-          <Button 
-          onPress={loginHandler}
-          >Login</Button>
+        <View style={styles.containerInner}>
+          <Text style={styles.header}>Welcome to Ergbase</Text>
+          <LoginScreen navigation={navigation} />
         </View>
       </ImageBackground>
     </View>
@@ -51,13 +35,13 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     color: GlobalStyles.colors.white,
   },
-  buttonContainer: {
-    height: '30%',
-    flexDirection: 'column',
-    // alignItems: 'center',
+  containerInner: {
+    flex: 1,
+    display: 'flex',
+    alignItems: 'center',
     justifyContent: 'space-around',
-
-  }
+    width: '100%',
+  },
 });
 
 export default SplashScreen;
