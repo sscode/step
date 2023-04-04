@@ -10,74 +10,95 @@ import { userContext } from '../store/userContext'
 
 const LoginScreen = ({navigation = { navigate: () => {} }}) => {
     const userCtx = useContext(userContext)
-
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState('')
+  
     const handleSignup = () => {
-        createUserWithEmailAndPassword(auth, email, password)
+      setIsLoading(true)
+      setError('')
+      createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            handleLogin()
+          setIsLoading(false)
+          handleLogin()
         })
         .catch((error) => {
-            console.log(error)
+          setIsLoading(false)
+          setError(error.message.replace('Firebase:', ''))
         })
     }
-
+  
     const handleLogin = () => {
-        signInWithEmailAndPassword(auth, email, password)
+      setIsLoading(true)
+      setError('')
+      signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            userCtx.addUser(userCredential.user)
-            navigation.navigate('Feed')
+          setIsLoading(false)
+          userCtx.addUser(userCredential.user)
+          navigation.navigate('Feed')
         })
         .catch((error) => {
-            console.log(error)
+          setIsLoading(false)
+          setError(error.message.replace('Firebase:', ''))
         })
     }
-
-
-  return (
-    <KeyboardAvoidingView
-    style={styles.container}
-    >
-      <View
-      style={styles.inputContainer}
-      >
-        <TextInput
-        value={email}
-        keyboardType='email-address'
-        placeholder='Email'
-        style={styles.input}
-        onChangeText={setEmail}
-        />
-
-        <TextInput
-        value={password}
-        placeholder='Password'
-        secureTextEntry
-        style={styles.input}
-        onChangeText={setPassword}
-        />
-      </View>
-      <View style={styles.buttonContainer}>
-        <Button
-        style={styles.buttons}
-        onPress={handleLogin}
-        >Login</Button>
-        <Button
-        style={styles.buttons}
-        mode='flat'
-        onPress={handleSignup}
-        >Register</Button>
+  
+    const clearError = () => {
+      setError('')
+    }
+  
+    return (
+      <KeyboardAvoidingView style={styles.container}>
+        <View style={styles.inputContainer}>
+          <TextInput
+            value={email}
+            keyboardType='email-address'
+            placeholder='Email'
+            style={styles.input}
+            onChangeText={setEmail}
+            onFocus={clearError}
+          />
+  
+          <TextInput
+            value={password}
+            placeholder='Password'
+            secureTextEntry
+            style={styles.input}
+            onChangeText={setPassword}
+            onFocus={clearError}
+          />
         </View>
-    </KeyboardAvoidingView>
-  )
-}
+  
+        {error ? <Text style={styles.error}>{error}</Text> : null}
+  
+        <View style={styles.buttonContainer}>
+          <Button
+            style={styles.buttons}
+            isLoading={isLoading}
+            onPress={handleLogin}
+          >
+            Login
+          </Button>
+  
+          <Button
+            style={styles.buttons}
+            mode='flat'
+            isLoading={isLoading}
+            onPress={handleSignup}
+          >
+            Register
+          </Button>
+        </View>
+      </KeyboardAvoidingView>
+    )
+  }
 
 export default LoginScreen
 
 const styles = StyleSheet.create({
     container: {
+        marginBottom: 100,
         width: '60%',
         alignItems: 'center',
         // justifyContent: 'center',
@@ -101,5 +122,8 @@ const styles = StyleSheet.create({
     },
     buttons: {
         marginVertical: 8,
-    }
+    },
+    error: {
+        color: GlobalStyles.colors.error500,
+    },
 })
