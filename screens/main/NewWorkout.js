@@ -1,10 +1,10 @@
 import { useLayoutEffect } from "react";
 import { View, StyleSheet, Text } from "react-native";
-import CameraBlock from "../components/Camera/CameraBlock";
-import LoadingOverlay from "../UI/LoadingOverlay";
+import CameraBlock from "../../components/Camera/CameraBlock";
+import LoadingOverlay from "../../UI/LoadingOverlay";
 
 
-function NewWorkout({ navigation }) {
+function NewWorkoutScreen({ navigation }) {
 
     //remove header
 
@@ -26,7 +26,7 @@ function NewWorkout({ navigation }) {
         </View>)
 }
 
-export default NewWorkout;
+export default NewWorkoutScreen;
 
 const styles = StyleSheet.create({
     container: {

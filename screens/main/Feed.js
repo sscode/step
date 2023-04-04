@@ -1,12 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import WorkoutSummary from '../components/Workouts/WorkoutSummary';
-import { GlobalStyles } from '../constants/styles';
-import { workoutContext } from '../store/workoutContext';
-import { fetchWorkout, storeWorkout } from '../util/firebase/http';
+import WorkoutSummary from '../../components/Workouts/WorkoutSummary';
+import { GlobalStyles } from '../../constants/styles';
+import { workoutContext } from '../../store/workoutContext';
+import { fetchWorkout, storeWorkout } from '../../util/firebase/http';
 
-function Feed() {
+function FeedScreen() {
   const [error, setError] = useState('')
 
   //remove head
@@ -34,7 +34,7 @@ function Feed() {
   )
 }
 
-export default Feed;
+export default FeedScreen;
 
 const styles = StyleSheet.create({
   container: {

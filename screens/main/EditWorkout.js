@@ -1,13 +1,13 @@
 import { useLayoutEffect, useState } from "react";
 import { View, StyleSheet, Text, Image, TextInput } from "react-native";
-import { workoutContext } from "../store/workoutContext";
-import IconButton from "../UI/IconButton";
-import { deleteWorkout, updateWorkout } from "../util/firebase/http";
+import { workoutContext } from "../../store/workoutContext";
+import IconButton from "../../UI/IconButton";
+import { deleteWorkout, updateWorkout } from "../../util/firebase/http";
 import { useContext } from "react";
-import { GlobalStyles } from "../constants/styles";
+import { GlobalStyles } from "../../constants/styles";
 
 
-function EditWorkout({route, navigation}){
+function EditWorkoutScreen({route, navigation}){
 
     const [newName, setNewName] = useState(route.params?.name)
 
@@ -15,7 +15,8 @@ function EditWorkout({route, navigation}){
         navigation.setOptions({
             title: 'Edit Workout',
             headerRight: () => {},
-            headerLeft: () => {},
+            headerLeft: () => {
+            },
             headerBackVisible: true,
         })
     }, [navigation])
@@ -82,7 +83,7 @@ function EditWorkout({route, navigation}){
     </View>)
 }
 
-export default EditWorkout;
+export default EditWorkoutScreen;
 
 const styles = StyleSheet.create({
     container: {

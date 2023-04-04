@@ -1,12 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Contact from '../components/User/Contact';
-import Logout from '../components/User/Logout';
-import Profile from '../components/User/Profile';
+import Contact from '../../components/User/Contact';
+import Logout from '../../components/User/Logout';
+import Profile from '../../components/User/Profile';
 
 
-function User({navigation}){
+function UserScreen({navigation}){
     useLayoutEffect(() => {
         navigation.setOptions({
             title: 'User Profile',
@@ -31,7 +31,7 @@ function User({navigation}){
     )
 }
 
-export default User;
+export default UserScreen;
 
 const styles = StyleSheet.create({
     container: {
