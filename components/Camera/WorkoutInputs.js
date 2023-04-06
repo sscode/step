@@ -20,17 +20,23 @@ function WorkoutInput({setName, setDate}){
     <View style={styles.container}>
         <View>
             <View>
-                <Text>Name: </Text>
+                <Text
+                style={styles.text}
+                >Name: </Text>
                 <TextInput 
                 onChangeText={setNewName}
                 style={styles.input}
+                placeholderTextColor= '#f0f0f057'
                 placeholder="Workout Name" defaultValue={newName}/>
             </View>
             <View>
-                <Text>Date: </Text>
+                <Text
+                style={styles.text}
+                >Date: </Text>
                 <TextInput 
                 onChangeText={setNewDate}
                 style={styles.input}
+                placeholderTextColor= '#f0f0f057'
                 placeholder="Date" defaultValue={newDate}/>
             </View>
         </View>
@@ -54,12 +60,16 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-between',
     },
+    text: {
+        color: GlobalStyles.colors.gray200,
+    },
     input: {
         borderWidth: 1,
-        borderColor: GlobalStyles.colors.black,
+        borderColor: GlobalStyles.colors.white,
         borderRadius: 6,
         padding: 8,
         marginVertical: 8,
+        color: GlobalStyles.colors.white,
 
     },
     buttonContainer: {

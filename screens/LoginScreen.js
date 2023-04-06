@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, View } from 'react-native'
+import { ImageBackground, KeyboardAvoidingView, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useContext, useLayoutEffect, useState } from 'react'
 import Button from '../UI/Button'
 import { GlobalStyles } from '../constants/styles'
@@ -58,13 +58,18 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
     }
   
     return (
+      <ImageBackground
+        source={require('../assets/bg1-splash.png')} 
+        style={styles.image}>
       <KeyboardAvoidingView style={styles.container}>
+        
         <View style={styles.inputContainer}>
           <TextInput
             value={email}
             keyboardType='email-address'
             placeholder='Email'
             style={styles.input}
+            placeholderTextColor= '#f0f0f057'
             onChangeText={setEmail}
             onFocus={clearError}
           />
@@ -74,6 +79,7 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
             placeholder='Password'
             secureTextEntry
             style={styles.input}
+            placeholderTextColor= '#f0f0f057'
             onChangeText={setPassword}
             onFocus={clearError}
           />
@@ -84,6 +90,7 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
         <View style={styles.buttonContainer}>
           <Button
             style={styles.buttons}
+            mode='full'
             isLoading={isLoading}
             onPress={handleLogin}
           >
@@ -99,30 +106,40 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
             Register
           </Button>
         </View>
-      </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
+      </ImageBackground>
     )
   }
 
 export default LoginScreen
 
 const styles = StyleSheet.create({
+    image: {
+        flex: 1,
+        resizeMode: "cover",
+        width: '100%',
+        height: '100%',
+      },
     container: {
         flex: 1,
-        alignItems: 'center',
+        display: 'flex',
         justifyContent: 'center',
+        alignItems: 'center',
         // backgroundColor: GlobalStyles.colors.primary500,
     },
     inputContainer: {
         width: '60%',
     },
     input: {
-        backgroundColor: GlobalStyles.colors.white,
+        // backgroundColor: GlobalStyles.colors.white,
+        color: GlobalStyles.colors.white,
         paddingVertical: 12,
         paddingHorizontal: 24,
         borderWidth: 1,
-        borderColor: 'black',
-        borderRadius: 8,
+        borderColor: GlobalStyles.colors.gray200,
+        borderRadius: 50,
         marginVertical: 8,
+
     },
     buttonContainer: {
         width: '50%',

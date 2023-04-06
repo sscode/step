@@ -13,7 +13,7 @@ const HeaderRight = () => {
                 navigation.navigate('main', { screen: 'newWorkout' })
             }}
         >
-            <Ionicons name="add" size={24} color="black" style={{ marginRight: 10 }} />
+            <Ionicons name="add" size={24} color="white" style={{ marginRight: 10 }} />
         </TouchableOpacity>
     )
 }

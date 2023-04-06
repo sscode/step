@@ -25,13 +25,15 @@ export const MainNavigator = () => {
                 headerRight: HeaderRight,
                 headerLeft: HeaderLeft,
                 title: "Home",
+                headerTransparent: true,
                 headerStyle: {
-                    backgroundColor: GlobalStyles.colors.primary500,
+                    borderBottomWidth: 5,
+                    borderBottomColor: 'white',
                 },
                 headerTintColor: '#fff',
                 headerTitleStyle: {
                     fontWeight: 'bold',
-                    color: 'black'
+                    color: 'white'
                 },
             })}
         >

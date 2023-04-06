@@ -11,6 +11,7 @@ function Button({children, onPress, mode, style}){
             style={({pressed}) => pressed && styles.pressed}
             >
                 <View style={[styles.button, 
+                    mode === 'full' && styles.full,
                     mode === 'flat' && styles.flat,
                     mode === 'half' && styles.half,
                     mode === 'redInverse' && styles.redInverse,
@@ -28,36 +29,36 @@ export default Button;
 
 const styles = StyleSheet.create({
     button: {
-        borderRadius: 4,
+        borderRadius: 50,
         paddingHorizontal: 16,
-        borderWidth: 4,
-        borderColor: GlobalStyles.colors.primary500,
+        borderWidth: 1,
         paddingVertical: 8,
-        backgroundColor: GlobalStyles.colors.primary500,
 
     },
     buttonText: {
-        color: GlobalStyles.colors.gray500,
+        color: GlobalStyles.colors.white,
         textAlign: 'center',
     },
-    pressed: {
-        opacity: 0.75,
-        backgroundColor: GlobalStyles.colors.primary500,
-        borderRadius: 4,
+    full: {
+        backgroundColor: GlobalStyles.colors.black,
+        borderColor: GlobalStyles.colors.black,
     },
     flat: {
-        backgroundColor: GlobalStyles.colors.primary50,
-        borderWidth: 4,
-        borderColor: GlobalStyles.colors.primary100,
+        backgroundColor: 'transparent',
+        borderColor: GlobalStyles.colors.primary500,
     },
     half: {
         backgroundColor: GlobalStyles.colors.white,
-        borderWidth: 4,
         borderColor: GlobalStyles.colors.primary400,
     },
     redInverse: {
         backgroundColor: GlobalStyles.colors.white,
-        borderWidth: 4,
+        borderWidth: 2,
         borderColor: GlobalStyles.colors.error500,
-    }
+    },
+    pressed: {
+        backgroundColor: GlobalStyles.colors.primary500,
+        borderColor: GlobalStyles.colors.primary500,
+        borderRadius: 50,
+    },
 })

@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { useContext, useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import WorkoutSummary from '../../components/Workouts/WorkoutSummary';
 import { GlobalStyles } from '../../constants/styles';
 import { userContext } from '../../store/userContext';
@@ -33,17 +33,23 @@ function FeedScreen() {
   }, [])
 
   return (
-    <View style={styles.container}>
-      <WorkoutSummary workouts={workoutCtx.workouts} />
-    </View>
+    <ImageBackground
+    source={require('../../assets/bg1-splash.png')} 
+    style={styles.image}>
+      <View style={styles.container}>
+        <WorkoutSummary workouts={workoutCtx.workouts} />
+      </View>
+    </ImageBackground>
   )
 }
 
 export default FeedScreen;
 
 const styles = StyleSheet.create({
+  image: {
+    flex: 1,
+  },
   container: {
     flex: 1,
-    backgroundColor: GlobalStyles.colors.black,
   },
 });
