@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { useContext, useEffect, useLayoutEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import Contact from '../../components/User/Contact';
 import Logout from '../../components/User/Logout';
 import Profile from '../../components/User/Profile';
@@ -22,22 +22,30 @@ function UserScreen({navigation}){
     }
 
     return( 
-        <View style={styles.container}>
-            <Profile />
-            <View style={styles.footer}>
-                <Logout />
-                <Contact />
+        <ImageBackground
+        source={require('../../assets/bg-user.png')}
+        style={styles.image}
+        >
+            <View style={styles.container}>
+                <Profile />
+                <View style={styles.footer}>
+                    <Logout />
+                    <Contact />
+                </View>
             </View>
-        </View>
+        </ImageBackground>
     )
 }
 
 export default UserScreen;
 
 const styles = StyleSheet.create({
+    image: {
+        flex: 1,
+        resizeMode: 'cover',
+    },
     container: {
       flex: 1,
-      backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'space-between',
     },

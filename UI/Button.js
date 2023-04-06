@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         borderColor: GlobalStyles.colors.primary400,
     },
     redInverse: {
-        backgroundColor: GlobalStyles.colors.white,
+        backgroundColor: GlobalStyles.colors.error500,
         borderWidth: 2,
         borderColor: GlobalStyles.colors.error500,
     },

@@ -7,7 +7,7 @@ function LoadingOverlay({ show, children }) {
   const [countdown, setCountdown] = useState(Math.floor(Math.random() * (51 - 34 + 1)) + 34);
 
 
-  const strings = ["coxswains loading excel", "transposing photo to csv", "uploading csv to server", "calling a coach. no stress."]
+  const strings = ["coxswains loading excel", "transposing photo to csv", "uploading csv to server", "calling a coach. please try again."]
 
   useEffect(() => {
     if (show) {
@@ -35,7 +35,7 @@ function LoadingOverlay({ show, children }) {
 
   return (
     <View style={styles.container}>
-      <ActivityIndicator size="large" color={GlobalStyles.colors.black} />
+      <ActivityIndicator size="large" color={GlobalStyles.colors.white} />
       <Text style={styles.countdownText}>Est. time remaining: {countdown}sec</Text>
       <Text style={styles.countdownTextSmall}>{getCurrentString()}</Text>
     </View>
@@ -54,10 +54,11 @@ const styles = StyleSheet.create({
     },
     countdownText: {
         marginTop: 24,
-        color: GlobalStyles.colors.black,
-    },
-    countdownTextSmall: {
+        color: GlobalStyles.colors.white,
+      },
+      countdownTextSmall: {
         marginTop: 8,
         fontSize: 8,
+        color: GlobalStyles.colors.white,
     }
 })

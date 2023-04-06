@@ -6,13 +6,11 @@ import HeaderLeft from './HeaderLeft';
 
 import { GlobalStyles } from '../constants/styles';
 
-
-
-import EditWorkoutScreen from '../screens/main/EditWorkout';
 import NewWorkoutScreen from '../screens/main/NewWorkout';
 import FeedScreen from '../screens/main/Feed';
 import UserScreen from '../screens/main/User';
 import LoginScreen from '../screens/LoginScreen';
+import EditWorkoutScreen from '../screens/main/EditWorkout';
 
 const Stack = createStackNavigator();
 
@@ -35,6 +33,9 @@ export const MainNavigator = () => {
                     fontWeight: 'bold',
                     color: 'white'
                 },
+                cardStyle: {
+                    backgroundColor: "black"
+                },
             })}
         >
             <Stack.Screen
@@ -56,7 +57,9 @@ export const MainNavigator = () => {
             <Stack.Screen
                 name="newWorkout"
                 component={NewWorkoutScreen}
-                options={{ presentation: 'modal' }}
+                options={{ 
+                    presentation: 'modal',
+                }}
             />
         </Stack.Navigator>
     );

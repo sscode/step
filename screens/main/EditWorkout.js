@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from "react";
-import { View, StyleSheet, Text, Image, TextInput } from "react-native";
+import { View, StyleSheet, Text, Image, TextInput, ImageBackground } from "react-native";
 import { workoutContext } from "../../store/workoutContext";
 import IconButton from "../../UI/IconButton";
 import { deleteWorkout, updateWorkout } from "../../util/firebase/http";
@@ -15,8 +15,7 @@ function EditWorkoutScreen({route, navigation}){
         navigation.setOptions({
             title: 'Edit Workout',
             headerRight: () => {},
-            headerLeft: () => {
-            },
+            headerLeft: navigation.navigate('main', { screen: 'edit' }),
             headerBackVisible: true,
         })
     }, [navigation])
@@ -50,54 +49,89 @@ function EditWorkoutScreen({route, navigation}){
     }
 
     return (
-    <View style={styles.container}>
-        <View>
+    <ImageBackground
+    source={require('../../assets/bg-edit.png')}
+    style={styles.image}
+    >
+        <View style={styles.container}>
             <View>
-                <Text>Name: </Text>
-                <TextInput 
-                onChangeText={setNewName}
-                style={styles.input}
-                placeholder="Edit Name" defaultValue={newName}/>
+                <View style={styles.textContainer}>
+                    <View>
+                        <Text
+                        style={styles.text}
+                        >Workout Name: </Text>
+                        <TextInput 
+                        onChangeText={setNewName}
+                        style={styles.input}
+                        placeholder="Edit Name" defaultValue={newName}/>
+                    </View>
+                    <Text
+                    style={[styles.text, styles.date]}
+                    >Date: {route.params?.date}</Text>
+                </View>
             </View>
-            <View>
-                <Text>Date: {route.params?.date}</Text>
+            <Image 
+            source={{uri: route.params?.imgURL}} 
+            style={styles.imageSmall}/>
+            <View style={styles.buttonContainer}>
+                <View style={[styles.button, styles.delete]}>
+                    <IconButton 
+                        iconType="Ionicons"
+                        icon="trash" size={24} 
+                        color={GlobalStyles.colors.white} 
+                        onPress={deleteHandler}/>
+                </View>
+                <View style={[styles.button, styles.save]}>
+                    <IconButton 
+                        iconType="Ionicons"
+                        icon="save" size={24} 
+                        color={GlobalStyles.colors.black} 
+                        onPress={saveHandler}/>
+                </View>
             </View>
         </View>
-        <Image source={{uri: route.params?.imgURL}} style={{width: 100, height: 100}}/>
-        <View style={styles.buttonContainer}>
-            <View style={[styles.button, styles.delete]}>
-                <IconButton 
-                    iconType="Ionicons"
-                    icon="trash" size={24} 
-                    color={GlobalStyles.colors.black} 
-                    onPress={deleteHandler}/>
-            </View>
-            <View style={[styles.button, styles.save]}>
-                <IconButton 
-                    iconType="Ionicons"
-                    icon="save" size={24} 
-                    color={GlobalStyles.colors.black} 
-                    onPress={saveHandler}/>
-            </View>
-        </View>
-    </View>)
+    </ImageBackground>
+    )
 }
 
 export default EditWorkoutScreen;
 
 const styles = StyleSheet.create({
+    image: {
+        flex: 1,
+        resizeMode: "cover",
+    },
     container: {
         padding: 24,
         flex: 1,
         justifyContent: 'space-between',
     },
+    textContainer: {
+        marginTop: 100,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+
+    },
+    text: {
+        color: GlobalStyles.colors.white,
+    },
+    date: {
+        marginTop: 8,
+    },
     input: {
         borderWidth: 1,
-        borderColor: GlobalStyles.colors.black,
+        borderColor: GlobalStyles.colors.white,
+        color: GlobalStyles.colors.white,
         borderRadius: 6,
         padding: 8,
-        marginVertical: 8,
+        marginTop: 8,
 
+    },
+    imageSmall: {
+        borderRadius: 10,
+        width: 300,
+        height: 300,
+        alignSelf: 'center',
     },
     buttonContainer: {
         flexDirection: 'row',

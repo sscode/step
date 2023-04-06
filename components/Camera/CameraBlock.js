@@ -209,11 +209,11 @@ export default function CameraBlock({ close }) {
                 {!image ?
                     <>
                         <Button
-                            mode='half'
+                            mode='full'
                             onPress={pickImage}
                         >Select Old</Button>
                         <Button
-                            mode='half'
+                            mode='flat'
                             onPress={takePicture}
                         >Capture New</Button>
 
@@ -221,7 +221,7 @@ export default function CameraBlock({ close }) {
                     :
                     <>
                         <Button
-                            mode='half'
+                            mode='full'
                             onPress={() => setImage(null)}
                         >Retake</Button>
                         <Button
@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
     },
     camera: {
         // flex: 1,
-        backgroundColor: 'red',
+        marginTop: 56,
         width: windowWidth * .8,
         height: windowWidth * .8,
     },
@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     buttonContainer: {
-        marginTop: 24,
+        marginTop: 74,
         flexDirection: 'row',
         width: '100%',
         // alignItems: 'center',

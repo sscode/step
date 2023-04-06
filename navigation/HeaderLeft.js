@@ -13,7 +13,7 @@ const HeaderLeft = () => {
                 navigation.navigate('main', { screen: 'user' })
             }}
         >
-            <Ionicons name="person" size={24} color="white" style={{ marginLeft: 10 }} />
+            <Ionicons name="person" size={24} color="white" style={{ marginLeft: 24 }} />
         </TouchableOpacity>
     )
 }

@@ -4,7 +4,6 @@ import { useNavigation } from "@react-navigation/native";
 import { formatDate } from "../../util/date";
 import IconButton from "../../UI/IconButton";
 import { useEffect, useState } from "react";
-import TableOne from "../../UI/Table";
 import Expanded from "./Expanded";
 import splitOrWatts from "../../util/dataFormats/splitorwatts";
 
@@ -16,7 +15,7 @@ function WorkoutItem({id, name, date, imgURL, ergData}){
     
 
     function editHandler(){
-        navigation.navigate('EditWorkout', 
+        navigation.navigate('editWorkout', 
         {name: name,
         date: date,
         id: id,
@@ -81,7 +80,7 @@ function WorkoutItem({id, name, date, imgURL, ergData}){
     >
 
         <ImageBackground 
-        source={require('../../assets/ergbg.png')} 
+        source={require('../../assets/ergbg-dark.png')} 
         style={styles.imageBackground}>
             {small && 
                 <View style={[styles.workoutItem, styles.small]}>
@@ -103,6 +102,7 @@ export default WorkoutItem;
 const styles = StyleSheet.create({
     imageBackground: {
         marginTop: 24,
+        // opacity: 0.5,
     },
     workoutItem: {
         borderRadius: 6,

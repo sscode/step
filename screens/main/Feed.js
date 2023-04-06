@@ -14,9 +14,9 @@ function FeedScreen() {
 
   const workoutCtx = useContext(workoutContext)
 
-  const userCtx = useContext(userContext)
+  // const userCtx = useContext(userContext)
   // const userId = userCtx.user[0].uid;
-  console.log(userCtx)
+  // console.log(userCtx)
 
   useEffect(() => {
     async function getWorkouts() {
