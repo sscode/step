@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Contact from '../../components/User/Contact';
 import Logout from '../../components/User/Logout';
 import Profile from '../../components/User/Profile';
+import HeaderLeft from '../../navigation/HeaderLeft';
 
 
 function UserScreen({navigation}){
@@ -11,7 +12,7 @@ function UserScreen({navigation}){
         navigation.setOptions({
             title: 'User Profile',
             headerRight: () => {},
-            headerLeft: () => {},
+            headerLeft: navigation.navigate('main', { screen: 'user' }),
             headerBackVisible: true,
         })
     }, [navigation])

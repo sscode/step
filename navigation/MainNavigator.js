@@ -12,6 +12,7 @@ import EditWorkoutScreen from '../screens/main/EditWorkout';
 import NewWorkoutScreen from '../screens/main/NewWorkout';
 import FeedScreen from '../screens/main/Feed';
 import UserScreen from '../screens/main/User';
+import LoginScreen from '../screens/LoginScreen';
 
 const Stack = createStackNavigator();
 
@@ -34,6 +35,10 @@ export const MainNavigator = () => {
                 },
             })}
         >
+            <Stack.Screen
+                name="login"
+                component={LoginScreen}
+            />
             <Stack.Screen
                 name="feed"
                 component={FeedScreen}

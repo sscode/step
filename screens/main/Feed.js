@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import WorkoutSummary from '../../components/Workouts/WorkoutSummary';
 import { GlobalStyles } from '../../constants/styles';
+import { userContext } from '../../store/userContext';
 import { workoutContext } from '../../store/workoutContext';
 import { fetchWorkout, storeWorkout } from '../../util/firebase/http';
 
@@ -12,6 +13,10 @@ function FeedScreen() {
   //remove head
 
   const workoutCtx = useContext(workoutContext)
+
+  const userCtx = useContext(userContext)
+  // const userId = userCtx.user[0].uid;
+  console.log(userCtx)
 
   useEffect(() => {
     async function getWorkouts() {

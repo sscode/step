@@ -14,6 +14,15 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
     const [password, setPassword] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState('')
+
+    useLayoutEffect(() => {
+      navigation.setOptions({
+          title: '',
+          headerRight: () => {},
+          headerLeft: () => {},
+          header: () => {},
+      })
+  }, [navigation])
   
     const handleSignup = () => {
       setIsLoading(true)
@@ -36,7 +45,7 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
         .then((userCredential) => {
           setIsLoading(false)
           userCtx.addUser(userCredential.user)
-          navigation.navigate('Feed')
+          navigation.navigate('feed', { screen: 'feed' })
         })
         .catch((error) => {
           setIsLoading(false)
@@ -98,14 +107,13 @@ export default LoginScreen
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 100,
-        width: '60%',
+        flex: 1,
         alignItems: 'center',
-        // justifyContent: 'center',
+        justifyContent: 'center',
         // backgroundColor: GlobalStyles.colors.primary500,
     },
     inputContainer: {
-        width: '100%',
+        width: '60%',
     },
     input: {
         backgroundColor: GlobalStyles.colors.white,
