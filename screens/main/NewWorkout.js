@@ -3,24 +3,36 @@ import { View, StyleSheet, Text, FlatList } from 'react-native';
 import AddExerciseButton from '../../components/Workout/AddExerciseButton';
 import AddExerciseModal from '../../components/Workout/AddExerciseModal';
 import ExerciseItem from '../../components/Workout/ExerciseItem';
-import OrderExercises from '../../components/Workout/OrderExercise';
 import SetOrderButton from '../../components/Workout/SetOrderButton';
 import { GlobalStyles } from '../../constants/styles';
 import { ExerciseContext } from '../../store/exerciseContext';
+import { addExercise } from '../../util/firebase/http';
 
 const NewWorkout = ({ navigation }) => {
-  const { exercises, addExercise } = useContext(ExerciseContext);
+
+    const exerciseCtx = useContext(ExerciseContext);
+    console.log("NewWorkout ", exerciseCtx.exerciseData.Exercises)
+
+    const exercises = exerciseCtx.exerciseData.Exercises;
+
+
+    // console.log('exercises', exercises);
+
   const [selectedExercisesIds, setSelectedExercisesIds] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [newExerciseName, setNewExerciseName] = useState('');
 
-  const handleAddExercise = () => {
-    // Replace 'userId' with the actual user ID when adding a new exercise
+  const handleAddExercise = async () => {
+    // console.log("newExerciseName ", newExerciseName)
     const userId = 'stu';
-    addExercise(userId, newExerciseName);
+    const newExerciseFirebaseId = Math.random().toString(36).substring(7);
+    // const newExerciseFirebaseId = await addExercise(userId, newExerciseName);
+    // console.log('newExercise', newExerciseFirebaseId);
+    exerciseCtx.getAllExercises({id: newExerciseFirebaseId, name: newExerciseName});
     setModalVisible(false);
     setNewExerciseName('');
   };
+  
 
   const toggleExercise = (exerciseId) => {
     if (selectedExercisesIds.includes(exerciseId)) {
@@ -42,7 +54,7 @@ const NewWorkout = ({ navigation }) => {
   };
   
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item, id }) => (
     <ExerciseItem
       exercise={item}
       onSelect={() => toggleExercise(item.id)}
@@ -50,21 +62,27 @@ const NewWorkout = ({ navigation }) => {
     />
   );
 
-  const renderEmptyList = () => (
-    <View>
-      <Text>No exercises found. Start adding exercises:</Text>
-    </View>
-  );
+  const mainList = () => {
+    if(exercises.length === 0){
+        return (
+            <View>
+                <Text>No exercises found. Start adding exercises:</Text>
+            </View>
+    )} else {
+        return(
+            <FlatList
+            data={exercises}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+            />
+        )
+    }
+    }
 
   return (
     <View>
       <AddExerciseButton onPress={() => setModalVisible(true)} />
-      <FlatList
-        data={exercises}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-        ListEmptyComponent={renderEmptyList}
-      />
+      {mainList()}
       <SetOrderButton onPress={setOrder} />
       <AddExerciseModal
         visible={modalVisible}

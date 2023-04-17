@@ -4,10 +4,10 @@ import { userContext } from '../../store/userContext';
 
 const baseURL = `${process.env.REACT_APP_FIREBASE_databaseURL}`;
 
-export const addSetToFirebase = async (userId, exerciseId, workoutId, set) => {
+export const addSetToFirebase = async (userId, set) => {
     try {
       const response = await axios.post(
-        `${baseURL}/users/${userId}/exercises/${exerciseId}/workouts/${workoutId}/sets.json`,
+        `${baseURL}/users/${userId}/sets.json`,
         set
       );
   
@@ -23,11 +23,24 @@ export const addSetToFirebase = async (userId, exerciseId, workoutId, set) => {
       return null;
     }
   };
+  
+  export const addExercise = async (userId, exerciseName) => {
+    try {
+      const response = await axios.post(
+        `${baseURL}/users/${userId}/exercises.json`,
+        { name: exerciseName }
+      );
+      const data = response.data;
+      return data
+    } catch (error) {
+      console.error('Error adding exercise:', error);
+    }
+  };
 
-  export const fetchExercises = async (userId) => {
+  export const getUserIdData = async (userId) => {
     try {
       const response = await axios.get(
-        `${baseURL}/exercises/${userId}.json`
+        `${baseURL}/users/${userId}.json`
       );
       const data = response.data;
       return data;
@@ -37,37 +50,3 @@ export const addSetToFirebase = async (userId, exerciseId, workoutId, set) => {
     }
   };
   
-  export const fetchWorkoutHistory = async (userId) => {
-    try {
-      const response = await axios.get(
-        `${baseURL}/workoutHistory/${userId}.json`
-      );
-      const data = response.data;
-      return data;
-    } catch (error) {
-      console.error('Error fetching workout history:', error);
-      return null;
-    }
-  };
-  
-  export const addExercise = async (userId, exerciseName) => {
-    try {
-      await axios.post(
-        `${baseURL}/exercises/${userId}.json`,
-        { name: exerciseName }
-      );
-    } catch (error) {
-      console.error('Error adding exercise:', error);
-    }
-  };
-  
-  export const addWorkoutHistory = async (userId, workout) => {
-    try {
-      await axios.post(
-        `${baseURL}/workoutHistory/${userId}.json`,
-        workout
-      );
-    } catch (error) {
-      console.error('Error adding workout history:', error);
-    }
-  };

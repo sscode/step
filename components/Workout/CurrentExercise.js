@@ -1,19 +1,27 @@
-import React from 'react';
-import { View, FlatList } from 'react-native';
-import WorkoutSummary from './WorkoutSummary';
+import React, { useContext } from 'react';
+import { View, FlatList, Text } from 'react-native';
+import { ExerciseContext } from '../../store/exerciseContext';
 
-const CurrentExercise = ({ currentWorkoutData }) => {
+const CurrentExercise = ({ exerciseName, setsForCurrentExercise }) => {
+
+
+  const renderItem = ({ item }) => {
+    return (
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
+        <Text>Time: {item.date}</Text>
+        <Text>Reps: {item.reps}</Text>
+        <Text>Lbs: {item.weight}</Text>
+      </View>
+    );
+  };
+
   return (
     <View>
-      {currentWorkoutData ? (
-        <FlatList
-          data={currentWorkoutData}
-          renderItem={({ item }) => <WorkoutSummary workout={item} />}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      ) : (
-        <WorkoutSummary workout={null} />
-      )}
+      <FlatList
+        data={setsForCurrentExercise}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+      />
     </View>
   );
 };

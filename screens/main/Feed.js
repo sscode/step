@@ -1,22 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet, FlatList, TouchableOpacity, Text, ImageBackground } from 'react-native';
 import WorkoutSummary from '../../components/Workout/WorkoutSummary';
 import { GlobalStyles } from '../../constants/styles';
+import { ExerciseContext } from '../../store/exerciseContext';
 import Button from '../../UI/Button';
+import { getUserIdData } from '../../util/firebase/http';
+import { dummyData } from './data';
 
 const Feed = ({ navigation }) => {
-  const [workoutSummaries, setWorkoutSummaries] = useState([]);
+  const exerciseCtx = useContext(ExerciseContext);
+
+//   exerciseCtx.getSetHistory([]);
+// exerciseCtx.getAllExercises([]);
+
 
   useEffect(() => {
     // Fetch workout summaries from your data source (e.g., Firebase) here
+    async function fetchData() {
+        try {
+            // const userData = await getUserIdData('stu');
+            const userData = dummyData
+            console.log('userData', userData);
+            exerciseCtx.getSetHistory(userData[0].Sets);
+            exerciseCtx.getAllExercises(userData[1].Exercises);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    fetchData();
   }, []);
 
-  const navigateToDetails = (workoutId) => {
-    navigation.navigate('WorkoutDetails', { workoutId });
-  };
 
   const startNewWorkout = () => {
-    console.log('startNewWorkout');
     navigation.navigate('NewWorkout');
   };
 
@@ -43,13 +58,16 @@ const Feed = ({ navigation }) => {
     // source={require('../../assets/bg1-splash.png')} 
     // style={styles.image}>
         <View style={styles.container}>
-        <FlatList
+        <TouchableOpacity onPress={startNewWorkout} style={styles.newWorkoutButton}>
+            <Text style={styles.newWorkoutText}>New Workout</Text>
+        </TouchableOpacity>
+        {/* <FlatList
             data={workoutSummaries}
             renderItem={renderItem}
             keyExtractor={(item) => item.id.toString()}
             ListEmptyComponent={renderEmptyList}
             ListFooterComponent={renderFooter}
-        />
+        /> */}
         </View>
     // </ImageBackground>
   );

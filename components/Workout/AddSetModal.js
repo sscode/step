@@ -16,7 +16,7 @@ const AddSetModal = ({ visible, onRequestClose, onConfirm, exerciseName }) => {
     onConfirm({
       reps: parseInt(reps),
       lbs: parseInt(lbs),
-      time: new Date().toISOString(),
+      date: new Date().toISOString(),
       exerciseName: exerciseName,
     });
 

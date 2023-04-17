@@ -10,6 +10,7 @@ import Feed from '../screens/main/Feed';
 import NewWorkout from '../screens/main/NewWorkout';
 import OrderExercises from '../components/Workout/OrderExercise';
 import InExercise from '../components/Workout/InExercise';
+import WorkoutComplete from '../screens/main/WorkoutComplete';
 
 
 const Stack = createStackNavigator();
@@ -70,6 +71,10 @@ export const MainNavigator = () => {
             <Stack.Screen
                 name="InExercise"
                 component={InExercise}
+            />
+            <Stack.Screen
+                name="WorkoutComplete"
+                component={WorkoutComplete}
             />
         </Stack.Navigator>
     );
