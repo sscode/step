@@ -1,24 +1,16 @@
 import React, { createContext, useReducer } from 'react';
+import { exerciseReducer } from './exerciseReducer';
 
 export const ExerciseContext = createContext({
     exerciseData: {
       Sets: [],
       Exercises: [],
+    Other: [],
     },
     getSetHistory: () => {},
     addNewSet: () => {},
   });
 
-function exerciseReducer(state, action) {
-  switch (action.type) {
-    case 'ADD_SET':
-        return { ...state, Sets: [...state.Sets, action.payload] };
-    case 'ADD_EXERCISE':
-      return { ...state, Exercises: [...state.Exercises, action.payload] };
-    default:
-      return state;
-  }
-}
 
 function ExerciseContextProvider({ children }) {
   const [exerciseState, dispatch] = useReducer(exerciseReducer, {
@@ -26,38 +18,33 @@ function ExerciseContextProvider({ children }) {
     Exercises: [],
   });
 
-  function getSetHistory(workoutData) {
-    dispatch({ type: 'ADD_SET', payload: workoutData });
-  }
 
-  function addNewSet(newSet) {
-    dispatch({ type: 'ADD_SET', payload: newSet });
-  }
+  function addSet(newSet) {
+      dispatch({ type: 'ADD_SET', payload: newSet });
+    }
 
-  function getAllExercises(exercises) {
-    if (Array.isArray(exercises)) {
-      exercises.forEach((exercise) => {
-        const newExercise = {
-          id: exercise.id,
-          name: exercise.name,
-        };
-        dispatch({ type: 'ADD_EXERCISE', payload: newExercise });
-      });
-    } else {
+    function clearSets(){
+        dispatch({ type: 'CLEAR_SETS'});
+      }
+
+  function addExercise(exercises) {
       const newExercise = {
         id: exercises.id,
         name: exercises.name,
       };
       dispatch({ type: 'ADD_EXERCISE', payload: newExercise });
-    }
   }
-  
+
+  function clearExercises(){
+    dispatch({ type: 'CLEAR_EXERCISES'});
+  }
 
   const value = {
     exerciseData: exerciseState,
-    addNewSet: addNewSet,
-    getSetHistory: getSetHistory,
-    getAllExercises: getAllExercises,
+    addSet: addSet,
+    clearSets: clearSets,
+    addExercise: addExercise,
+    clearExercises: clearExercises,
   };
 
   return (

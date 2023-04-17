@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,6 +7,7 @@ import {
   ScrollView,
   FlatList,
 } from 'react-native';
+import { dummyData } from '../../screens/main/data';
 import { ExerciseContext } from '../../store/exerciseContext';
 import { addSetToFirebase } from '../../util/firebase/http';
 import AddSetModal from './AddSetModal';
@@ -15,40 +16,49 @@ import Header from './Header';
 import SetAddButtons from './SetAddButtons';
 
 
-const InExercise = ({ navigation, route, repeatSet }) => {
+const InExercise = ({ navigation, route }) => {
     // Get the ordered exercises from navigation parameters
     const { orderedExercises } = route.params;
     const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
     const currentExercise = orderedExercises[currentExerciseIndex];
     const exerciseName = currentExercise ? currentExercise.name : '';
-
-    const exerciseCtx = useContext(ExerciseContext);
-
-    // Filter the sets for the current exercise
-    const setsForCurrentExercise = exerciseCtx.exerciseData.Sets[0].filter(
-        (set) => set.exerciseName === exerciseName
-    );
-    console.log("setsForCurrentExercise ", setsForCurrentExercise)
-
+    // const [setsForCurrentExercise, setSetsForCurrentExercise] = useState([]);
     //modal props
     const [modalVisible, setModalVisible] = useState(false);
-  
 
-    const handleAddSet = async () => {
-        console.log("added ")
-        exerciseCtx.addNewSet(
+    const exerciseCtx = useContext(ExerciseContext);
+    const setsForCurrentExercise = exerciseCtx.exerciseData.Sets;
+
+    const sortedSetsForCurrentExercise = setsForCurrentExercise.sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+      });
+
+    const repeatSet = sortedSetsForCurrentExercise[0];
+
+    useEffect(() => {
+        //clearSet context
+        exerciseCtx.clearSets();
+        // Get the sets for the current exercise from dummy data and set to context
+        const setsForCurrentExercise = dummyData[0].Sets.filter(
+            (set) => set.exerciseName === exerciseName  
+        );
+          
+        // console.log("setsForCurrentExercise ", setsForCurrentExercise)
+        setsForCurrentExercise.forEach(set => {
+            exerciseCtx.addSet(set);
+        })
+        // setSetsForCurrentExercise(setsForCurrentExercise);
+    }, [exerciseName]);
+
+    const handleAddSet = async (newSet) => {
+        console.log("added ", newSet)
+        exerciseCtx.addSet(
             {id: Math.random().toString(36).substring(8), 
             exerciseName: exerciseName, 
-            weight: 100, 
-            reps: 10, 
-            date: "2020-10-10"})
+            weight: newSet.lbs, 
+            reps: newSet.reps, 
+            date: newSet.date});
     }
-        // Add the set to Firebase and local context here
-        // Include current time for submission
-        // {id: "0.123456789", exerciseName: "dark", weight: 100, reps: 10, date: "2020-10-10"},
-      
-        // const addedSet = await addSetToFirebase(userId, exerciseId, workoutId, newSet);
-
 
       const nextExercise = () => {
         if (currentExerciseIndex < orderedExercises.length - 1) {
@@ -66,7 +76,7 @@ const InExercise = ({ navigation, route, repeatSet }) => {
         <SetAddButtons repeatSet={repeatSet} showModal={() => setModalVisible(true)} />
         <CurrentExercise
         exerciseName={exerciseName}
-        setsForCurrentExercise={setsForCurrentExercise}
+        setsForCurrentExercise={sortedSetsForCurrentExercise}
         />
       <AddSetModal 
         exerciseName={exerciseName}

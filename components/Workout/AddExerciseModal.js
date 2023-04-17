@@ -14,12 +14,13 @@ const AddExerciseModal = ({ visible, onAdd, onCancel, onChangeText, value }) => 
         <TextInput
           value={value}
           onChangeText={onChangeText}
+          onSubmitEditing={onAdd}
           placeholder="Exercise name"
           style={styles.modalInput}
         />
         <View style={styles.modalButtons}>
-          <Button onPress={onAdd} title="Add" />
           <Button onPress={onCancel} title="Cancel" />
+          <Button onPress={onAdd} title="Add" />
         </View>
       </View>
     </View>

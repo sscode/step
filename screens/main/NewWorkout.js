@@ -7,10 +7,24 @@ import SetOrderButton from '../../components/Workout/SetOrderButton';
 import { GlobalStyles } from '../../constants/styles';
 import { ExerciseContext } from '../../store/exerciseContext';
 import { addExercise } from '../../util/firebase/http';
+import { dummyData } from './data';
 
 const NewWorkout = ({ navigation }) => {
 
     const exerciseCtx = useContext(ExerciseContext);
+    
+    useEffect(() => {
+        //clear context
+        exerciseCtx.clearExercises();
+        // Fetch exercises from dummy data here
+        const data = dummyData
+        data[1].Exercises.forEach(exercise => {
+            exerciseCtx.addExercise(exercise);
+        })
+
+    }, []);
+
+
     console.log("NewWorkout ", exerciseCtx.exerciseData.Exercises)
 
     const exercises = exerciseCtx.exerciseData.Exercises;
@@ -24,11 +38,11 @@ const NewWorkout = ({ navigation }) => {
 
   const handleAddExercise = async () => {
     // console.log("newExerciseName ", newExerciseName)
-    const userId = 'stu';
+    // const userId = 'stu';
     const newExerciseFirebaseId = Math.random().toString(36).substring(7);
     // const newExerciseFirebaseId = await addExercise(userId, newExerciseName);
     // console.log('newExercise', newExerciseFirebaseId);
-    exerciseCtx.getAllExercises({id: newExerciseFirebaseId, name: newExerciseName});
+    exerciseCtx.addExercise({id: newExerciseFirebaseId, name: newExerciseName});
     setModalVisible(false);
     setNewExerciseName('');
   };

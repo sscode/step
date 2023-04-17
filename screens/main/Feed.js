@@ -1,57 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet, FlatList, TouchableOpacity, Text, ImageBackground } from 'react-native';
-import WorkoutSummary from '../../components/Workout/WorkoutSummary';
 import { GlobalStyles } from '../../constants/styles';
-import { ExerciseContext } from '../../store/exerciseContext';
-import Button from '../../UI/Button';
-import { getUserIdData } from '../../util/firebase/http';
-import { dummyData } from './data';
+
 
 const Feed = ({ navigation }) => {
-  const exerciseCtx = useContext(ExerciseContext);
-
-//   exerciseCtx.getSetHistory([]);
-// exerciseCtx.getAllExercises([]);
-
-
-  useEffect(() => {
-    // Fetch workout summaries from your data source (e.g., Firebase) here
-    async function fetchData() {
-        try {
-            // const userData = await getUserIdData('stu');
-            const userData = dummyData
-            console.log('userData', userData);
-            exerciseCtx.getSetHistory(userData[0].Sets);
-            exerciseCtx.getAllExercises(userData[1].Exercises);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    fetchData();
-  }, []);
 
 
   const startNewWorkout = () => {
     navigation.navigate('NewWorkout');
   };
-
-  const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => navigateToDetails(item.id)}>
-      <WorkoutSummary workout={item} style={styles.workoutSummary} />
-    </TouchableOpacity>
-  );
-
-  const renderEmptyList = () => (
-    <View>
-       <Text style={styles.emptyListText}>Add your first workout</Text>
-    </View>
-  );
-
-  const renderFooter = () => (
-    <TouchableOpacity onPress={startNewWorkout} style={styles.newWorkoutButton}>
-      <Text style={styles.newWorkoutText}>New Workout</Text>
-    </TouchableOpacity>
-  );
 
   return (
     // <ImageBackground
@@ -61,6 +18,7 @@ const Feed = ({ navigation }) => {
         <TouchableOpacity onPress={startNewWorkout} style={styles.newWorkoutButton}>
             <Text style={styles.newWorkoutText}>New Workout</Text>
         </TouchableOpacity>
+
         {/* <FlatList
             data={workoutSummaries}
             renderItem={renderItem}

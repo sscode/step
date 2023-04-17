@@ -44,7 +44,7 @@ export const MainNavigator = () => {
                 component={LoginScreen}
             /> */}
             <Stack.Screen
-                name="feed"
+                name="Feed"
                 component={Feed}
             />
             {/* <Stack.Screen
