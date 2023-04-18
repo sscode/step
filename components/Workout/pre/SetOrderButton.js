@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { GlobalStyles } from '../../constants/styles';
+import { GlobalStyles } from '../../../constants/styles';
 
 const SetOrderButton = ({ onPress }) => (
   <TouchableOpacity style={styles.setOrderButton} onPress={onPress}>

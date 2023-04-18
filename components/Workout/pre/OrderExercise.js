@@ -78,6 +78,8 @@ const OrderExercises = ({ navigation, route }) => {
   );
 };
 
+export default OrderExercises;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -121,5 +123,3 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
 });
-
-export default OrderExercises;

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet, Text, FlatList } from 'react-native';
-import AddExerciseButton from '../../components/Workout/AddExerciseButton';
-import AddExerciseModal from '../../components/Workout/AddExerciseModal';
-import ExerciseItem from '../../components/Workout/ExerciseItem';
-import SetOrderButton from '../../components/Workout/SetOrderButton';
+import AddExerciseButton from '../../components/Workout/pre/AddExerciseButton';
+import AddExerciseModal from '../../components/Workout/pre/AddExerciseModal';
+import ExerciseItem from '../../components/Workout/active/ExerciseItem';
+import SetOrderButton from '../../components/Workout/pre/SetOrderButton';
 import { GlobalStyles } from '../../constants/styles';
 import { ExerciseContext } from '../../store/exerciseContext';
 import { addExercise } from '../../util/firebase/http';
@@ -25,12 +25,9 @@ const NewWorkout = ({ navigation }) => {
     }, []);
 
 
-    console.log("NewWorkout ", exerciseCtx.exerciseData.Exercises)
+    // console.log("NewWorkout ", exerciseCtx.exerciseData.Exercises)
 
     const exercises = exerciseCtx.exerciseData.Exercises;
-
-
-    // console.log('exercises', exercises);
 
   const [selectedExercisesIds, setSelectedExercisesIds] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -66,7 +63,6 @@ const NewWorkout = ({ navigation }) => {
       selectedExercises,
     });
   };
-  
 
   const renderItem = ({ item, id }) => (
     <ExerciseItem

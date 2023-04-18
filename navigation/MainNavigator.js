@@ -8,8 +8,8 @@ import { GlobalStyles } from '../constants/styles';
 import LoginScreen from '../screens/LoginScreen';
 import Feed from '../screens/main/Feed';
 import NewWorkout from '../screens/main/NewWorkout';
-import OrderExercises from '../components/Workout/OrderExercise';
-import InExercise from '../components/Workout/InExercise';
+import OrderExercises from '../components/Workout/pre/OrderExercise';
+import InExercise from '../components/Workout/active/InExercise';
 import WorkoutComplete from '../screens/main/WorkoutComplete';
 
 

@@ -1,15 +1,15 @@
 import React, { useContext } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { ExerciseContext } from '../../store/exerciseContext';
+import { ExerciseContext } from '../../../store/exerciseContext';
 
 const SetAddButtons = ({ repeatSet, showModal }) => {
 
     const exerciseCtx = useContext(ExerciseContext);
 
     const repeatHandler = () => {
-        console.log('repeatHandler', repeatSet);
+        console.log('repeatHandler', repeatSet.exerciseName);
         const newSet = {
-            id: Math.random().toString(36).substring(8),
+            id: Math.random().toString(36).substring(9),
             exerciseName: repeatSet.exerciseName,
             weight: repeatSet.weight,
             reps: repeatSet.reps,

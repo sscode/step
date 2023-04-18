@@ -1,15 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {
   StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
-  ScrollView,
-  FlatList,
 } from 'react-native';
-import { dummyData } from '../../screens/main/data';
-import { ExerciseContext } from '../../store/exerciseContext';
-import { addSetToFirebase } from '../../util/firebase/http';
+import { dummyData } from '../../../screens/main/data';
+import { ExerciseContext } from '../../../store/exerciseContext';
 import AddSetModal from './AddSetModal';
 import CurrentExercise from './CurrentExercise';
 import Header from './Header';
@@ -22,38 +17,35 @@ const InExercise = ({ navigation, route }) => {
     const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
     const currentExercise = orderedExercises[currentExerciseIndex];
     const exerciseName = currentExercise ? currentExercise.name : '';
-    // const [setsForCurrentExercise, setSetsForCurrentExercise] = useState([]);
+    
+    const exerciseCtx = useContext(ExerciseContext);
+    
     //modal props
     const [modalVisible, setModalVisible] = useState(false);
 
-    const exerciseCtx = useContext(ExerciseContext);
-    const setsForCurrentExercise = exerciseCtx.exerciseData.Sets;
-
-    const sortedSetsForCurrentExercise = setsForCurrentExercise.sort((a, b) => {
-        return new Date(b.date) - new Date(a.date);
-      });
-
-    const repeatSet = sortedSetsForCurrentExercise[0];
-
     useEffect(() => {
-        //clearSet context
-        exerciseCtx.clearSets();
-        // Get the sets for the current exercise from dummy data and set to context
-        const setsForCurrentExercise = dummyData[0].Sets.filter(
-            (set) => set.exerciseName === exerciseName  
-        );
-          
-        // console.log("setsForCurrentExercise ", setsForCurrentExercise)
-        setsForCurrentExercise.forEach(set => {
-            exerciseCtx.addSet(set);
-        })
-        // setSetsForCurrentExercise(setsForCurrentExercise);
+      // Filter the dummyData to only show data which matches the exerciseName
+      const filteredSets = dummyData[0].Sets.filter(
+        (set) => set.exerciseName === exerciseName
+      );
+      // Use forEach to add those to the global context using addSet
+      filteredSets.forEach((set) => {
+        exerciseCtx.addSet(set);
+      });
     }, [exerciseName]);
+  
+    const setsForCurrentExercise = exerciseCtx.exerciseData.Sets.filter(
+      (set) => set.exerciseName === exerciseName
+    );
+
+    
+    const repeatSet = setsForCurrentExercise[0];
+
 
     const handleAddSet = async (newSet) => {
         console.log("added ", newSet)
         exerciseCtx.addSet(
-            {id: Math.random().toString(36).substring(8), 
+            {id: Math.random().toString(36).substring(9), 
             exerciseName: exerciseName, 
             weight: newSet.lbs, 
             reps: newSet.reps, 
@@ -75,8 +67,8 @@ const InExercise = ({ navigation, route }) => {
         <Header exerciseName={exerciseName} nextExercise={nextExercise} />
         <SetAddButtons repeatSet={repeatSet} showModal={() => setModalVisible(true)} />
         <CurrentExercise
-        exerciseName={exerciseName}
-        setsForCurrentExercise={sortedSetsForCurrentExercise}
+          exerciseName={exerciseName}
+          setsForCurrentExercise={setsForCurrentExercise}
         />
       <AddSetModal 
         exerciseName={exerciseName}

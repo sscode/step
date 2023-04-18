@@ -1,10 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import TodayStats from '../../components/Workout/post/TodayStats';
 
 const WorkoutComplete = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Workout Complete!</Text>
+      <TodayStats />
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('Feed')}>
@@ -17,23 +19,29 @@ const WorkoutComplete = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#F2F2F2',
+    paddingTop: 60,
+    paddingHorizontal: 24,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 32,
+    textAlign: 'center',
+    color: '#333333',
   },
   button: {
-    backgroundColor: '#4A4A4A',
+    backgroundColor: '#2F80ED',
     paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingVertical: 14,
     borderRadius: 5,
   },
   buttonText: {
     color: 'white',
     fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 

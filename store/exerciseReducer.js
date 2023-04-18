@@ -1,7 +1,9 @@
 export function exerciseReducer(state, action) {
     switch (action.type) {
-      case 'ADD_SET':
-          return { ...state, Sets: [...state.Sets, action.payload] };
+    case 'ADD_SET':
+        const updatedSets = [...state.Sets, action.payload];
+        updatedSets.sort((a, b) => new Date(b.date) - new Date(a.date));
+        return { ...state, Sets: updatedSets };   
     case 'CLEAR_SETS':
         return { ...state, Sets: [] };
       case 'ADD_EXERCISE':

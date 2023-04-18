@@ -13,6 +13,7 @@ const AddSetModal = ({ visible, onRequestClose, onConfirm, exerciseName }) => {
   const [lbs, setLbs] = useState('');
 
   const handleConfirm = () => {
+    console.log('add new ,', exerciseName);
     onConfirm({
       reps: parseInt(reps),
       lbs: parseInt(lbs),

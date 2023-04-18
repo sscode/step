@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { GlobalStyles } from '../../constants/styles';
+import { GlobalStyles } from '../../../constants/styles';
 
 const AddExerciseButton = ({ onPress }) => (
   <TouchableOpacity style={styles.addButton} onPress={onPress}>
