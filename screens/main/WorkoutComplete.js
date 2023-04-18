@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     color: '#333333',
   },
   button: {
+    marginTop: 32,
     backgroundColor: '#2F80ED',
     paddingHorizontal: 20,
     paddingVertical: 14,

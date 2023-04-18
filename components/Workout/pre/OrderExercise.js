@@ -6,6 +6,7 @@ import {
   View,
   FlatList,
 } from 'react-native';
+import MoveButtons from './MoveButtons';
 
 const OrderExercises = ({ navigation, route }) => {
     const [orderedExercises, setOrderedExercises] = useState([]);
@@ -47,14 +48,7 @@ const OrderExercises = ({ navigation, route }) => {
     return (
       <View style={styles.exerciseItem}>
         <Text style={styles.exerciseName}>{item.name}</Text>
-        <View style={styles.arrowButtons}>
-          <TouchableOpacity onPress={() => moveUp(index)}>
-            <Text style={styles.arrowButton}>▲</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => moveDown(index)}>
-            <Text style={styles.arrowButton}>▼</Text>
-          </TouchableOpacity>
-        </View>
+        <MoveButtons index={index} moveUp={moveUp} moveDown={moveDown} />
       </View>
     );
   };
@@ -99,22 +93,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#424242',
   },
-  arrowButtons: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  arrowButton: {
-    fontSize: 28,
-    color: '#424242',
-    marginBottom: 4,
-    paddingLeft: 16,
-  },
   startButton: {
     backgroundColor: '#4CAF50',
     borderRadius: 8,
     paddingHorizontal: 16,
     paddingVertical: 12,
-    marginBottom: 8,
+    marginBottom: 24,
     alignSelf: 'center',
   },
   startButtonText: {

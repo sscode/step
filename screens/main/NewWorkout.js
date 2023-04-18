@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, StyleSheet, Text, FlatList } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import AddExerciseButton from '../../components/Workout/pre/AddExerciseButton';
 import AddExerciseModal from '../../components/Workout/pre/AddExerciseModal';
-import ExerciseItem from '../../components/Workout/active/ExerciseItem';
 import SetOrderButton from '../../components/Workout/pre/SetOrderButton';
 import { GlobalStyles } from '../../constants/styles';
 import { ExerciseContext } from '../../store/exerciseContext';
 import { addExercise } from '../../util/firebase/http';
 import { dummyData } from './data';
+import ExerciseList from '../../components/Workout/pre/ExerciseList';
 
 const NewWorkout = ({ navigation }) => {
 
@@ -59,48 +59,29 @@ const NewWorkout = ({ navigation }) => {
     const selectedExercises = exercises.filter((exercise) =>
       selectedExercisesIds.includes(exercise.id)
     );
-    navigation.navigate('OrderExercises', {
-      selectedExercises,
-    });
+    if(selectedExercises.length === 0) {
+        alert("Please select at least one exercise")
+        return;
+    } else {
+        navigation.navigate('OrderExercises', {
+          selectedExercises,
+        });
+    }
   };
 
-  const renderItem = ({ item, id }) => (
-    <ExerciseItem
-      exercise={item}
-      onSelect={() => toggleExercise(item.id)}
-      selected={selectedExercisesIds.includes(item.id)}
-    />
-  );
-
-  const mainList = () => {
-    if(exercises.length === 0){
-        return (
-            <View>
-                <Text>No exercises found. Start adding exercises:</Text>
-            </View>
-    )} else {
-        return(
-            <FlatList
-            data={exercises}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-            />
-        )
-    }
-    }
-
   return (
-    <View>
-      <AddExerciseButton onPress={() => setModalVisible(true)} />
-      {mainList()}
-      <SetOrderButton onPress={setOrder} />
-      <AddExerciseModal
-        visible={modalVisible}
-        onAdd={handleAddExercise}
-        onCancel={() => setModalVisible(false)}
-        onChangeText={setNewExerciseName}
-        value={newExerciseName}
-      />
+    <View style={styles.container}>
+        <AddExerciseButton onPress={() => setModalVisible(true)} />
+        <ExerciseList exercises={exercises} toggleExercise={toggleExercise} selectedExercisesIds={selectedExercisesIds}/>
+        <SetOrderButton 
+            onPress={setOrder} />
+        <AddExerciseModal
+            visible={modalVisible}
+            onAdd={handleAddExercise}
+            onCancel={() => setModalVisible(false)}
+            onChangeText={setNewExerciseName}
+            value={newExerciseName}
+        />
     </View>
   );
 };
@@ -108,56 +89,8 @@ const NewWorkout = ({ navigation }) => {
 export default NewWorkout;
 
 const styles = StyleSheet.create({
-    modalContainer: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    },
-    modalContent: {
-      backgroundColor: 'white',
-      borderRadius: 10,
-      padding: 20,
-      width: '80%',
-    },
-    modalTitle: {
-      fontSize: 24,
-      fontWeight: 'bold',
-      marginBottom: 20,
-    },
-    modalInput: {
-      borderWidth: 1,
-      borderColor: 'gray',
-      borderRadius: 5,
-      paddingHorizontal: 10,
-      paddingVertical: 5,
-      marginBottom: 20,
-    },
-    modalButtons: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-    },
-    addButton: {
-        backgroundColor: GlobalStyles.colors.black,
-        padding: 10,
-        borderRadius: 10,
-        alignSelf: 'center',
-        marginTop: 20,
-      },
-      addButtonText: {
-        color: GlobalStyles.colors.black,
-        fontSize: 16,
-      },
-      setOrderButton: {
-        backgroundColor: GlobalStyles.colors.black,
-        padding: 10,
-        borderRadius: 10,
-        alignSelf: 'center',
-        marginTop: 20,
-      },
-      setOrderButtonText: {
-        color: GlobalStyles.colors.white,
-        fontSize: 16,
-
-      },
+    container: {
+        // flex: 1,
+        backgroundColor: GlobalStyles.colors.gray200,
+    }
   });

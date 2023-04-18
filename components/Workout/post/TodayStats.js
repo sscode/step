@@ -14,7 +14,7 @@ const TodayStats = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Today's Stats</Text>
+      <Text style={styles.title}>Today's Stats</Text>
       {uniqueExerciseNames.map((exerciseName) => {
         const setsForToday = exerciseCtx.exerciseData.Sets.filter(
           (set) =>
@@ -52,27 +52,30 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+    alignItems: 'center',
   },
-  text: {
-    fontSize: 16,
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20,
   },
-    exerciseStats: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 12,
-      },
-      exerciseName: {
-        fontSize: 14,
-        fontWeight: 'bold',
-        color: '#333333',
-      },
-      statText: {
-        fontSize: 12,
-        color: '#828282',
-      }
-    });
-    
-    export default TodayStats;
-    
-   
+  exerciseStats: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  exerciseName: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#333333',
+    marginBottom: 6,
+  },
+  statText: {
+    fontSize: 12,
+    color: '#828282',
+  },
+});
+
+export default TodayStats;

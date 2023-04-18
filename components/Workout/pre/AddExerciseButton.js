@@ -10,13 +10,16 @@ const AddExerciseButton = ({ onPress }) => (
 
 const styles = StyleSheet.create({
   addButton: {
-    backgroundColor: GlobalStyles.colors.black,
+    marginTop: 20,
+    alignSelf: 'center',
+    width: 200,
     padding: 10,
     borderRadius: 10,
-    alignSelf: 'center',
-    marginTop: 20,
+    backgroundColor: GlobalStyles.colors.black,
   },
   addButtonText: {
+    alignSelf: 'center',
+    justifyContent: 'center',
     color: GlobalStyles.colors.white,
     fontSize: 16,
   },

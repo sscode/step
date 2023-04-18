@@ -17,6 +17,7 @@ const AddExerciseModal = ({ visible, onAdd, onCancel, onChangeText, value }) => 
           onSubmitEditing={onAdd}
           placeholder="Exercise name"
           style={styles.modalInput}
+          autoFocus={true}
         />
         <View style={styles.modalButtons}>
           <Button onPress={onCancel} title="Cancel" />

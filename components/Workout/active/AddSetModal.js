@@ -7,6 +7,7 @@ import {
   Modal,
   TextInput,
 } from 'react-native';
+import { GlobalStyles } from '../../../constants/styles';
 
 const AddSetModal = ({ visible, onRequestClose, onConfirm, exerciseName }) => {
   const [reps, setReps] = useState('');
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.9)',
   },
   modalTitle: {
     fontSize: 24,
@@ -84,7 +85,8 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   modalInput: {
-    backgroundColor: '#fff',
+    backgroundColor: GlobalStyles.colors.black,
+    color: GlobalStyles.colors.white,
     borderRadius: 4,
     paddingHorizontal: 8,
     paddingVertical: 4,
