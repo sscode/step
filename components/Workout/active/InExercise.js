@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { dummyData } from '../../../screens/main/data';
 import { ExerciseContext } from '../../../store/exerciseContext';
+import { addSetToFirebase } from '../../../util/firebase/http';
 import AddSetModal from './AddSetModal';
 import CurrentExercise from './CurrentExercise';
 import Header from './Header';
@@ -22,30 +23,37 @@ const InExercise = ({ navigation, route }) => {
     
     //modal props
     const [modalVisible, setModalVisible] = useState(false);
+    const userId = 'stu'
 
-    useEffect(() => {
-      // Filter the dummyData to only show data which matches the exerciseName
-      const filteredSets = dummyData[0].Sets.filter(
-        (set) => set.exerciseName === exerciseName
-      );
-      // Use forEach to add those to the global context using addSet
-      filteredSets.forEach((set) => {
-        exerciseCtx.addSet(set);
-      });
-    }, [exerciseName]);
+    // useEffect(() => {
+    //   // get all sets from firebase
+      
+
+    //   // Filter the dummyData to only show data which matches the exerciseName
+    //   // const filteredSets = dummyData[0].Sets.filter(
+    //   const filteredSets = exerciseCtx.Sets.filter(
+    //     (set) => set.exerciseName === exerciseName
+    //   );
+    //   // Use forEach to add those to the global context using addSet
+    //   filteredSets.forEach((set) => {
+    //     exerciseCtx.addSet(set);
+    //   });
+    // }, [exerciseName]);
   
     const setsForCurrentExercise = exerciseCtx.exerciseData.Sets.filter(
       (set) => set.exerciseName === exerciseName
     );
-
     
     const repeatSet = setsForCurrentExercise[0];
 
-
     const handleAddSet = async (newSet) => {
         console.log("added ", newSet)
+        // add to firebase
+        const newSetFirebaseId = await addSetToFirebase(userId, newSet);
+        // console.log("newSetFirebaseId ", newSetFirebaseId)
+        //to context
         exerciseCtx.addSet(
-            {id: Math.random().toString(36).substring(9), 
+            {id: newSetFirebaseId.name, 
             exerciseName: exerciseName, 
             weight: newSet.lbs, 
             reps: newSet.reps, 

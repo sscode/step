@@ -31,13 +31,14 @@ export const addSetToFirebase = async (userId, set) => {
         { name: exerciseName }
       );
       const data = response.data;
+        console.log('Exercise added successfully:', data);
       return data
     } catch (error) {
       console.error('Error adding exercise:', error);
     }
   };
 
-  export const getUserIdData = async (userId) => {
+  export const getUserData = async (userId) => {
     try {
       const response = await axios.get(
         `${baseURL}/users/${userId}.json`

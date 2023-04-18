@@ -5,23 +5,35 @@ import AddExerciseModal from '../../components/Workout/pre/AddExerciseModal';
 import SetOrderButton from '../../components/Workout/pre/SetOrderButton';
 import { GlobalStyles } from '../../constants/styles';
 import { ExerciseContext } from '../../store/exerciseContext';
-import { addExercise } from '../../util/firebase/http';
+import { addExercise, getUserData } from '../../util/firebase/http';
 import { dummyData } from './data';
 import ExerciseList from '../../components/Workout/pre/ExerciseList';
 
 const NewWorkout = ({ navigation }) => {
 
     const exerciseCtx = useContext(ExerciseContext);
+    const userId = 'stu'
     
     useEffect(() => {
+        const getData = async () => {
+            const data = await getUserData(userId)
+            //exercies
+            console.log("data ", data.exercises)
+            for (const key in data.exercises) {
+                const name = data.exercises[key].name;
+                exerciseCtx.addExercise({id: key, name: name});
+                console.log(name);
+              }
+            //sets
+            for (const key in data.sets) {
+                exerciseCtx.addSet({id: key, exerciseName: data.sets[key].exerciseName, weight: data.sets[key].weight, reps: data.sets[key].reps, date: data.sets[key].date});
+            }  
+            return data
+        }
         //clear context
         exerciseCtx.clearExercises();
-        // Fetch exercises from dummy data here
-        const data = dummyData
-        data[1].Exercises.forEach(exercise => {
-            exerciseCtx.addExercise(exercise);
-        })
-
+        // Fetch exercises from firebase here
+        getData()
     }, []);
 
 
@@ -34,11 +46,7 @@ const NewWorkout = ({ navigation }) => {
   const [newExerciseName, setNewExerciseName] = useState('');
 
   const handleAddExercise = async () => {
-    // console.log("newExerciseName ", newExerciseName)
-    // const userId = 'stu';
-    const newExerciseFirebaseId = Math.random().toString(36).substring(7);
-    // const newExerciseFirebaseId = await addExercise(userId, newExerciseName);
-    // console.log('newExercise', newExerciseFirebaseId);
+    const newExerciseFirebaseId = await addExercise(userId, newExerciseName);
     exerciseCtx.addExercise({id: newExerciseFirebaseId, name: newExerciseName});
     setModalVisible(false);
     setNewExerciseName('');

@@ -37,6 +37,7 @@ const AddSetModal = ({ visible, onRequestClose, onConfirm, exerciseName }) => {
       <View style={styles.modalView}>
         <Text style={styles.modalTitle}>Add Set</Text>
         <TextInput
+          autoFocus={true}
           style={styles.modalInput}
           keyboardType="number-pad"
           placeholder="Reps"
