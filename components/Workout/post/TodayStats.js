@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { ExerciseContext } from '../../../store/exerciseContext';
+import ExerciseStats from './ExerciseStats';
 
 const TodayStats = () => {
   const exerciseCtx = useContext(ExerciseContext);
@@ -12,6 +13,20 @@ const TodayStats = () => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
+  const grandTotalLbs = uniqueExerciseNames.reduce((total, exerciseName) => {
+    const setsForToday = exerciseCtx.exerciseData.Sets.filter(
+      (set) =>
+        set.exerciseName === exerciseName &&
+        new Date(set.date).setHours(0, 0, 0, 0) === today.getTime()
+    );
+
+    const totalLbsForExercise = setsForToday.reduce((acc, set) => {
+      return acc + set.reps * set.lbs;
+    }, 0);
+
+    return total + totalLbsForExercise;
+  }, 0);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Today's Stats</Text>
@@ -22,18 +37,22 @@ const TodayStats = () => {
             new Date(set.date).setHours(0, 0, 0, 0) === today.getTime()
         );
 
-        const totalReps = setsForToday.reduce((sum, set) => sum + set.reps, 0);
-        const totalLbs = setsForToday.reduce((sum, set) => sum + set.weight, 0);
+        const totals = setsForToday.reduce((acc, set) => {
+            acc.totalReps += set.reps;
+            acc.totalLbs += set.reps * set.lbs;
+            return acc;
+          }, {totalReps: 0, totalLbs: 0});
 
         return (
-          <View key={exerciseName} style={styles.exerciseStats}>
-            <Text style={styles.exerciseName}>{exerciseName}</Text>
-            <Text style={styles.statText}>
-              Total Reps: {totalReps} | Total Weight: {totalLbs} lbs
-            </Text>
-          </View>
+          <ExerciseStats
+            key={exerciseName}
+            exerciseName={exerciseName}
+            totalReps={totals.totalReps}
+            totalLbs={totals.totalLbs}
+          />
         );
       })}
+        <Text style={styles.title}>Total Lbs: {grandTotalLbs}</Text>
     </View>
   );
 };
@@ -59,22 +78,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
-  },
-  exerciseStats: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  exerciseName: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#333333',
-    marginBottom: 6,
-  },
-  statText: {
-    fontSize: 12,
-    color: '#828282',
   },
 });
 

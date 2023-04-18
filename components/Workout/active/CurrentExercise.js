@@ -11,7 +11,7 @@ const CurrentExercise = ({ setsForCurrentExercise }) => {
     <View style={styles.row}>
       <Text style={styles.rowText}>{getShortDateAndTime(item.date).time}</Text>
       <Text style={styles.rowText}>{item.reps}</Text>
-      <Text style={styles.rowText}>{item.weight}</Text>
+      <Text style={styles.rowText}>{item.lbs}</Text>
     </View>
   );
 

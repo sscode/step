@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { ExerciseContext } from '../../../store/exerciseContext';
+import { addSetToFirebase } from '../../../util/firebase/http';
 
 const SetAddButtons = ({ repeatSet, showModal }) => {
 
@@ -9,12 +10,14 @@ const SetAddButtons = ({ repeatSet, showModal }) => {
     const repeatHandler = () => {
         console.log('repeatHandler', repeatSet.exerciseName);
         const newSet = {
-            id: Math.random().toString(36).substring(9),
             exerciseName: repeatSet.exerciseName,
-            weight: repeatSet.weight,
+            lbs: repeatSet.lbs,
             reps: repeatSet.reps,
             date: new Date().toISOString(),
         };
+        //add to firebase
+        addSetToFirebase('stu', newSet)
+        //add to context
         exerciseCtx.addSet(newSet);
     }
 

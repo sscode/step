@@ -26,12 +26,13 @@ const NewWorkout = ({ navigation }) => {
               }
             //sets
             for (const key in data.sets) {
-                exerciseCtx.addSet({id: key, exerciseName: data.sets[key].exerciseName, weight: data.sets[key].weight, reps: data.sets[key].reps, date: data.sets[key].date});
+                exerciseCtx.addSet({id: key, exerciseName: data.sets[key].exerciseName, lbs: data.sets[key].lbs, reps: data.sets[key].reps, date: data.sets[key].date});
             }  
             return data
         }
         //clear context
         exerciseCtx.clearExercises();
+        exerciseCtx.clearSets();
         // Fetch exercises from firebase here
         getData()
     }, []);

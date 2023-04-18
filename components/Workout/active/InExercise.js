@@ -20,25 +20,13 @@ const InExercise = ({ navigation, route }) => {
     const exerciseName = currentExercise ? currentExercise.name : '';
     
     const exerciseCtx = useContext(ExerciseContext);
+    //clear set context
+    // exerciseCtx.clearSets();
+    
     
     //modal props
     const [modalVisible, setModalVisible] = useState(false);
     const userId = 'stu'
-
-    // useEffect(() => {
-    //   // get all sets from firebase
-      
-
-    //   // Filter the dummyData to only show data which matches the exerciseName
-    //   // const filteredSets = dummyData[0].Sets.filter(
-    //   const filteredSets = exerciseCtx.Sets.filter(
-    //     (set) => set.exerciseName === exerciseName
-    //   );
-    //   // Use forEach to add those to the global context using addSet
-    //   filteredSets.forEach((set) => {
-    //     exerciseCtx.addSet(set);
-    //   });
-    // }, [exerciseName]);
   
     const setsForCurrentExercise = exerciseCtx.exerciseData.Sets.filter(
       (set) => set.exerciseName === exerciseName
@@ -55,7 +43,7 @@ const InExercise = ({ navigation, route }) => {
         exerciseCtx.addSet(
             {id: newSetFirebaseId.name, 
             exerciseName: exerciseName, 
-            weight: newSet.lbs, 
+            lbs: newSet.lbs, 
             reps: newSet.reps, 
             date: newSet.date});
     }

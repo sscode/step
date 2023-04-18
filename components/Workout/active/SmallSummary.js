@@ -2,15 +2,21 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const SmallSummary = ({ sets }) => {
+
+    console.log('sets', sets);
   const totalSets = sets.length;
-  const totalReps = sets.reduce((acc, set) => acc + set.reps, 0);
-  const totalLbs = sets.reduce((acc, set) => acc + set.weight, 0);
+
+  const totals = sets.reduce((acc, set) => {
+    acc.totalReps += set.reps;
+    acc.totalLbs += set.reps * set.lbs;
+    return acc;
+  }, {totalReps: 0, totalLbs: 0});
 
   return (
     <View style={styles.summaryContainer}>
       <Text style={styles.summaryText}>Sets: {totalSets}</Text>
-      <Text style={styles.summaryText}>Total Reps: {totalReps}</Text>
-      <Text style={styles.summaryText}>Total Lbs: {totalLbs}</Text>
+      <Text style={styles.summaryText}>Total Reps: {totals.totalReps}</Text>
+      <Text style={styles.summaryText}>Total Lbs: {totals.totalLbs}</Text>
     </View>
   );
 };
