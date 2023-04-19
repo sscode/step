@@ -6,9 +6,18 @@ import MainBG from '../../UI/MainBG';
 import PrimaryButton from '../../UI/PrimaryButton';
 
 const Feed = ({ navigation }) => {
+
+useEffect(() => {
+    navigation.setOptions({
+        headerShown: false,
+    });
+    }, []);
+
   const startNewWorkout = () => {
     navigation.navigate('NewWorkout');
   };
+
+  
 
 
   return (
@@ -29,6 +38,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     backgroundColor: GlobalStyles.colors.lightGray,
-    paddingTop: 20,
+    paddingTop: 48,
   },
 });

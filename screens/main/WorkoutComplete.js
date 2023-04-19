@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import TodayStats from '../../components/Workout/post/TodayStats';
+import { GlobalStyles } from '../../constants/styles';
+import MainBG from '../../UI/MainBG';
+import PrimaryButton from '../../UI/PrimaryButton';
 
 const WorkoutComplete = ({ navigation }) => {
 
@@ -8,19 +11,18 @@ const WorkoutComplete = ({ navigation }) => {
     useEffect(() => {
         navigation.setOptions({
             headerLeft: null,
+            headerShown: false,
         });
         }, []);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Workout Complete!</Text>
-      <TodayStats />
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Feed')}>
-        <Text style={styles.buttonText}>Go to Feed</Text>
-      </TouchableOpacity>
-    </View>
+    <MainBG>
+        <View style={styles.container}>
+        <Text style={styles.title}>Workout Complete!</Text>
+        <TodayStats />
+        <PrimaryButton title="Go to Feed" onPress={() => navigation.navigate('Feed')} />
+        </View>
+    </MainBG>
   );
 };
 
@@ -28,8 +30,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#F2F2F2',
-    paddingTop: 60,
+    justifyContent: 'center',
     paddingHorizontal: 24,
   },
   title: {
@@ -37,21 +38,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 32,
     textAlign: 'center',
-    color: '#333333',
-  },
-  button: {
-    marginTop: 32,
-    backgroundColor: '#2F80ED',
-    paddingHorizontal: 20,
-    paddingVertical: 14,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
+    color: GlobalStyles.colors.primary500,
+  }
 });
 
 export default WorkoutComplete;

@@ -23,6 +23,7 @@ const InExercise = ({ navigation, route }) => {
     useEffect(() => {
       navigation.setOptions({
         headerLeft: null,
+        headerShown: false,
       });
     }, []);
     
@@ -90,6 +91,7 @@ export default InExercise;
 const styles = StyleSheet.create({
     container: {
       flex: 1,
+      marginTop: 48,
     }
   });
 

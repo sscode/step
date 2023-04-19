@@ -14,6 +14,12 @@ const OrderExercises = ({ navigation, route }) => {
     const [orderedExercises, setOrderedExercises] = useState([]);
 
     const { selectedExercises } = route.params;
+
+    useEffect(() => {
+      navigation.setOptions({
+          headerShown: false,
+      });
+      }, []);
   
     useEffect(() => {
       setOrderedExercises(selectedExercises);
@@ -78,6 +84,7 @@ export default OrderExercises;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 48,
   },
   list: {
     flex: 1,

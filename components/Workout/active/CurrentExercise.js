@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { View, SectionList, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, SectionList } from 'react-native';
+import { GlobalStyles } from '../../../constants/styles';
 import { getShortDateAndTime, groupSetsByDate } from '../../../util/date';
 import SmallSummary from './SmallSummary';
 
@@ -7,7 +8,6 @@ const CurrentExercise = ({ setsForCurrentExercise }) => {
   const groupedSets = groupSetsByDate(setsForCurrentExercise);
 
   const renderSet = ({ item }) => (
-
     <View style={styles.row}>
       <Text style={styles.rowText}>{getShortDateAndTime(item.date).time}</Text>
       <Text style={styles.rowText}>{item.reps}</Text>
@@ -15,10 +15,14 @@ const CurrentExercise = ({ setsForCurrentExercise }) => {
     </View>
   );
 
-  const SectionHeader = ({ date, sets }) => (
+  const SectionHeader = ({ section }) => (
     <View style={styles.sectionHeader}>
-      <Text style={styles.sectionHeaderText}>{date}</Text>
-      <SmallSummary sets={sets} />
+      {section && section.date && (
+        <>
+          <Text style={styles.sectionHeaderText}>{section.date}</Text>
+          <SmallSummary sets={section.data} />
+        </>
+      )}
     </View>
   );
 
@@ -28,7 +32,7 @@ const CurrentExercise = ({ setsForCurrentExercise }) => {
         sections={groupedSets}
         keyExtractor={(item) => item.id}
         renderItem={renderSet}
-        renderSectionHeader={({ section: { date, data } }) => <SectionHeader date={date} sets={data}/>}
+        renderSectionHeader={({ section }) => <SectionHeader section={section} />}
       />
     </View>
   );
@@ -37,39 +41,42 @@ const CurrentExercise = ({ setsForCurrentExercise }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    paddingHorizontal: 15,
+    marginHorizontal: 15,
+    marginTop: 20,
+    backgroundColor: GlobalStyles.colors.white,
+    borderRadius: 5,
   },
   sectionHeader: {
-    backgroundColor: '#fff',
-    borderBottomWidth: 1,
-    borderColor: '#ddd',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     paddingVertical: 10,
     paddingHorizontal: 15,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    elevation: 1,
+
   },
   sectionHeaderText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#333',
+    color: GlobalStyles.colors.black,
   },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 8,
-    backgroundColor: '#f5f5f5',
+    alignItems: 'center',
+    backgroundColor: GlobalStyles.colors.white,
     paddingVertical: 8,
-    paddingHorizontal: 15,
+    marginHorizontal: 15,
+    borderBottomColor: '#ddd',
     borderBottomWidth: 1,
-    borderColor: '#ddd',
   },
   rowText: {
     fontSize: 14,
     color: '#333',
+    flex: 1,
+    textAlign: 'center',
+  },
+  separator: {
+    height: 1,
+    backgroundColor: '#ddd',
   },
 });
 

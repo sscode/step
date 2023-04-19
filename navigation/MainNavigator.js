@@ -19,25 +19,7 @@ export const MainNavigator = () => {
 
     return (
         <Stack.Navigator
-            // screenOptions={() => ({
-            //     headerBackVisible: false,
-            //     headerRight: HeaderRight,
-            //     headerLeft: HeaderLeft,
-            //     title: "Home",
-            //     headerTransparent: true,
-            //     headerStyle: {
-            //         borderBottomWidth: 5,
-            //         borderBottomColor: 'white',
-            //     },
-            //     headerTintColor: '#fff',
-            //     headerTitleStyle: {
-            //         fontWeight: 'bold',
-            //         color: 'white'
-            //     },
-            //     cardStyle: {
-            //         backgroundColor: "black"
-            //     },
-            // })}
+        screenOptions={{headerTintColor: GlobalStyles.colors.primary500}}
         >
             {/* <Stack.Screen
                 name="login"
@@ -51,16 +33,9 @@ export const MainNavigator = () => {
                 name="user"
                 component={UserScreen}
             /> */}
-            {/* <Stack.Screen
-                name="editWorkout"
-                component={EditWorkoutScreen}
-            /> */}
             <Stack.Screen
                 name="NewWorkout"
                 component={NewWorkout}
-                // options={{ 
-                //     presentation: 'modal',
-                // }}
             />
             <Stack.Screen
                 name="OrderExercises"

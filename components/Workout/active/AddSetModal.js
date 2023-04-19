@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.9)',
+    backgroundColor: 'rgba(0, 0, 0, 0.85)',
   },
   modalTitle: {
     fontSize: 24,
@@ -87,8 +87,8 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   modalInput: {
-    backgroundColor: GlobalStyles.colors.black,
-    color: GlobalStyles.colors.white,
+    backgroundColor: GlobalStyles.colors.white,
+    color: GlobalStyles.colors.black,
     borderRadius: 4,
     paddingHorizontal: 8,
     paddingVertical: 4,
@@ -109,11 +109,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalButtonCancel: {
-    backgroundColor: '#f00',
+    backgroundColor: GlobalStyles.colors.error500,
     marginRight: 8,
   },
   modalButtonConfirm: {
-    backgroundColor: '#0f0',
+    backgroundColor: GlobalStyles.colors.primary500,
     marginLeft: 8,
   },
   modalButtonText: {

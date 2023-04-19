@@ -15,6 +15,14 @@ const NewWorkout = ({ navigation }) => {
     const userId = 'stu'
     
     useEffect(() => {
+
+        //header
+        navigation.setOptions({
+            headerShown: false,
+          });
+
+
+
         const getData = async () => {
             const data = await getUserData(userId)
             //exercies
@@ -98,6 +106,7 @@ export default NewWorkout;
 const styles = StyleSheet.create({
     container: {
       flex: 1,
+      paddingTop: 48,
     },
     mainBg: {
       position: 'absolute',

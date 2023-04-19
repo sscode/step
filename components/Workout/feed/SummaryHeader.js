@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { GlobalStyles } from '../../../constants/styles';
 
 const SummaryHeader = ({ date }) => {
   const dateString = new Date(date).toLocaleDateString();
@@ -18,9 +19,8 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     marginBottom: 16,
-    borderBottomColor: '#163c96ed',
+    borderBottomColor: GlobalStyles.colors.primary500,
     borderBottomWidth: 1,
-
   },
   header: {
     backgroundColor: '#FFF',

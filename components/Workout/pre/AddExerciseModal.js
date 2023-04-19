@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { GlobalStyles } from '../../../constants/styles';
 
 const AddExerciseModal = ({ visible, onAdd, onCancel, onChangeText, value }) => (
   <Modal
@@ -20,8 +21,8 @@ const AddExerciseModal = ({ visible, onAdd, onCancel, onChangeText, value }) => 
           autoFocus={true}
         />
         <View style={styles.modalButtons}>
-          <Button onPress={onCancel} title="Cancel" />
-          <Button onPress={onAdd} title="Add" />
+          <Button onPress={onCancel} title="Cancel" color={GlobalStyles.colors.gray700} />
+          <Button onPress={onAdd} title="Add" color={GlobalStyles.colors.primary500} />
         </View>
       </View>
     </View>
@@ -33,10 +34,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
   },
   modalContent: {
-    backgroundColor: 'white',
+    backgroundColor: GlobalStyles.colors.white,
     borderRadius: 10,
     padding: 20,
     width: '80%',
@@ -45,14 +46,16 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    color: GlobalStyles.colors.gray500,
   },
   modalInput: {
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: GlobalStyles.colors.gray500,
     borderRadius: 5,
     paddingHorizontal: 10,
     paddingVertical: 5,
     marginBottom: 20,
+    color: GlobalStyles.colors.gray500,
   },
   modalButtons: {
     flexDirection: 'row',
