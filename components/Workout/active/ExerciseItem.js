@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { GlobalStyles } from '../../../constants/styles';
+
 
 const ExerciseItem = ({ exercise, onSelect }) => {
   const [active, setActive] = useState(false);
@@ -16,7 +18,7 @@ const ExerciseItem = ({ exercise, onSelect }) => {
       <MaterialIcons
         name={active ? 'radio-button-checked' : 'radio-button-unchecked'}
         size={24}
-        color={active ? '#4CAF50' : '#757575'}
+        color={active ? GlobalStyles.colors.black : GlobalStyles.colors.gray500}
       />
     </TouchableOpacity>
   );
@@ -27,7 +29,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: GlobalStyles.colors.primary500,
     borderRadius: 8,
     paddingHorizontal: 16,
     paddingVertical: 12,
@@ -36,7 +38,7 @@ const styles = StyleSheet.create({
   exerciseName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#424242',
+    color: GlobalStyles.colors.gray700,
   },
 });
 

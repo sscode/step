@@ -2,51 +2,33 @@ import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet, FlatList, TouchableOpacity, Text, ImageBackground } from 'react-native';
 import SummaryList from '../../components/Workout/feed/SummaryList';
 import { GlobalStyles } from '../../constants/styles';
-
+import MainBG from '../../UI/MainBG';
+import PrimaryButton from '../../UI/PrimaryButton';
 
 const Feed = ({ navigation }) => {
-
   const startNewWorkout = () => {
     navigation.navigate('NewWorkout');
   };
 
+
   return (
-        <View style={styles.container}>
-        <TouchableOpacity onPress={startNewWorkout} style={styles.newWorkoutButton}>
-            <Text style={styles.newWorkoutText}>New Workout</Text>
-        </TouchableOpacity>
+    <MainBG>
+      <View style={styles.container}>
+        <PrimaryButton title="New Workout" onPress={startNewWorkout} />
         <SummaryList />
-        </View>
+      </View>
+    </MainBG>
   );
 };
 
 export default Feed;
 
 const styles = StyleSheet.create({
-
-    container: {
-      flex: 1,
-      backgroundColor: GlobalStyles.colors.lightGray,
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-    },
-    newWorkoutButton: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '70%',
-        padding: 10,
-        marginVertical: 20,
-        borderWidth: 2,
-        borderColor: GlobalStyles.colors.black,
-        borderRadius: 10,
-        backgroundColor: GlobalStyles.colors.white,
-      },
-      newWorkoutText: {
-        fontSize: 18,
-        color: GlobalStyles.colors.black,
-      },
-      newWorkoutButtonHover: {
-        backgroundColor: GlobalStyles.colors.primary,
-        borderColor: GlobalStyles.colors.white,
-      }
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    backgroundColor: GlobalStyles.colors.lightGray,
+    paddingTop: 20,
+  },
 });

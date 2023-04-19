@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { GlobalStyles } from '../../../constants/styles';
 import { ExerciseContext } from '../../../store/exerciseContext';
 import { addSetToFirebase } from '../../../util/firebase/http';
 
@@ -44,7 +45,9 @@ const styles = StyleSheet.create({
     width: 130,
     height: 130,
     borderRadius: 100,
-    backgroundColor: '#fff',
+    borderColor: GlobalStyles.colors.primary500,
+    borderWidth: 2,
+    backgroundColor: GlobalStyles.colors.black,
     justifyContent: 'center',
     alignItems: 'center',
     elevation: 2,
@@ -52,7 +55,7 @@ const styles = StyleSheet.create({
   repeatAddButtonText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#424242',
+    color: GlobalStyles.colors.primary500,
   },
 });
 

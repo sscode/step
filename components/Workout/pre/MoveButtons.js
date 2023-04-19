@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { GlobalStyles } from '../../../constants/styles'
 
 export default function MoveButtons({ index, moveUp, moveDown }) {
 
@@ -22,8 +23,7 @@ const styles = StyleSheet.create({
       },
       arrowButton: {
         fontSize: 50,
-        color: '#424242',
-        marginBottom: 4,
+        color: GlobalStyles.colors.black,
         paddingLeft: 16,
       },
 })

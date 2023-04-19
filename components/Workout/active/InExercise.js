@@ -3,8 +3,8 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import { dummyData } from '../../../screens/main/data';
 import { ExerciseContext } from '../../../store/exerciseContext';
+import MainBG from '../../../UI/MainBG';
 import { addSetToFirebase } from '../../../util/firebase/http';
 import AddSetModal from './AddSetModal';
 import CurrentExercise from './CurrentExercise';
@@ -18,20 +18,27 @@ const InExercise = ({ navigation, route }) => {
     const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
     const currentExercise = orderedExercises[currentExerciseIndex];
     const exerciseName = currentExercise ? currentExercise.name : '';
+
+    // Hide the back button in the header
+    useEffect(() => {
+      navigation.setOptions({
+        headerLeft: null,
+      });
+    }, []);
     
     const exerciseCtx = useContext(ExerciseContext);
-    //clear set context
-    // exerciseCtx.clearSets();
-    
     
     //modal props
     const [modalVisible, setModalVisible] = useState(false);
     const userId = 'stu'
   
+
+    //filter to get sets for current exercise
     const setsForCurrentExercise = exerciseCtx.exerciseData.Sets.filter(
       (set) => set.exerciseName === exerciseName
     );
     
+    //get the last set for the current exercise in order to repeat it
     const repeatSet = setsForCurrentExercise[0];
 
     const handleAddSet = async (newSet) => {
@@ -59,20 +66,22 @@ const InExercise = ({ navigation, route }) => {
       
       
     return (
-      <View style={styles.container}>
-        <Header exerciseName={exerciseName} nextExercise={nextExercise} />
-        <SetAddButtons repeatSet={repeatSet} showModal={() => setModalVisible(true)} />
-        <CurrentExercise
+      <MainBG>
+        <View style={styles.container}>
+          <Header exerciseName={exerciseName} nextExercise={nextExercise} />
+          <SetAddButtons repeatSet={repeatSet} showModal={() => setModalVisible(true)} />
+          <CurrentExercise
+            exerciseName={exerciseName}
+            setsForCurrentExercise={setsForCurrentExercise}
+          />
+        <AddSetModal 
           exerciseName={exerciseName}
-          setsForCurrentExercise={setsForCurrentExercise}
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+          onConfirm={handleAddSet}
         />
-      <AddSetModal 
-        exerciseName={exerciseName}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-        onConfirm={handleAddSet}
-      />
-      </View>
+        </View>
+      </MainBG>
     );
   };
 

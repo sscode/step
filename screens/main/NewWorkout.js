@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import AddExerciseButton from '../../components/Workout/pre/AddExerciseButton';
 import AddExerciseModal from '../../components/Workout/pre/AddExerciseModal';
-import SetOrderButton from '../../components/Workout/pre/SetOrderButton';
 import { GlobalStyles } from '../../constants/styles';
 import { ExerciseContext } from '../../store/exerciseContext';
 import { addExercise, getUserData } from '../../util/firebase/http';
-import { dummyData } from './data';
+
 import ExerciseList from '../../components/Workout/pre/ExerciseList';
+import PrimaryButton from '../../UI/PrimaryButton';
+import MainBG from '../../UI/MainBG';
 
 const NewWorkout = ({ navigation }) => {
 
@@ -32,7 +32,6 @@ const NewWorkout = ({ navigation }) => {
         }
         //clear context
         exerciseCtx.clearExercises();
-        exerciseCtx.clearSets();
         // Fetch exercises from firebase here
         getData()
     }, []);
@@ -79,19 +78,18 @@ const NewWorkout = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-        <AddExerciseButton onPress={() => setModalVisible(true)} />
-        <ExerciseList exercises={exercises} toggleExercise={toggleExercise} selectedExercisesIds={selectedExercisesIds}/>
-        <SetOrderButton 
-            onPress={setOrder} />
-        <AddExerciseModal
-            visible={modalVisible}
-            onAdd={handleAddExercise}
-            onCancel={() => setModalVisible(false)}
-            onChangeText={setNewExerciseName}
-            value={newExerciseName}
-        />
-    </View>
+    <MainBG>
+        <View style={styles.container}>
+        <View style={styles.buttonsContainer}>
+            <PrimaryButton title={'Add Exercise'} onPress={() => setModalVisible(true)} />
+        </View>
+        <ExerciseList exercises={exercises} toggleExercise={toggleExercise} selectedExercisesIds={selectedExercisesIds} />
+        <View style={styles.buttonsContainer}>
+            <PrimaryButton title={'Set Order'} onPress={setOrder} style={styles.setOrderButton} />
+        </View>
+        <AddExerciseModal visible={modalVisible} onAdd={handleAddExercise} onCancel={() => setModalVisible(false)} onChangeText={setNewExerciseName} value={newExerciseName} />
+        </View>
+    </MainBG>
   );
 };
 
@@ -99,7 +97,20 @@ export default NewWorkout;
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
-        backgroundColor: GlobalStyles.colors.gray200,
-    }
+      flex: 1,
+    },
+    mainBg: {
+      position: 'absolute',
+      width: '100%',
+      height: '100%',
+    },
+    buttonsContainer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      marginBottom: 20,
+    },
+    button: {
+      marginHorizontal: 10,
+    },
   });
+  

@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
   FlatList,
 } from 'react-native';
+import { GlobalStyles } from '../../../constants/styles';
+import MainBG from '../../../UI/MainBG';
+import PrimaryButton from '../../../UI/PrimaryButton';
 import MoveButtons from './MoveButtons';
 
 const OrderExercises = ({ navigation, route }) => {
@@ -54,21 +56,20 @@ const OrderExercises = ({ navigation, route }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={orderedExercises}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-      />
-      <TouchableOpacity
-        onPress={() => {
-          startWorkout(orderedExercises);
-        }}
-        style={styles.startButton}
-      >
-        <Text style={styles.startButtonText}>Start Workout</Text>
-      </TouchableOpacity>
-    </View>
+    <MainBG>
+      <View style={styles.container}>
+        <View style={styles.list}>
+          <FlatList
+            data={orderedExercises}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <PrimaryButton title='Start Workout' onPress={() => startWorkout(orderedExercises)} />
+        </View>
+      </View>
+    </MainBG>
   );
 };
 
@@ -78,32 +79,28 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  list: {
+    flex: 1,
+    paddingHorizontal: 24,
+    paddingTop: 20,
+  },
   exerciseItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: GlobalStyles.colors.primary500,
     borderRadius: 8,
     paddingHorizontal: 16,
-    paddingVertical: 12,
     marginBottom: 8,
     justifyContent: 'space-between',
   },
   exerciseName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#424242',
+    color: GlobalStyles.colors.black,
   },
-  startButton: {
-    backgroundColor: '#4CAF50',
-    borderRadius: 8,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    marginBottom: 24,
-    alignSelf: 'center',
-  },
-  startButtonText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#ffffff',
-  },
+  buttonContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+  }
 });

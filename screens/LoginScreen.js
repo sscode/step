@@ -1,10 +1,10 @@
 import { ImageBackground, KeyboardAvoidingView, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useContext, useLayoutEffect, useState } from 'react'
-import Button from '../UI/Button'
 import { GlobalStyles } from '../constants/styles'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../util/firebase/firebase'
 import { userContext } from '../store/userContext'
+import PrimaryButton from '../UI/PrimaryButton'
 
 
 
@@ -88,23 +88,23 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
         {error ? <Text style={styles.error}>{error}</Text> : null}
   
         <View style={styles.buttonContainer}>
-          <Button
+          <PrimaryButton
             style={styles.buttons}
             mode='full'
             isLoading={isLoading}
             onPress={handleLogin}
           >
             Login
-          </Button>
+          </PrimaryButton>
   
-          <Button
+          <PrimaryButton
             style={styles.buttons}
             mode='flat'
             isLoading={isLoading}
             onPress={handleSignup}
           >
             Register
-          </Button>
+          </PrimaryButton>
         </View>
         </KeyboardAvoidingView>
       </ImageBackground>

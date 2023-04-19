@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import TodayStats from '../../components/Workout/post/TodayStats';
 
 const WorkoutComplete = ({ navigation }) => {
+
+    // Hide the back button in the header
+    useEffect(() => {
+        navigation.setOptions({
+            headerLeft: null,
+        });
+        }, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Workout Complete!</Text>

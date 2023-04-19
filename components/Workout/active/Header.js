@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { GlobalStyles } from '../../../constants/styles';
+import PrimaryButton from '../../../UI/PrimaryButton';
 
 const Header = ({ exerciseName, nextExercise }) => {
   return (
     <View style={styles.header}>
       <Text style={styles.workoutName}>{exerciseName}</Text>
-      <TouchableOpacity onPress={nextExercise}>
-        <Text style={styles.nextButtonText}>Next</Text>
-      </TouchableOpacity>
+      <PrimaryButton title={'Next'} onPress={nextExercise} small/>
     </View>
   );
 };
@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
   workoutName: {
     fontSize: 24,
     fontWeight: 'bold',
+    color: GlobalStyles.colors.white
   },
   nextButtonText: {
     fontSize: 18,

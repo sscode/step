@@ -20,21 +20,22 @@ export default function ExerciseList({exercises, selectedExercisesIds, toggleExe
                 </View>
         )} else {
             return(
-                <FlatList
-                style={styles.list}
-                data={exercises}
-                renderItem={renderItem}
-                keyExtractor={(item) => item.id}
-                />
+                <View style={styles.container}>
+                    <FlatList
+                    style={styles.list}
+                    data={exercises}
+                    renderItem={renderItem}
+                    keyExtractor={(item) => item.id}
+                    />
+                </View >
             )
         }
 }
 
-
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
-        backgroundColor: GlobalStyles.colors.gray200,
+        flex: 1,
+        marginHorizontal: 20,
     },
     middle: {
         marginTop: 20,
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
     },
     middleText: {
         fontSize: 18,
-        color: GlobalStyles.colors.black,
+        color: GlobalStyles.colors.white,
     },
     list: {
         marginTop: 20,

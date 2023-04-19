@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
+import { GlobalStyles } from '../../../constants/styles';
 import { ExerciseContext } from '../../../store/exerciseContext';
 import SubHeader from './SubHeader';
 import SummaryHeader from './SummaryHeader';
@@ -30,7 +31,7 @@ const SummaryCard = ({ date }) => {
 const styles = StyleSheet.create({
   container: {
     width: '90%',
-    backgroundColor: '#FFF',
+    backgroundColor: GlobalStyles.colors.white,
     borderRadius: 10,
     padding: 16,
     marginBottom: 16,
