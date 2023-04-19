@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet, FlatList, TouchableOpacity, Text, ImageBackground } from 'react-native';
+import SummaryList from '../../components/Workout/feed/SummaryList';
 import { GlobalStyles } from '../../constants/styles';
 
 
@@ -14,6 +15,7 @@ const Feed = ({ navigation }) => {
         <TouchableOpacity onPress={startNewWorkout} style={styles.newWorkoutButton}>
             <Text style={styles.newWorkoutText}>New Workout</Text>
         </TouchableOpacity>
+        <SummaryList />
         </View>
   );
 };
