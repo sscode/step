@@ -12,32 +12,42 @@ import MainBG from '../../UI/MainBG';
 const NewWorkout = ({ navigation }) => {
 
     const exerciseCtx = useContext(ExerciseContext);
-    const userId = 'stu'
+    const userId = exerciseCtx.exerciseData.User.id
+
+    console.log("userId ", userId)
     
     useEffect(() => {
 
         //header
         navigation.setOptions({
             headerShown: false,
-          });
-
-
+        });
 
         const getData = async () => {
-            const data = await getUserData(userId)
-            //exercies
-            console.log("data ", data.exercises)
-            for (const key in data.exercises) {
+            const data = await getUserData(userId);
+            // exercises
+            if (data.exercises) {
+              console.log("data ", data.exercises);
+              for (const key in data.exercises) {
                 const name = data.exercises[key].name;
-                exerciseCtx.addExercise({id: key, name: name});
+                exerciseCtx.addExercise({ id: key, name: name });
                 console.log(name);
               }
-            //sets
-            for (const key in data.sets) {
-                exerciseCtx.addSet({id: key, exerciseName: data.sets[key].exerciseName, lbs: data.sets[key].lbs, reps: data.sets[key].reps, date: data.sets[key].date});
-            }  
-            return data
-        }
+            }
+            // sets
+            if (data.sets) {
+              for (const key in data.sets) {
+                exerciseCtx.addSet({
+                  id: key,
+                  exerciseName: data.sets[key].exerciseName,
+                  lbs: data.sets[key].lbs,
+                  reps: data.sets[key].reps,
+                  date: data.sets[key].date,
+                });
+              }
+            }
+            return data;
+          };
         //clear context
         exerciseCtx.clearExercises();
         // Fetch exercises from firebase here

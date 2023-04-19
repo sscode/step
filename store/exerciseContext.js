@@ -5,7 +5,7 @@ export const ExerciseContext = createContext({
     exerciseData: {
       Sets: [],
       Exercises: [],
-    Other: [],
+        User: {id: 'Stuart'},
     },
     getSetHistory: () => {},
     addNewSet: () => {},
@@ -16,6 +16,7 @@ function ExerciseContextProvider({ children }) {
   const [exerciseState, dispatch] = useReducer(exerciseReducer, {
     Sets: [],
     Exercises: [],
+    User: {id: 'Stuart'}
   });
 
 
