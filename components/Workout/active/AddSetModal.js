@@ -50,6 +50,7 @@ const AddSetModal = ({ visible, onRequestClose, onConfirm, exerciseName }) => {
           placeholder="Lbs"
           value={lbs}
           onChangeText={setLbs}
+          onSubmitEditing={handleConfirm}
         />
         <View style={styles.modalButtons}>
           <TouchableOpacity
