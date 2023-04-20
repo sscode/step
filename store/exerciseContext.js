@@ -16,7 +16,7 @@ function ExerciseContextProvider({ children }) {
   const [exerciseState, dispatch] = useReducer(exerciseReducer, {
     Sets: [],
     Exercises: [],
-    User: {id: 'Stuart'}
+    User: {id: 'stusim'}
   });
 
 

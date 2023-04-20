@@ -31,7 +31,7 @@ const InExercise = ({ navigation, route }) => {
     
     //modal props
     const [modalVisible, setModalVisible] = useState(false);
-    const userId = 'stu'
+    const userId = exerciseCtx.exerciseData.User.id
   
 
     //filter to get sets for current exercise

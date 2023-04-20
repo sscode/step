@@ -13,8 +13,6 @@ const NewWorkout = ({ navigation }) => {
 
     const exerciseCtx = useContext(ExerciseContext);
     const userId = exerciseCtx.exerciseData.User.id
-
-    console.log("userId ", userId)
     
     useEffect(() => {
 

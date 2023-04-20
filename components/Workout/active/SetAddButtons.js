@@ -7,6 +7,7 @@ import { addSetToFirebase } from '../../../util/firebase/http';
 const SetAddButtons = ({ repeatSet, showModal }) => {
 
     const exerciseCtx = useContext(ExerciseContext);
+    const userId = exerciseCtx.exerciseData.User.id
 
     const repeatHandler = () => {
         console.log('repeatHandler', repeatSet.exerciseName);
@@ -17,7 +18,7 @@ const SetAddButtons = ({ repeatSet, showModal }) => {
             date: new Date().toISOString(),
         };
         //add to firebase
-        addSetToFirebase('stu', newSet)
+        addSetToFirebase(userId, newSet)
         //add to context
         exerciseCtx.addSet(newSet);
     }
