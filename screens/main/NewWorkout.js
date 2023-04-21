@@ -25,11 +25,10 @@ const NewWorkout = ({ navigation }) => {
             const data = await getUserData(userId);
             // exercises
             if (data.exercises) {
-              console.log("data ", data.exercises);
+            //   console.log("data ", data.exercises);
               for (const key in data.exercises) {
                 const name = data.exercises[key].name;
                 exerciseCtx.addExercise({ id: key, name: name });
-                console.log(name);
               }
             }
             // sets

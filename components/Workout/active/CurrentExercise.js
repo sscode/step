@@ -30,7 +30,7 @@ const CurrentExercise = ({ setsForCurrentExercise }) => {
     <View style={styles.container}>
       <SectionList
         sections={groupedSets}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item, index) => item.id || String(index)}
         renderItem={renderSet}
         renderSectionHeader={({ section }) => <SectionHeader section={section} />}
       />

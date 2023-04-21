@@ -2,8 +2,6 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const SmallSummary = ({ sets }) => {
-
-    console.log('sets', sets);
   const totalSets = sets.length;
 
   const totals = sets.reduce((acc, set) => {

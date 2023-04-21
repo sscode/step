@@ -46,7 +46,7 @@ const InExercise = ({ navigation, route }) => {
         console.log("added ", newSet)
         // add to firebase
         const newSetFirebaseId = await addSetToFirebase(userId, newSet);
-        // console.log("newSetFirebaseId ", newSetFirebaseId)
+        // console.log("newSetFirebaseId ", newSetFirebaseId.name)
         //to context
         exerciseCtx.addSet(
             {id: newSetFirebaseId.name, 
@@ -64,6 +64,10 @@ const InExercise = ({ navigation, route }) => {
           navigation.navigate('WorkoutComplete');
         }
       };
+
+      // Inside the InExercise component
+      console.log('setsForCurrentExercise ids:', setsForCurrentExercise.map(set => set.id));
+
       
       
     return (

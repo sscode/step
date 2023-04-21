@@ -9,7 +9,7 @@ const SetAddButtons = ({ repeatSet, showModal }) => {
     const exerciseCtx = useContext(ExerciseContext);
     const userId = exerciseCtx.exerciseData.User.id
 
-    const repeatHandler = () => {
+    const repeatHandler = async () => {
         console.log('repeatHandler', repeatSet.exerciseName);
         const newSet = {
             exerciseName: repeatSet.exerciseName,
@@ -18,9 +18,11 @@ const SetAddButtons = ({ repeatSet, showModal }) => {
             date: new Date().toISOString(),
         };
         //add to firebase
-        addSetToFirebase(userId, newSet)
+        const newSetFirebaseId = await addSetToFirebase(userId, newSet)
+        
+        const newSetWithId = { ...newSet, id: newSetFirebaseId.name };
         //add to context
-        exerciseCtx.addSet(newSet);
+        exerciseCtx.addSet(newSetWithId);
     }
 
   return (
