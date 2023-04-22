@@ -17,6 +17,10 @@ useEffect(() => {
     navigation.navigate('NewWorkout');
   };
 
+  const pressHandler = () => {
+    console.log('pressed');
+  };
+  
   
 
 
@@ -24,6 +28,7 @@ useEffect(() => {
     <MainBG>
       <View style={styles.container}>
         <PrimaryButton title="New Workout" onPress={startNewWorkout} />
+        <PrimaryButton title="Press Text" onPress={pressHandler} />
         <SummaryList />
       </View>
     </MainBG>
