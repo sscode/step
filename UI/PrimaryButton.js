@@ -1,20 +1,54 @@
-import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { TouchableOpacity, Text, StyleSheet, Pressable, Animated } from 'react-native';
 import { GlobalStyles } from '../constants/styles';
 
 const PrimaryButton = ({ title, onPress, disabled, small }) => {
+
+  const [isPressed, setIsPressed] = useState(false);
+  const animatedScale = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    animatedScale.setValue(1);
+  }, []);
+
+  const pressAnimation = () => {
+    animatedScale.setValue(0.8);
+    Animated.spring(animatedScale, {
+      toValue: 1.1,
+      bounciness: 15,
+      speed: 1,
+      useNativeDriver: true,
+    }).start();
+    setIsPressed(true);
+  };
+
+  const handlePressOut = () => {
+    animatedScale.setValue(1);
+    setIsPressed(false);
+  };
+
   return (
-    <TouchableOpacity
-      style={[
+      <Pressable
+      style={({pressed}) => [
         styles.button,
-        small ? styles.smallButton : null,
-        disabled ? styles.disabledButton : null,
+        small && styles.smallButton,
+        isPressed && styles.longPressStyle,
       ]}
+      onPressIn={pressAnimation}
       onPress={onPress}
       disabled={disabled}
+      onPressOut={handlePressOut}
     >
-      <Text style={styles.buttonText}>{title}</Text>
-    </TouchableOpacity>
+      {({pressed}) => {
+        return (
+          <Animated.Text style={[{transform: [{scale: animatedScale}]}]}>
+            <Text style={[
+              styles.buttonText,
+            ]}>{title}</Text>
+          </Animated.Text>
+        )
+      }}
+    </Pressable>
   );
 };
 
@@ -41,6 +75,9 @@ const styles = StyleSheet.create({
   disabledButton: {
     opacity: 0.5,
   },
+  longPressStyle: {
+    backgroundColor: GlobalStyles.colors.black,
+  }
 });
 
 export default PrimaryButton;
