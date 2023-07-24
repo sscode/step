@@ -10,6 +10,12 @@ export function exerciseReducer(state, action) {
         return { ...state, Exercises: [...state.Exercises, action.payload] };
     case 'CLEAR_EXERCISES':
         return { ...state, Exercises: [] };
+    case 'UPDATE_DATA':
+      return {
+        ...state,
+        Sets: action.payload.sets,
+        Exercises: action.payload.exercises,
+      };
       default:
         return state;
     }

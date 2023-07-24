@@ -2,42 +2,44 @@ import React, { createContext, useReducer } from 'react';
 import { exerciseReducer } from './exerciseReducer';
 
 export const ExerciseContext = createContext({
-    exerciseData: {
-      Sets: [],
-      Exercises: [],
-        User: {id: 'Stuart'},
-    },
-    getSetHistory: () => {},
-    addNewSet: () => {},
-  });
-
+  exerciseData: {
+    Sets: [],
+    Exercises: [],
+    User: { id: 'Stuart' },
+  },
+  getSetHistory: () => {},
+  addNewSet: () => {},
+});
 
 function ExerciseContextProvider({ children }) {
   const [exerciseState, dispatch] = useReducer(exerciseReducer, {
     Sets: [],
     Exercises: [],
-    User: {id: 'stusim'}
+    User: { id: 'stusim' },
   });
 
-
   function addSet(newSet) {
-      dispatch({ type: 'ADD_SET', payload: newSet });
-    }
-
-    function clearSets(){
-        dispatch({ type: 'CLEAR_SETS'});
-      }
-
-  function addExercise(exercises) {
-      const newExercise = {
-        id: exercises.id,
-        name: exercises.name,
-      };
-      dispatch({ type: 'ADD_EXERCISE', payload: newExercise });
+    dispatch({ type: 'ADD_SET', payload: newSet });
   }
 
-  function clearExercises(){
-    dispatch({ type: 'CLEAR_EXERCISES'});
+  function clearSets() {
+    dispatch({ type: 'CLEAR_SETS' });
+  }
+
+  function addExercise(exercises) {
+    const newExercise = {
+      id: exercises.id,
+      name: exercises.name,
+    };
+    dispatch({ type: 'ADD_EXERCISE', payload: newExercise });
+  }
+
+  function clearExercises() {
+    dispatch({ type: 'CLEAR_EXERCISES' });
+  }
+
+  function updateData({ exercises, sets }) {
+    dispatch({ type: 'UPDATE_DATA', payload: { exercises, sets } });
   }
 
   const value = {
@@ -46,6 +48,7 @@ function ExerciseContextProvider({ children }) {
     clearSets: clearSets,
     addExercise: addExercise,
     clearExercises: clearExercises,
+    updateData: updateData,
   };
 
   return (

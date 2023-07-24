@@ -30,7 +30,6 @@ const SummaryCard = ({ date }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '90%',
     backgroundColor: GlobalStyles.colors.white,
     borderRadius: 10,
     padding: 16,

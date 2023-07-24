@@ -12,7 +12,7 @@ const SplashScreen = ({navigation}) => {
       source={require('../assets/ergbg.png')} 
       style={styles.image}>
         <View style={styles.containerInner}>
-          <Text style={styles.header}>Welcome to Ergbase</Text>
+          <Text style={styles.header}>Welcome to Workout</Text>
           <LoginScreen navigation={navigation} />
         </View>
       </ImageBackground>
