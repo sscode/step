@@ -2,24 +2,28 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { GlobalStyles } from '../../../constants/styles';
+import { useNavigation } from '@react-navigation/native';
 
 
 const ExerciseItem = ({ exercise, onSelect }) => {
+  const navigation = useNavigation();
+
   const [active, setActive] = useState(false);
 
-  const handleSelect = () => {
-    setActive(!active);
-    onSelect(exercise.id);
+
+  const exerciseName = exercise.name;
+  const exerciseId = exercise.id;
+
+  const startWorkout = () => {
+    navigation.navigate('InExercise', {
+      exerciseId,
+      exerciseName,
+    });
   };
 
   return (
-    <TouchableOpacity onPress={handleSelect} style={styles.container}>
+    <TouchableOpacity onPress={startWorkout} style={styles.container}>
       <Text style={styles.exerciseName}>{exercise.name}</Text>
-      <MaterialIcons
-        name={active ? 'radio-button-checked' : 'radio-button-unchecked'}
-        size={24}
-        color={active ? GlobalStyles.colors.black : GlobalStyles.colors.gray500}
-      />
     </TouchableOpacity>
   );
 };

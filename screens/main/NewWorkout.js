@@ -4,61 +4,29 @@ import AddExerciseModal from '../../components/Workout/pre/AddExerciseModal';
 import { GlobalStyles } from '../../constants/styles';
 import { ExerciseContext } from '../../store/exerciseContext';
 import { addExercise, getUserData } from '../../util/firebase/http';
-
 import ExerciseList from '../../components/Workout/pre/ExerciseList';
 import PrimaryButton from '../../UI/PrimaryButton';
 import MainBG from '../../UI/MainBG';
+import WorkoutStyle from '../../components/Workout/active/WorkoutStyle';
 
 const NewWorkout = ({ navigation }) => {
 
     const exerciseCtx = useContext(ExerciseContext);
     const userId = exerciseCtx.exerciseData.User.id
+    const [toggleState, setToggleState] = useState(false);
     
-    useEffect(() => {
-
-        //header
-        navigation.setOptions({
-            headerShown: false,
-        });
-
-        const getData = async () => {
-            const data = await getUserData(userId);
-            // exercises
-            if (data.exercises) {
-            //   console.log("data ", data.exercises);
-              for (const key in data.exercises) {
-                const name = data.exercises[key].name;
-                exerciseCtx.addExercise({ id: key, name: name });
-              }
-            }
-            // sets
-            if (data.sets) {
-              for (const key in data.sets) {
-                exerciseCtx.addSet({
-                  id: key,
-                  exerciseName: data.sets[key].exerciseName,
-                  lbs: data.sets[key].lbs,
-                  reps: data.sets[key].reps,
-                  date: data.sets[key].date,
-                });
-              }
-            }
-            return data;
-          };
-        //clear context
-        exerciseCtx.clearExercises();
-        // Fetch exercises from firebase here
-        getData()
-    }, []);
-
-
-    // console.log("NewWorkout ", exerciseCtx.exerciseData.Exercises)
-
-    const exercises = exerciseCtx.exerciseData.Exercises;
+  const exercises = exerciseCtx.exerciseData.Exercises;
 
   const [selectedExercisesIds, setSelectedExercisesIds] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [newExerciseName, setNewExerciseName] = useState('');
+
+  useEffect(() => {
+    //header
+    navigation.setOptions({
+      headerShown: false,
+    });
+  }, []);
 
   const handleAddExercise = async () => {
     const newExerciseFirebaseId = await addExercise(userId, newExerciseName);
@@ -98,9 +66,12 @@ const NewWorkout = ({ navigation }) => {
         <View style={styles.buttonsContainer}>
             <PrimaryButton title={'Add Exercise'} onPress={() => setModalVisible(true)} />
         </View>
+        <View style={styles.toggleContainer}>
+          {/* <WorkoutStyle toggleState={toggleState} setToggleState={setToggleState}/> */}
+        </View>
         <ExerciseList exercises={exercises} toggleExercise={toggleExercise} selectedExercisesIds={selectedExercisesIds} />
         <View style={styles.buttonsContainer}>
-            <PrimaryButton title={'Set Order'} onPress={setOrder} style={styles.setOrderButton} />
+            {/* <PrimaryButton title={'Set Order'} onPress={setOrder} style={styles.setOrderButton} /> */}
         </View>
         <AddExerciseModal visible={modalVisible} onAdd={handleAddExercise} onCancel={() => setModalVisible(false)} onChangeText={setNewExerciseName} value={newExerciseName} />
         </View>
@@ -119,6 +90,10 @@ const styles = StyleSheet.create({
       position: 'absolute',
       width: '100%',
       height: '100%',
+    },
+    toggleContainer: {
+      flexDirection: 'row',
+      justifyContent: 'center', 
     },
     buttonsContainer: {
       flexDirection: 'row',

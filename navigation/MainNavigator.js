@@ -36,6 +36,7 @@ export const MainNavigator = () => {
             <Stack.Screen
                 name="NewWorkout"
                 component={NewWorkout}
+                options={{ title: 'Exercises' }}
             />
             <Stack.Screen
                 name="OrderExercises"

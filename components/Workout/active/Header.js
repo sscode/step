@@ -7,7 +7,7 @@ const Header = ({ exerciseName, nextExercise }) => {
   return (
     <View style={styles.header}>
       <Text style={styles.workoutName}>{exerciseName}</Text>
-      <PrimaryButton title={'Next'} onPress={nextExercise} small/>
+      {/* <PrimaryButton title={'Next'} onPress={nextExercise} small/> */}
     </View>
   );
 };

@@ -13,21 +13,10 @@ import SetAddButtons from './SetAddButtons';
 
 
 const InExercise = ({ navigation, route }) => {
-    // Get the ordered exercises from navigation parameters
-    const { orderedExercises } = route.params;
-    const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
-    const currentExercise = orderedExercises[currentExerciseIndex];
-    const exerciseName = currentExercise ? currentExercise.name : '';
 
-    // Hide the back button in the header
-    useEffect(() => {
-      navigation.setOptions({
-        headerLeft: null,
-        headerShown: false,
-      });
-    }, []);
-    
     const exerciseCtx = useContext(ExerciseContext);
+    console.log(route.params.exerciseName)
+    const exerciseName = route.params.exerciseName;
     
     //modal props
     const [modalVisible, setModalVisible] = useState(false);
@@ -56,24 +45,15 @@ const InExercise = ({ navigation, route }) => {
             date: newSet.date});
     }
 
-      const nextExercise = () => {
-        if (currentExerciseIndex < orderedExercises.length - 1) {
-          setCurrentExerciseIndex(currentExerciseIndex + 1);
-        } else {
-          // Navigate to the WorkoutComplete screen when the last exercise is reached
-          navigation.navigate('WorkoutComplete');
-        }
-      };
-
       // Inside the InExercise component
       console.log('setsForCurrentExercise ids:', setsForCurrentExercise.map(set => set.id));
 
-      
+
       
     return (
       <MainBG>
         <View style={styles.container}>
-          <Header exerciseName={exerciseName} nextExercise={nextExercise} />
+          <Header exerciseName={exerciseName} />
           <SetAddButtons repeatSet={repeatSet} showModal={() => setModalVisible(true)} />
           <CurrentExercise
             exerciseName={exerciseName}
