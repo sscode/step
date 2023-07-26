@@ -15,8 +15,14 @@ import SetAddButtons from './SetAddButtons';
 const InExercise = ({ navigation, route }) => {
 
     const exerciseCtx = useContext(ExerciseContext);
-    console.log(route.params.exerciseName)
     const exerciseName = route.params.exerciseName;
+
+    //header
+    useEffect(() => {
+        navigation.setOptions({
+            title: null,
+        });
+    }, []);
     
     //modal props
     const [modalVisible, setModalVisible] = useState(false);
@@ -55,10 +61,12 @@ const InExercise = ({ navigation, route }) => {
         <View style={styles.container}>
           <Header exerciseName={exerciseName} />
           <SetAddButtons repeatSet={repeatSet} showModal={() => setModalVisible(true)} />
-          <CurrentExercise
-            exerciseName={exerciseName}
-            setsForCurrentExercise={setsForCurrentExercise}
-          />
+          <View style={styles.exerciseHistoryContainer}>
+            <CurrentExercise
+              exerciseName={exerciseName}
+              setsForCurrentExercise={setsForCurrentExercise}
+            />
+          </View>
         <AddSetModal 
           exerciseName={exerciseName}
           visible={modalVisible}
@@ -75,7 +83,12 @@ export default InExercise;
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      marginTop: 48,
-    }
+      marginTop: 98,
+    },
+    exerciseHistoryContainer: {
+      flex: 1,
+      marginHorizontal: 15,
+      marginTop: 20,
+    },
   });
 

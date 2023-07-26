@@ -5,7 +5,12 @@ import { getShortDateAndTime, groupSetsByDate } from '../../../util/date';
 import SmallSummary from './SmallSummary';
 
 const CurrentExercise = ({ setsForCurrentExercise }) => {
-  const groupedSets = groupSetsByDate(setsForCurrentExercise);
+  const groupedSets = groupSetsByDate(setsForCurrentExercise).reverse();
+
+  const reversedGroupedSets = groupedSets.map((section) => ({
+    ...section,
+    data: section.data.reverse(),
+  }));
 
   const renderSet = ({ item }) => (
     <View style={styles.row}>
@@ -29,7 +34,7 @@ const CurrentExercise = ({ setsForCurrentExercise }) => {
   return (
     <View style={styles.container}>
       <SectionList
-        sections={groupedSets}
+        sections={reversedGroupedSets}
         keyExtractor={(item, index) => item.id || String(index)}
         renderItem={renderSet}
         renderSectionHeader={({ section }) => <SectionHeader section={section} />}
@@ -41,22 +46,23 @@ const CurrentExercise = ({ setsForCurrentExercise }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginHorizontal: 15,
-    marginTop: 20,
     backgroundColor: GlobalStyles.colors.white,
-    borderRadius: 5,
+    // borderRadius: 5,
   },
   sectionHeader: {
     flexDirection: 'column',
     justifyContent: 'space-between',
-    paddingVertical: 10,
+    paddingTop: 20,
     paddingHorizontal: 15,
+    backgroundColor: GlobalStyles.colors.white,
+    // borderRadius: 5,
 
   },
   sectionHeaderText: {
     fontSize: 16,
     fontWeight: 'bold',
     color: GlobalStyles.colors.black,
+    // borderRadius: 5,
   },
   row: {
     flexDirection: 'row',
@@ -65,6 +71,7 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalStyles.colors.white,
     paddingVertical: 8,
     marginHorizontal: 15,
+    // borderRadius: 5,
     borderBottomColor: '#ddd',
     borderBottomWidth: 1,
   },

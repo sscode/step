@@ -24,7 +24,9 @@ const NewWorkout = ({ navigation }) => {
   useEffect(() => {
     //header
     navigation.setOptions({
-      headerShown: false,
+      headerShown: true,
+      headerTransparent: true,
+      headerTitle: '',
     });
   }, []);
 
@@ -60,6 +62,11 @@ const NewWorkout = ({ navigation }) => {
     }
   };
 
+  const endWorkout = () => {
+    //navigate to the workoutComplete screen
+    navigation.navigate('WorkoutComplete');
+  }
+
   return (
     <MainBG>
         <View style={styles.container}>
@@ -72,6 +79,7 @@ const NewWorkout = ({ navigation }) => {
         <ExerciseList exercises={exercises} toggleExercise={toggleExercise} selectedExercisesIds={selectedExercisesIds} />
         <View style={styles.buttonsContainer}>
             {/* <PrimaryButton title={'Set Order'} onPress={setOrder} style={styles.setOrderButton} /> */}
+            <PrimaryButton title={'End Workout'} onPress={endWorkout} style={styles.setOrderButton} />
         </View>
         <AddExerciseModal visible={modalVisible} onAdd={handleAddExercise} onCancel={() => setModalVisible(false)} onChangeText={setNewExerciseName} value={newExerciseName} />
         </View>
@@ -84,7 +92,7 @@ export default NewWorkout;
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      paddingTop: 48,
+      paddingTop: 96,
     },
     mainBg: {
       position: 'absolute',

@@ -29,7 +29,7 @@ const TodayStats = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Today's Stats</Text>
+      {/* <Text style={styles.title}>Today's Stats</Text> */}
       {uniqueExerciseNames.map((exerciseName) => {
         const setsForToday = exerciseCtx.exerciseData.Sets.filter(
           (set) =>
@@ -43,6 +43,11 @@ const TodayStats = () => {
             return acc;
           }, {totalReps: 0, totalLbs: 0});
 
+        // Skip rendering the ExerciseStats if totalReps is 0
+        if (totals.totalReps === 0) {
+          return null;
+        }
+
         return (
           <ExerciseStats
             key={exerciseName}
@@ -52,7 +57,7 @@ const TodayStats = () => {
           />
         );
       })}
-        <Text style={styles.title}>Total Lbs: {grandTotalLbs}</Text>
+        <Text style={styles.titleBottom}>Total Lbs: {grandTotalLbs}</Text>
     </View>
   );
 };
@@ -60,7 +65,7 @@ const TodayStats = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-    paddingVertical: 20,
+    paddingVertical: 24,
     paddingHorizontal: 24,
     borderRadius: 10,
     shadowColor: '#000000',
@@ -78,6 +83,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
+  },
+  titleBottom: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 

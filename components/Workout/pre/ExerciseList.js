@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         color: GlobalStyles.colors.white,
     },
     list: {
-        marginTop: 20,
+        // marginTop: 20,
     },
   });
 

@@ -13,16 +13,25 @@ const SummaryCard = ({ date }) => {
     (set) => new Date(set.date).setHours(0, 0, 0, 0) === date
   );
 
+  const exerciseSets = setsForDate.map((set) => ({
+    exerciseName: set.exerciseName,
+    reps: set.reps,
+    lbs: set.lbs,
+  }));
+
+  const totalReps = exerciseSets.reduce((total, set) => total + set.reps, 0);
+  const totalLbsLifted = exerciseSets.reduce((total, set) => total + set.reps * set.lbs, 0);
+
   const uniqueExerciseNames = [
     ...new Set(setsForDate.map((set) => set.exerciseName)),
   ];
 
   return (
     <View style={styles.container}>
-      <SummaryHeader date={date} />
+      <SummaryHeader date={date} reps={totalReps} lbs={totalLbsLifted}/>
       <SubHeader />
       {uniqueExerciseNames.map((exerciseName) => (
-        <SummaryItem key={exerciseName} exerciseName={exerciseName} sets={setsForDate} />
+        <SummaryItem key={`${exerciseName}-${date}`} exerciseName={exerciseName} sets={setsForDate} />
       ))}
     </View>
   );

@@ -15,10 +15,13 @@ const WorkoutComplete = ({ navigation }) => {
         });
         }, []);
 
+      const today = new Date().toLocaleDateString();
+
   return (
     <MainBG>
         <View style={styles.container}>
         <Text style={styles.title}>Workout Complete!</Text>
+        <Text style={styles.subTitle}>{today}</Text>
         <TodayStats />
         <PrimaryButton title="Go to Feed" onPress={() => navigation.navigate('Feed')} />
         </View>
@@ -36,9 +39,15 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 32,
     textAlign: 'center',
     color: GlobalStyles.colors.primary500,
+  },
+  subTitle: {
+    fontWeight: 'bold',
+    color: GlobalStyles.colors.primary500,
+    fontSize: 14,
+    marginTop: 8,
+    marginBottom: 32,
   }
 });
 

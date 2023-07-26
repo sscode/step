@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 24,
   },
   exerciseName: {
     fontSize: 14,

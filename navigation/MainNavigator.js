@@ -36,7 +36,10 @@ export const MainNavigator = () => {
             <Stack.Screen
                 name="NewWorkout"
                 component={NewWorkout}
-                options={{ title: 'Exercises' }}
+                options={{ 
+                    title: '',
+                    headerTransparent: true, 
+                }}
             />
             <Stack.Screen
                 name="OrderExercises"
@@ -47,6 +50,7 @@ export const MainNavigator = () => {
             <Stack.Screen
                 name="InExercise"
                 component={InExercise}
+                options={{ headerTransparent: true }}
             />
             <Stack.Screen
                 name="WorkoutComplete"
