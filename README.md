@@ -1,3 +1,5 @@
+## Prolift
+
 # Need to launch
 - correct sorting feature on CurrentExercise
 - lbs and weights correction (to weight) and include lbs & kilos
