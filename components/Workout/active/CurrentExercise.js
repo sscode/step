@@ -5,7 +5,7 @@ import { getShortDateAndTime, groupSetsByDate } from '../../../util/date';
 import SmallSummary from './SmallSummary';
 
 const CurrentExercise = ({ setsForCurrentExercise }) => {
-  const groupedSets = groupSetsByDate(setsForCurrentExercise).reverse();
+  const groupedSets = groupSetsByDate(setsForCurrentExercise);
 
   const reversedGroupedSets = groupedSets.map((section) => ({
     ...section,
