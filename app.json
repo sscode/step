@@ -29,7 +29,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.workout.mobile",
+      "bundleIdentifier": "com.prolift.mobile",
       "infoPlist": {
         "NSPhotoLibraryUsageDescription": "Allow workout to access your photos.",
         "NSPhotoLibraryAddUsageDescription": "Allow workout to save photos."
