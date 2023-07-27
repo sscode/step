@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "workout",
-    "slug": "workout",
+    "name": "prolift",
+    "slug": "prolift",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -29,21 +29,31 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.workout.mobile"
+      "bundleIdentifier": "com.workout.mobile",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Allow workout to access your photos.",
+        "NSPhotoLibraryAddUsageDescription": "Allow workout to save photos."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "permissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.ACCESS_MEDIA_LOCATION"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "d1cb8285-9ffa-4537-af87-72bb1330d31f"
+        "projectId": "68a19544-2ff0-4244-8aa8-b2f1631f4c45"
       }
-    }
+    },
+    "owner": "stusim"
   }
 }
