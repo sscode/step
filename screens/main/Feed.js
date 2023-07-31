@@ -47,6 +47,9 @@ const Feed = ({ navigation }) => {
             }
           }
 
+          // Sort the setsArray by date in ascending order
+          setsArray.sort((a, b) => new Date(a.date) - new Date(b.date));
+
           exerciseCtx.updateData({ exercises: exercisesArray, sets: setsArray });
           return data;
         };

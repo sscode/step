@@ -2,22 +2,20 @@ import React, { useContext } from 'react';
 import { View, Text, StyleSheet, SectionList } from 'react-native';
 import { GlobalStyles } from '../../../constants/styles';
 import { getShortDateAndTime, groupSetsByDate } from '../../../util/date';
+import ExerciseDetailItem from './ExerciseDetailItem';
 import SmallSummary from './SmallSummary';
 
 const CurrentExercise = ({ setsForCurrentExercise }) => {
-  const groupedSets = groupSetsByDate(setsForCurrentExercise);
+  //order and group by date
+  const groupedSets = groupSetsByDate(setsForCurrentExercise).reverse();
 
-  const reversedGroupedSets = groupedSets.map((section) => ({
-    ...section,
-    data: section.data.reverse(),
-  }));
+  //order the sets by time
+  groupedSets.forEach((set) => {
+    set.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+  });
 
   const renderSet = ({ item }) => (
-    <View style={styles.row}>
-      <Text style={styles.rowText}>{getShortDateAndTime(item.date).time}</Text>
-      <Text style={styles.rowText}>{item.reps}</Text>
-      <Text style={styles.rowText}>{item.lbs}</Text>
-    </View>
+    <ExerciseDetailItem key={item.id} item={item} />
   );
 
   const SectionHeader = ({ section }) => (
@@ -34,7 +32,7 @@ const CurrentExercise = ({ setsForCurrentExercise }) => {
   return (
     <View style={styles.container}>
       <SectionList
-        sections={reversedGroupedSets}
+        sections={groupedSets}
         keyExtractor={(item, index) => item.id || String(index)}
         renderItem={renderSet}
         renderSectionHeader={({ section }) => <SectionHeader section={section} />}

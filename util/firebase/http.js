@@ -50,4 +50,24 @@ export const addSetToFirebase = async (userId, set) => {
       return null;
     }
   };
+
+  export const deleteSetFromFirebase = async (userId, setId) => {
+    try {
+      const response = await axios.delete(
+        `${baseURL}/users/${userId}/sets/${setId}.json`
+      );
+  
+      if (response.status === 200) {
+        console.log('Set deleted successfully:', setId);
+        return true;
+      } else {
+        console.error('Error deleting set:', response);
+        return false;
+      }
+    } catch (error) {
+      console.error('Error deleting set:', error);
+      return false;
+    }
+  };
+  
   

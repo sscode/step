@@ -2,32 +2,43 @@ import React from 'react';
 import { Modal, View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { GlobalStyles } from '../../../constants/styles';
 
-const AddExerciseModal = ({ visible, onAdd, onCancel, onChangeText, value }) => (
-  <Modal
-    animationType="slide"
-    transparent={true}
-    visible={visible}
-    onRequestClose={onCancel}
-  >
-    <View style={styles.modalContainer}>
-      <View style={styles.modalContent}>
-        <Text style={styles.modalTitle}>Add a new exercise</Text>
-        <TextInput
-          value={value}
-          onChangeText={onChangeText}
-          onSubmitEditing={onAdd}
-          placeholder="Exercise name"
-          style={styles.modalInput}
-          autoFocus={true}
-        />
-        <View style={styles.modalButtons}>
-          <Button onPress={onCancel} title="Cancel" color={GlobalStyles.colors.gray700} />
-          <Button onPress={onAdd} title="Add" color={GlobalStyles.colors.primary500} />
+const AddExerciseModal = ({ visible, onAdd, onCancel, onChangeText, value }) => {
+
+  const addHandler = () => {
+    if(value.length === 0) {
+      return;
+    }
+    onAdd(value);
+  };
+
+  return (
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={visible}
+      onRequestClose={onCancel}
+    >
+      <View style={styles.modalContainer}>
+        <View style={styles.modalContent}>
+          <Text style={styles.modalTitle}>Add a new exercise</Text>
+          <TextInput
+            value={value}
+            onChangeText={onChangeText}
+            onSubmitEditing={onAdd}
+            placeholder="Exercise name"
+            style={styles.modalInput}
+            autoFocus={true}
+          />
+          <View style={styles.modalButtons}>
+            <Button onPress={onCancel} title="Cancel" color={GlobalStyles.colors.gray700} />
+            <Button
+            onPress={addHandler} title="Add" color={GlobalStyles.colors.primary500} />
+          </View>
         </View>
       </View>
-    </View>
-  </Modal>
-);
+    </Modal>
+  )
+};
 
 const styles = StyleSheet.create({
   modalContainer: {
