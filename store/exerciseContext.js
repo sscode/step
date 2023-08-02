@@ -22,6 +22,10 @@ function ExerciseContextProvider({ children }) {
     dispatch({ type: 'ADD_SET', payload: newSet });
   }
 
+  function deleteSet(setId) {
+    dispatch({ type: 'DELETE_SET', payload: setId });
+  }
+
   function clearSets() {
     dispatch({ type: 'CLEAR_SETS' });
   }
@@ -49,6 +53,7 @@ function ExerciseContextProvider({ children }) {
     addExercise: addExercise,
     clearExercises: clearExercises,
     updateData: updateData,
+    deleteSet: deleteSet,
   };
 
   return (

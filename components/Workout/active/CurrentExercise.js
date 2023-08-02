@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { View, Text, StyleSheet, SectionList } from 'react-native';
 import { GlobalStyles } from '../../../constants/styles';
 import { getShortDateAndTime, groupSetsByDate } from '../../../util/date';
@@ -6,6 +6,7 @@ import ExerciseDetailItem from './ExerciseDetailItem';
 import SmallSummary from './SmallSummary';
 
 const CurrentExercise = ({ setsForCurrentExercise }) => {
+
   //order and group by date
   const groupedSets = groupSetsByDate(setsForCurrentExercise).reverse();
 
@@ -15,7 +16,7 @@ const CurrentExercise = ({ setsForCurrentExercise }) => {
   });
 
   const renderSet = ({ item }) => (
-    <ExerciseDetailItem key={item.id} item={item} />
+    <ExerciseDetailItem key={item.id} item={item}/>
   );
 
   const SectionHeader = ({ section }) => (
@@ -61,23 +62,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: GlobalStyles.colors.black,
     // borderRadius: 5,
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: GlobalStyles.colors.white,
-    paddingVertical: 8,
-    marginHorizontal: 15,
-    // borderRadius: 5,
-    borderBottomColor: '#ddd',
-    borderBottomWidth: 1,
-  },
-  rowText: {
-    fontSize: 14,
-    color: '#333',
-    flex: 1,
-    textAlign: 'center',
   },
   separator: {
     height: 1,

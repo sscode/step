@@ -16,7 +16,10 @@ export function exerciseReducer(state, action) {
         Sets: action.payload.sets,
         Exercises: action.payload.exercises,
       };
-      default:
+    case 'DELETE_SET':
+        const filteredSets = state.Sets.filter((set) => set.id !== action.payload);
+        return { ...state, Sets: filteredSets };
+    default:
         return state;
     }
   }
