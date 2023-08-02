@@ -26,7 +26,7 @@ const ExerciseDetailItem = ({ item }) => {
         runOnJS(deleteSetFromFirebase)(userId, item.id)
         runOnJS(deleteSet)(item.id);
         console.log('delete set ', item.id);
-      } else if (event.translationX > 100) {
+      } else if (event.translationX > 0) {
         console.log('swipe right');
         translateX.value = withSpring(0);
       }
@@ -58,7 +58,7 @@ const ExerciseDetailItem = ({ item }) => {
       <Animated.View style={[styles.row, animatedStyle]}>
         <Text style={styles.rowText}>{getShortDateAndTime(item.date).time}</Text>
         <Text style={styles.rowText}>{item.reps}</Text>
-        <Text style={styles.rowText}>{item.id}</Text>
+        <Text style={styles.rowText}>{item.lbs}</Text>
       </Animated.View>
     </PanGestureHandler>
   );
