@@ -5,10 +5,11 @@ import { GlobalStyles } from '../../../constants/styles';
 const AddExerciseModal = ({ visible, onAdd, onCancel, onChangeText, value }) => {
 
   const addHandler = () => {
-    if(value.length === 0) {
+    const trimmedValue = value.trim(); // Remove any leading and trailing whitespace
+    if (trimmedValue.length === 0) {
       return;
     }
-    onAdd(value);
+    onAdd(trimmedValue);
   };
 
   return (

@@ -18,15 +18,19 @@ const AddSet = ({exerciseName}) => {
   //get the last set for the current exercise in order to repeat it
   const repeatSet = setsForCurrentExercise[0];
 
-  console.log('repeatSet', repeatSet);
+  // console.log('repeatSet', repeatSet);
 
-  const [reps, setReps] = useState(repeatSet.reps);
-  const [weight, setWeight] = useState(repeatSet.lbs);
+  // Set initial state of reps and weight to 0 if repeatSet is undefined or setsForCurrentExercise is empty
+  const initialReps = repeatSet ? repeatSet.reps.toString() : '0';
+  const initialWeight = repeatSet ? repeatSet.lbs.toString() : '0';
+  const [reps, setReps] = useState(initialReps);
+  const [weight, setWeight] = useState(initialWeight);
+
 
   const repeatHandler = async () => {
-    console.log('repeatHandler', repeatSet.exerciseName);
+    console.log('repeatHandler', exerciseName);
     const newSet = {
-      exerciseName: repeatSet.exerciseName,
+      exerciseName: exerciseName,
       lbs: parseFloat(weight),
       reps: parseInt(reps, 10),
       date: new Date().toISOString(),
@@ -48,22 +52,24 @@ const AddSet = ({exerciseName}) => {
             <Text style={styles.inputHeader}>Reps</Text>
             <TextInput
               style={styles.input}
-              placeholder={repeatSet.reps.toString()}
+              placeholder={reps}
               placeholderTextColor={GlobalStyles.colors.white}
               value={reps}
               onChangeText={setReps}
               keyboardType="numeric"
+              maxLength={3}
             />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputHeader}>Weight (lbs)</Text>
             <TextInput
               style={styles.input}
-              placeholder={repeatSet.lbs.toString()}
+              placeholder={weight}
               placeholderTextColor={GlobalStyles.colors.white}
               value={weight}
               onChangeText={setWeight}
               keyboardType="numeric"
+              maxLength={3}
             />
           </View>
         </View>

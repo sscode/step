@@ -1,60 +1,98 @@
 import React, { useContext, useEffect, useState } from 'react';
-import {
-  StyleSheet,
-  View,
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { ExerciseContext } from '../../../store/exerciseContext';
 import MainBG from '../../../UI/MainBG';
 import AddSet from './AddSet';
 import CurrentExercise from './CurrentExercise';
 import Header from './Header';
-
+import { PanGestureHandler } from 'react-native-gesture-handler';
+import Animated, {
+  runOnJS,
+  useAnimatedGestureHandler,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 
 const InExercise = ({ navigation, route }) => {
+  const exerciseCtx = useContext(ExerciseContext);
+  const exerciseName = route.params.exerciseName;
 
-    const exerciseCtx = useContext(ExerciseContext);
-    const exerciseName = route.params.exerciseName;
+  //header
+  useEffect(() => {
+    navigation.setOptions({
+      title: null,
+    });
+  }, []);
 
-    //header
-    useEffect(() => {
-        navigation.setOptions({
-            title: null,
-        });
-    }, []);
+  //filter to get sets for current exercise
+  const setsForCurrentExercise = exerciseCtx.exerciseData.Sets.filter(
+    (set) => set.exerciseName === exerciseName
+  );
 
-    //filter to get sets for current exercise
-    const setsForCurrentExercise = exerciseCtx.exerciseData.Sets.filter(
-      (set) => set.exerciseName === exerciseName
-    );
-    
-      
-    return (
-      <MainBG>
-        <View style={styles.container}>
-          <Header exerciseName={exerciseName} />
-          <AddSet exerciseName={exerciseName}/>
-          <View style={styles.exerciseHistoryContainer}>
-            <CurrentExercise
-              exerciseName={exerciseName}
-              setsForCurrentExercise={setsForCurrentExercise}
-            />
-          </View>
-        </View>
-      </MainBG>
-    );
+  const handleSwipeLeft = () => {
+    navigateToExerciseDetails();
   };
+
+  const navigateToExerciseDetails = () => {
+    navigation.navigate('Exercise Details', { exerciseName });
+  };
+
+  const translateX = useSharedValue(0);
+
+  const panGesture = useAnimatedGestureHandler({
+    onActive: (event, ctx) => {
+      translateX.value = event.translationX;
+    },
+    onEnd: (event, ctx) => {
+      if (event.translationX < -100) {
+        console.log('swipe left');
+        translateX.value = withSpring(0);
+        runOnJS(handleSwipeLeft)();
+      } else if (event.translationX > 100) {
+        console.log('swipe right');
+        translateX.value = withSpring(0);
+      }
+    },
+  });
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: translateX.value }],
+  }));
+
+  return (
+    <MainBG>
+      <View style={styles.container}>
+        <Header exerciseName={exerciseName} />
+        <PanGestureHandler onGestureEvent={panGesture}>
+          <Animated.View style={[styles.exerciseContainer, animatedStyle]}>
+            <AddSet exerciseName={exerciseName} />
+            <View style={styles.exerciseHistoryContainer}>
+              <CurrentExercise
+                exerciseName={exerciseName}
+                setsForCurrentExercise={setsForCurrentExercise}
+              />
+            </View>
+          </Animated.View>
+        </PanGestureHandler>
+      </View>
+    </MainBG>
+  );
+};
 
 export default InExercise;
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      marginTop: 98,
-    },
-    exerciseHistoryContainer: {
-      flex: 1,
-      marginHorizontal: 15,
-      marginTop: 20,
-    },
-  });
-
+  container: {
+    flex: 1,
+    marginTop: 98,
+  },
+  exerciseContainer: {
+    flex: 1,
+  },
+  exerciseHistoryContainer: {
+    flex: 1,
+    marginHorizontal: 15,
+    marginTop: 20,
+  },
+});
