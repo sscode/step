@@ -20,6 +20,7 @@ const NewWorkout = ({ navigation }) => {
   const [selectedExercisesIds, setSelectedExercisesIds] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [newExerciseName, setNewExerciseName] = useState('');
+  const [activeColor, setActiveColor] = useState('');
 
   useEffect(() => {
     //header
@@ -31,7 +32,7 @@ const NewWorkout = ({ navigation }) => {
   }, []);
 
   const handleAddExercise = async () => {
-    const newExerciseFirebaseId = await addExercise(userId, newExerciseName);
+    const newExerciseFirebaseId = await addExercise(userId, newExerciseName, activeColor);
     exerciseCtx.addExercise({id: newExerciseFirebaseId, name: newExerciseName});
     setModalVisible(false);
     setNewExerciseName('');
@@ -81,7 +82,14 @@ const NewWorkout = ({ navigation }) => {
             {/* <PrimaryButton title={'Set Order'} onPress={setOrder} style={styles.setOrderButton} /> */}
             <PrimaryButton title={'End Workout'} onPress={endWorkout} style={styles.setOrderButton} />
         </View>
-        <AddExerciseModal visible={modalVisible} onAdd={handleAddExercise} onCancel={() => setModalVisible(false)} onChangeText={setNewExerciseName} value={newExerciseName} />
+        <AddExerciseModal 
+        visible={modalVisible} 
+        onAdd={handleAddExercise} 
+        setActiveColor={setActiveColor}
+        activeColor={activeColor}
+        onCancel={() => setModalVisible(false)} 
+        onChangeText={setNewExerciseName} 
+        value={newExerciseName} />
         </View>
     </MainBG>
   );

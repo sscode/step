@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
+import { GlobalStyles } from '../../../../../constants/styles';
 import ColorItem from './ColorItem'; // Assuming you have already created the ColorItem component
 
-const ColorSwatch = () => {
+const ColorSwatch = ({activeColor, handleColorPress}) => {
   const colors = [
-    '#2A5841', 
-  '#172D26', 
-  '#2A4494', 
-  '#4EA5D9', 
-  '#44CFCB', 
-  '#D0DB97', 
-  '#BE6E46'];
+    GlobalStyles.colors.swatch0, 
+    GlobalStyles.colors.swatch1,
+    GlobalStyles.colors.swatch2,
+    GlobalStyles.colors.swatch3,
+    GlobalStyles.colors.swatch4,
+    GlobalStyles.colors.swatch5,
+    GlobalStyles.colors.swatch6];
 
-  const [activeColor, setActiveColor] = useState('');
-
-  const handleColorPress = (color) => {
-    setActiveColor(color);
-  };
+    const currentActiveColor = activeColor || colors[0];
 
   return (
     <View style={styles.container}>
@@ -24,7 +21,7 @@ const ColorSwatch = () => {
         <ColorItem
           key={color}
           color={color}
-          isActive={color === activeColor}
+          isActive={color === currentActiveColor}
           onPress={handleColorPress}
         />
       ))}
@@ -36,7 +33,7 @@ export default ColorSwatch;
 
 const styles = StyleSheet.create({
     container: {
-        width: '80%',
+        width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
         // backgroundColor: 'red',

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal, View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { GlobalStyles } from '../../../constants/styles';
+import ColorSwatch from '../active/details/edit/ColorSwatch';
 
-const AddExerciseModal = ({ visible, onAdd, onCancel, onChangeText, value }) => {
+const AddExerciseModal = ({ visible, onAdd, onCancel, onChangeText, value, activeColor, setActiveColor }) => {
 
   const addHandler = () => {
     const trimmedValue = value.trim(); // Remove any leading and trailing whitespace
@@ -11,6 +12,9 @@ const AddExerciseModal = ({ visible, onAdd, onCancel, onChangeText, value }) => 
     }
     onAdd(trimmedValue);
   };
+
+  
+
 
   return (
     <Modal
@@ -21,7 +25,10 @@ const AddExerciseModal = ({ visible, onAdd, onCancel, onChangeText, value }) => 
     >
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
-          <Text style={styles.modalTitle}>Add a new exercise</Text>
+          <Text style={styles.modalTitle}>Add a New Exercise</Text>
+          <ColorSwatch 
+          activeColor={activeColor}
+          handleColorPress={setActiveColor}/>
           <TextInput
             value={value}
             onChangeText={onChangeText}
@@ -66,7 +73,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 10,
     paddingVertical: 5,
-    marginBottom: 20,
+    marginTop: 16,
+    marginBottom: 16,
     color: GlobalStyles.colors.gray500,
   },
   modalButtons: {

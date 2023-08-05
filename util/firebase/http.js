@@ -24,11 +24,11 @@ export const addSetToFirebase = async (userId, set) => {
     }
   };
   
-  export const addExercise = async (userId, exerciseName) => {
+  export const addExercise = async (userId, exerciseName, activeColor) => {
     try {
       const response = await axios.post(
         `${baseURL}/users/${userId}/exercises.json`,
-        { name: exerciseName }
+        { name: exerciseName, color: activeColor }
       );
       const data = response.data;
         console.log('Exercise added successfully:', data);
