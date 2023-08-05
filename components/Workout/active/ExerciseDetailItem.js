@@ -26,7 +26,7 @@ const ExerciseDetailItem = ({ item }) => {
         runOnJS(deleteSetFromFirebase)(userId, item.id)
         runOnJS(deleteSet)(item.id);
         console.log('delete set ', item.id);
-      } else if (event.translationX > 0) {
+      } else {
         console.log('swipe right');
         translateX.value = withSpring(0);
       }

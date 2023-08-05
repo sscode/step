@@ -54,8 +54,6 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingHorizontal: 15,
     backgroundColor: GlobalStyles.colors.white,
-    // borderRadius: 5,
-
   },
   sectionHeaderText: {
     fontSize: 16,
