@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, StyleSheet, Keyboard } from 'react-native';
 import { GlobalStyles } from '../../../constants/styles';
 import { ExerciseContext } from '../../../store/exerciseContext';
 import { addSetToFirebase } from '../../../util/firebase/http';
@@ -18,8 +18,6 @@ const AddSet = ({exerciseName}) => {
   //get the last set for the current exercise in order to repeat it
   const repeatSet = setsForCurrentExercise[0];
 
-  // console.log('repeatSet', repeatSet);
-
   // Set initial state of reps and weight to 0 if repeatSet is undefined or setsForCurrentExercise is empty
   const initialReps = repeatSet ? repeatSet.reps.toString() : '0';
   const initialWeight = repeatSet ? repeatSet.lbs.toString() : '0';
@@ -27,8 +25,7 @@ const AddSet = ({exerciseName}) => {
   const [weight, setWeight] = useState(initialWeight);
 
 
-  const repeatHandler = async () => {
-    console.log('repeatHandler', exerciseName);
+  const addSetHandler = async () => {
     const newSet = {
       exerciseName: exerciseName,
       lbs: parseFloat(weight),
@@ -42,6 +39,9 @@ const AddSet = ({exerciseName}) => {
     
     // Add to context
     exerciseCtx.addSet(newSetWithId);
+
+    // close keyboards
+    Keyboard.dismiss();
   };
 
   return (
@@ -73,7 +73,7 @@ const AddSet = ({exerciseName}) => {
             />
           </View>
         </View>
-        <TouchableOpacity style={styles.repeatAddButton} onPress={repeatHandler}>
+        <TouchableOpacity style={styles.repeatAddButton} onPress={addSetHandler}>
           <Text style={styles.buttonText}>Add Set</Text>
         </TouchableOpacity>
       </View>
