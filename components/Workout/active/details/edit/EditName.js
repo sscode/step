@@ -1,13 +1,7 @@
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 
-const EditName = ({ exerciseName, onSave }) => {
-  const [editedName, setEditedName] = useState(exerciseName);
-
-  const handleSave = () => {
-    // Call the onSave function with the edited exercise name
-    onSave(editedName);
-  };
+const EditName = ({ exerciseName, editedName, setEditedName }) => {
 
   return (
     <View style={styles.container}>

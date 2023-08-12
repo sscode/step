@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { GlobalStyles } from '../../../constants/styles';
-import ColorSwatch from '../active/details/edit/ColorSwatch';
+import ColorSwatch from '../../../UI/ColorSwatch';
 
 const AddExerciseModal = ({ visible, onAdd, onCancel, onChangeText, value, activeColor, setActiveColor }) => {
 

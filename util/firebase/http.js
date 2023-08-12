@@ -38,6 +38,21 @@ export const addSetToFirebase = async (userId, set) => {
     }
   };
 
+  export const editExercise = async (userId, exerciseId, exerciseName, activeColor) => {
+    try {
+      const response = await axios.patch(
+        `${baseURL}/users/${userId}/exercises/${exerciseId}.json`,
+        { name: exerciseName, color: activeColor }
+      );
+      const data = response.data;
+      console.log('Exercise edited successfully:', data);
+      return data;
+    } catch (error) {
+      console.error('Error editing exercise:', error);
+    }
+  };
+  
+
   export const getUserData = async (userId) => {
     try {
       const response = await axios.get(

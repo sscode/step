@@ -11,7 +11,7 @@ import NewWorkout from '../screens/main/NewWorkout';
 import OrderExercises from '../components/Workout/pre/OrderExercise';
 import InExercise from '../components/Workout/active/InExercise';
 import WorkoutComplete from '../screens/main/WorkoutComplete';
-import ExerciseDetails from '../components/Workout/active/details/ExerciseDetails';
+import MoreExerciseInfo from '../components/Workout/active/details/MoreExerciseInfo';
 
 
 const Stack = createStackNavigator();
@@ -53,8 +53,8 @@ export const MainNavigator = () => {
                 options={{ headerTransparent: true }}
                 />
             <Stack.Screen 
-            name="Exercise Details" 
-            component={ExerciseDetails} 
+            name="MoreExerciseInfo" 
+            component={MoreExerciseInfo} 
             options={{ headerTransparent: true }}
             />
             <Stack.Screen

@@ -38,6 +38,14 @@ function ExerciseContextProvider({ children }) {
     dispatch({ type: 'ADD_EXERCISE', payload: newExercise });
   }
 
+  function editExercise(exerciseId, newName, newColor) {
+    dispatch({
+      type: 'EDIT_EXERCISE',
+      payload: { exerciseId, newName, newColor },
+    });
+  }
+  
+
   function clearExercises() {
     dispatch({ type: 'CLEAR_EXERCISES' });
   }
@@ -54,6 +62,7 @@ function ExerciseContextProvider({ children }) {
     clearExercises: clearExercises,
     updateData: updateData,
     deleteSet: deleteSet,
+    editExercise: editExercise,
   };
 
   return (

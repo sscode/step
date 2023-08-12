@@ -9,9 +9,10 @@
 - slide right on exercise page to reveal stats on exercise
 - sort exercises by most recent
 - lbs and weights correction (to weight) and include lbs & kilos
+- Correct time/date to timezone and not UTC-0
 
 # bugs
-- After inputting numbers into set, close keyboard
+
 
 # Done
 - Correct Sum of LBS in summaries

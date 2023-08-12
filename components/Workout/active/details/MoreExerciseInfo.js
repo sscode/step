@@ -5,8 +5,10 @@ import BottomSheet from './edit/BottomSheet';
 import { AntDesign } from '@expo/vector-icons';
 import { GlobalStyles } from '../../../../constants/styles';
 
-const ExerciseDetails = ({ route }) => {
+const MoreExerciseInfo = ({ route }) => {
   const { exerciseName } = route.params;
+  const { exerciseId } = route.params;
+  const { exerciseColor } = route.params;
   const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
 
   const handleEditButtonPress = () => {
@@ -22,15 +24,18 @@ const ExerciseDetails = ({ route }) => {
             <AntDesign name="edit" size={24} color="white" />
           </TouchableOpacity>
         </View>
-        {bottomSheetVisible && <BottomSheet 
+        {bottomSheetVisible && 
+        <BottomSheet 
         exerciseName={exerciseName}
+        exerciseId={exerciseId}
+        exerciseColor={exerciseColor}
         />}
       </View>
     </MainBG>
   );
 };
 
-export default ExerciseDetails;
+export default MoreExerciseInfo;
 
 const styles = StyleSheet.create({
   container: {

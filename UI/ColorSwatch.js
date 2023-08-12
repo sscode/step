@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { GlobalStyles } from '../../../../../constants/styles';
+import { GlobalStyles } from '../constants/styles';
 import ColorItem from './ColorItem'; // Assuming you have already created the ColorItem component
 
 const ColorSwatch = ({activeColor, handleColorPress}) => {

@@ -10,17 +10,24 @@ const ExerciseItem = ({ exercise, onSelect }) => {
 
   const exerciseName = exercise.name;
   const exerciseId = exercise.id;
+  const exerciseColor = exercise.color;
 
   const startWorkout = () => {
     navigation.navigate('InExercise', {
       exerciseId,
       exerciseName,
+      exerciseColor,
     });
   };
 
   return (
     <View style={styles.outerContainer}>
-      <View style={styles.colorIndicator}></View>
+      <View
+        style={[
+          styles.colorIndicator,
+          { backgroundColor: exerciseColor || GlobalStyles.colors.primary500 }
+        ]}
+      ></View>
       <TouchableOpacity onPress={startWorkout} style={styles.container}>
         <Text style={styles.exerciseName}>{exercise.name}</Text>
       </TouchableOpacity>
@@ -30,7 +37,6 @@ const ExerciseItem = ({ exercise, onSelect }) => {
 
 const styles = StyleSheet.create({
   outerContainer: {
-    // backgroundColor: 'red',
     display: 'flex',
     flexDirection: 'row',
     borderRadius: 8,
@@ -41,20 +47,16 @@ const styles = StyleSheet.create({
     height: '100%',
     borderTopLeftRadius: 8,
     borderBottomLeftRadius: 8,
-    backgroundColor: GlobalStyles.colors.primary500,
   },
   container: {
     flex: 1,
     flexDirection: 'row',
-    // justifyContent: 'space-between',
-    // alignItems: 'center',
-    backgroundColor: GlobalStyles.colors.white,
-    // backgroundColor: 'blue',
     width: '100%', 
     borderBottomRightRadius: 8,
     borderTopRightRadius: 8,
     paddingHorizontal: 16,
     paddingVertical: 8,
+    backgroundColor: GlobalStyles.colors.white,
   },
   exerciseName: {
     flex: 1,

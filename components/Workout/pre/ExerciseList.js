@@ -1,7 +1,7 @@
 import React from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { GlobalStyles } from '../../../constants/styles';
-import ExerciseItem from '../active/ExerciseItem';
+import ExerciseItem from './ExerciseItem';
 
 export default function ExerciseList({exercises, selectedExercisesIds, toggleExercise}) {
 

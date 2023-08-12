@@ -1,11 +1,23 @@
-import { View, Text } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import React from 'react'
-import ColorSwatch from './ColorSwatch'
+import ColorSwatch from '../../../../../UI/ColorSwatch'
 
-const SetColor = () => {
+const SetColor = ({activeColor, handleColorPress}) => {
+
   return (
-      <ColorSwatch />
+    <View style={styles.container}>
+        <ColorSwatch 
+        activeColor={activeColor}
+        handleColorPress={handleColorPress}
+        />
+    </View>
   )
 }
 
-export default SetColor
+export default SetColor;
+
+const styles = StyleSheet.create({
+    container: {
+        width: '80%',
+    },
+});

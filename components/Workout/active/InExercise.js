@@ -17,6 +17,8 @@ import Animated, {
 const InExercise = ({ navigation, route }) => {
   const exerciseCtx = useContext(ExerciseContext);
   const exerciseName = route.params.exerciseName;
+  const exerciseId = route.params.exerciseId;
+  const exerciseColor = route.params.exerciseColor;
 
   //header
   useEffect(() => {
@@ -35,14 +37,16 @@ const InExercise = ({ navigation, route }) => {
   };
 
   const navigateToExerciseDetails = () => {
-    navigation.navigate('Exercise Details', { exerciseName });
+    navigation.navigate('MoreExerciseInfo', { exerciseName, exerciseId, exerciseColor });
   };
 
   const translateX = useSharedValue(0);
 
   const panGesture = useAnimatedGestureHandler({
     onActive: (event, ctx) => {
-      translateX.value = event.translationX;
+      if (event.translationX < 0) {
+        translateX.value = event.translationX;
+      }
     },
     onEnd: (event, ctx) => {
       if (event.translationX < -100) {

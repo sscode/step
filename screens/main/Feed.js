@@ -30,7 +30,7 @@ const Feed = ({ navigation }) => {
           if (data.exercises) {
             for (const key in data.exercises) {
               const name = data.exercises[key].name;
-              exercisesArray.push({ id: key, name: name });
+              exercisesArray.push({ id: key, name: name, color: data.exercises[key].color });
             }
           }
     

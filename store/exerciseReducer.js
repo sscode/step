@@ -8,6 +8,21 @@ export function exerciseReducer(state, action) {
         return { ...state, Sets: [] };
       case 'ADD_EXERCISE':
         return { ...state, Exercises: [...state.Exercises, action.payload] };
+      case 'EDIT_EXERCISE':
+        const editedExercises = state.Exercises.map(exercise => {
+          if (exercise.id === action.payload.exerciseId) {
+            return {
+              ...exercise,
+              name: action.payload.newName,
+              color: action.payload.newColor,
+            };
+          }
+          return exercise;
+        });
+        return {
+          ...state,
+          Exercises: editedExercises,
+        };      
     case 'CLEAR_EXERCISES':
         return { ...state, Exercises: [] };
     case 'UPDATE_DATA':

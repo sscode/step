@@ -1,23 +1,74 @@
 import { View, Text, StyleSheet, Dimensions } from 'react-native'
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import EditName from './EditName'
 import SetColor from './SetColor'
 import DeleteExercise from './DeleteExercise'
 import SaveExercise from './SaveExercise'
-
+import { editExercise } from '../../../../../util/firebase/http'
+import { ExerciseContext } from '../../../../../store/exerciseContext'
 
 const {height} = Dimensions.get('window')
 
-const BottomSheet = ({exerciseName}) => {
+const BottomSheet = ({exerciseName, exerciseId, exerciseColor}) => {
+
+    const exerciseCtx = useContext(ExerciseContext);
+    const userId = exerciseCtx.exerciseData.User.id
+    const exercises = exerciseCtx.exerciseData.Exercises;
+
+    const exerciseToEdit = exercises.find(exercise => exercise.id === exerciseId);
+
+
+
+    const [activeColor, setActiveColor] = useState(exerciseColor);
+    const [editedName, setEditedName] = useState(exerciseName);
+
+
+    const saveHandler = async () => {
+        try {
+            const editedExercise = await editExercise(userId, exerciseId, editedName, activeColor) 
+        
+            // Update context state
+            const updatedExercises = exercises.map(exercise => {
+                if (exercise.id === exerciseId) {
+                return {
+                    ...exercise,
+                    name: editedName,
+                    color: activeColor,
+                };
+                }
+                return exercise;
+            });
+            
+            //call context. Need to fix this.
+            exerciseCtx.editExercise({
+                ...exerciseCtx.exerciseData,
+                Exercises: updatedExercises,
+            })
+        
+        } catch (error) {
+            
+        }
+
+    }
+
   return (
     <View style={styles.container}>
         {/* <View style={styles.line}></View> */}
         <View style={styles.options}>
-            <SetColor />
-            <EditName exerciseName={exerciseName}/>
+            <SetColor 
+            activeColor={activeColor}
+            handleColorPress={setActiveColor}
+            />
+            <EditName 
+            exerciseName={exerciseName}
+            editedName={editedName}
+            setEditedName={setEditedName}
+            />
             <View style={styles.buttons}>
                 <DeleteExercise /> 
-                <SaveExercise />
+                <SaveExercise 
+                saveHandler={saveHandler}
+                />
             </View>
         </View>
     </View>
