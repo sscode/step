@@ -38,10 +38,12 @@ function ExerciseContextProvider({ children }) {
     dispatch({ type: 'ADD_EXERCISE', payload: newExercise });
   }
 
-  function editExercise(exerciseId, newName, newColor) {
+  function editExercise(exerciseDetails) {
+    console.log('editExercise context :', exerciseDetails);
+    const { exerciseId, editedName, activeColor } = exerciseDetails;
     dispatch({
       type: 'EDIT_EXERCISE',
-      payload: { exerciseId, newName, newColor },
+      payload: { exerciseId, editedName, activeColor },
     });
   }
   

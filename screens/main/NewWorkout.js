@@ -11,9 +11,9 @@ import WorkoutStyle from '../../components/Workout/active/WorkoutStyle';
 
 const NewWorkout = ({ navigation }) => {
 
-    const exerciseCtx = useContext(ExerciseContext);
-    const userId = exerciseCtx.exerciseData.User.id
-    const [toggleState, setToggleState] = useState(false);
+  const exerciseCtx = useContext(ExerciseContext);
+  const userId = exerciseCtx.exerciseData.User.id
+  const [toggleState, setToggleState] = useState(false);
     
   const exercises = exerciseCtx.exerciseData.Exercises;
 
@@ -80,7 +80,7 @@ const NewWorkout = ({ navigation }) => {
         <ExerciseList exercises={exercises} toggleExercise={toggleExercise} selectedExercisesIds={selectedExercisesIds} />
         <View style={styles.buttonsContainer}>
             {/* <PrimaryButton title={'Set Order'} onPress={setOrder} style={styles.setOrderButton} /> */}
-            <PrimaryButton title={'End Workout'} onPress={endWorkout} style={styles.setOrderButton} />
+            <PrimaryButton title={'Share Workout'} onPress={endWorkout} style={styles.setOrderButton} />
         </View>
         <AddExerciseModal 
         visible={modalVisible} 

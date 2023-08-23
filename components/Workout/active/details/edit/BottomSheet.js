@@ -15,35 +15,18 @@ const BottomSheet = ({exerciseName, exerciseId, exerciseColor}) => {
     const userId = exerciseCtx.exerciseData.User.id
     const exercises = exerciseCtx.exerciseData.Exercises;
 
-    const exerciseToEdit = exercises.find(exercise => exercise.id === exerciseId);
-
-
 
     const [activeColor, setActiveColor] = useState(exerciseColor);
-    const [editedName, setEditedName] = useState(exerciseName);
+    // const [editedName, setEditedName] = useState(exerciseName);
 
 
     const saveHandler = async () => {
         try {
-            const editedExercise = await editExercise(userId, exerciseId, editedName, activeColor) 
-        
-            // Update context state
-            const updatedExercises = exercises.map(exercise => {
-                if (exercise.id === exerciseId) {
-                return {
-                    ...exercise,
-                    name: editedName,
-                    color: activeColor,
-                };
-                }
-                return exercise;
-            });
+            //update firebase
+            await editExercise(userId, exerciseId, editedName, activeColor) 
             
-            //call context. Need to fix this.
-            exerciseCtx.editExercise({
-                ...exerciseCtx.exerciseData,
-                Exercises: updatedExercises,
-            })
+            //call context
+            exerciseCtx.editExercise({exerciseId, editedName, activeColor})
         
         } catch (error) {
             
@@ -59,11 +42,11 @@ const BottomSheet = ({exerciseName, exerciseId, exerciseColor}) => {
             activeColor={activeColor}
             handleColorPress={setActiveColor}
             />
-            <EditName 
+            {/* <EditName 
             exerciseName={exerciseName}
             editedName={editedName}
             setEditedName={setEditedName}
-            />
+            /> */}
             <View style={styles.buttons}>
                 <DeleteExercise /> 
                 <SaveExercise 

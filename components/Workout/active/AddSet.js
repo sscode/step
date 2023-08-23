@@ -58,6 +58,7 @@ const AddSet = ({exerciseName}) => {
               onChangeText={setReps}
               keyboardType="numeric"
               maxLength={3}
+              onFocus={() => setReps('')}
             />
           </View>
           <View style={styles.inputContainer}>
@@ -70,6 +71,7 @@ const AddSet = ({exerciseName}) => {
               onChangeText={setWeight}
               keyboardType="numeric"
               maxLength={3}
+              onFocus={() => setWeight('')}
             />
           </View>
         </View>

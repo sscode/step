@@ -45,7 +45,7 @@ export const addSetToFirebase = async (userId, set) => {
         { name: exerciseName, color: activeColor }
       );
       const data = response.data;
-      console.log('Exercise edited successfully:', data);
+      console.log('Exercise edited successfully in Firebase:', data);
       return data;
     } catch (error) {
       console.error('Error editing exercise:', error);

@@ -2,7 +2,7 @@
   "expo": {
     "name": "prolift",
     "slug": "prolift",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "orientation": "portrait",
     "icon": "./assets/iconprolift.png",
     "userInterfaceStyle": "light",
@@ -28,7 +28,7 @@
       "**/*"
     ],
     "ios": {
-      "buildNumber": "1.0.6",
+      "buildNumber": "1.0.7",
       "supportsTablet": true,
       "bundleIdentifier": "com.prolift.mobile",
       "infoPlist": {

@@ -13,9 +13,6 @@ const AddExerciseModal = ({ visible, onAdd, onCancel, onChangeText, value, activ
     onAdd(trimmedValue);
   };
 
-  
-
-
   return (
     <Modal
       animationType="slide"

@@ -13,8 +13,8 @@ export function exerciseReducer(state, action) {
           if (exercise.id === action.payload.exerciseId) {
             return {
               ...exercise,
-              name: action.payload.newName,
-              color: action.payload.newColor,
+              name: action.payload.editedName,
+              color: action.payload.activeColor,
             };
           }
           return exercise;
