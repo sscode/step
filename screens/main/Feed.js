@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet, FlatList, TouchableOpacity, Text, ImageBackground } from 'react-native';
+import Logout from '../../components/User/Logout';
 import SummaryList from '../../components/Workout/feed/SummaryList';
 import { GlobalStyles } from '../../constants/styles';
 import { ExerciseContext } from '../../store/exerciseContext';
@@ -64,6 +65,7 @@ const Feed = ({ navigation }) => {
   return (
     <MainBG>
       <View style={styles.container}>
+        <Logout />
         <PrimaryButton title="New Workout" onPress={startNewWorkout} />
         <SummaryList />
       </View>

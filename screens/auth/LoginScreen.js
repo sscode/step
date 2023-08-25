@@ -1,12 +1,11 @@
 import { ImageBackground, KeyboardAvoidingView, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useContext, useLayoutEffect, useState } from 'react'
-import { GlobalStyles } from '../constants/styles'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../util/firebase/firebase'
-import { userContext } from '../store/userContext'
-import PrimaryButton from '../UI/PrimaryButton'
-
-
+import { auth } from '../../util/firebase/firebase'
+import { userContext } from '../../store/userContext'
+import PrimaryButton from '../../UI/PrimaryButton'
+import { GlobalStyles } from '../../constants/styles'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = ({navigation = { navigate: () => {} }}) => {
     const userCtx = useContext(userContext)
@@ -14,6 +13,9 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
     const [password, setPassword] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState('')
+
+    const { addUser } = useContext(userContext);
+
 
     useLayoutEffect(() => {
       navigation.setOptions({
@@ -23,6 +25,25 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
           header: () => {},
       })
   }, [navigation])
+
+  useLayoutEffect(() => {
+    const checkLoggedIn = async () => {
+      const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
+      if (isLoggedIn === 'true') {
+        addUser(auth.currentUser);
+
+        // Clear input fields
+        setEmail('');
+        setPassword('');
+
+        //navigate to feed
+        navigation.navigate('Feed', { screen: 'Feed' });
+      }
+    };
+  
+    checkLoggedIn();
+  }, [navigation]);
+  
   
     const handleSignup = () => {
       setIsLoading(true)
@@ -38,28 +59,37 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
         })
     }
   
-    const handleLogin = () => {
-      setIsLoading(true)
-      setError('')
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          setIsLoading(false)
-          userCtx.addUser(userCredential.user)
-          navigation.navigate('feed', { screen: 'feed' })
-        })
-        .catch((error) => {
-          setIsLoading(false)
-          setError(error.message.replace('Firebase:', ''))
-        })
-    }
+    const handleLogin = async () => {
+      setIsLoading(true);
+      setError('');
+    
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        setIsLoading(false);
+    
+        // Save user's login status
+        await AsyncStorage.setItem('isLoggedIn', 'true');
+    
+        // Update user context with logged-in user
+        addUser(userCredential.user);
+    
+        navigation.navigate('Feed', { screen: 'Feed' });
+      } catch (error) {
+        setIsLoading(false);
+        setError(error.message.replace('Firebase:', ''));
+      }
+    };
+    
+    
   
     const clearError = () => {
+      setPassword('');
       setError('')
     }
   
     return (
       <ImageBackground
-        source={require('../assets/bg1-splash.png')} 
+        source={require('../../assets/bg1-splash.png')} 
         style={styles.image}>
       <KeyboardAvoidingView style={styles.container}>
         
@@ -93,18 +123,17 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
             mode='full'
             isLoading={isLoading}
             onPress={handleLogin}
-          >
-            Login
-          </PrimaryButton>
+            title='Login'
+          />
+          
   
           <PrimaryButton
             style={styles.buttons}
             mode='flat'
             isLoading={isLoading}
             onPress={handleSignup}
-          >
-            Register
-          </PrimaryButton>
+            title='Register'
+          />
         </View>
         </KeyboardAvoidingView>
       </ImageBackground>
@@ -142,8 +171,12 @@ const styles = StyleSheet.create({
 
     },
     buttonContainer: {
-        width: '50%',
+        width: '60%',
         marginVertical: 24,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        // backgroundColor: GlobalStyles.colors.primary500,
     },
     buttons: {
         marginVertical: 8,

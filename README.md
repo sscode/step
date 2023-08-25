@@ -1,7 +1,8 @@
 ## Prolift
 
 # Need to launch
-- user page
+- user page Login/Create
+- user page logout/Delete
 - delete exercises
 
 # Improvements

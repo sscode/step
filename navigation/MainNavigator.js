@@ -5,13 +5,14 @@ import HeaderRight from './HeaderRight';
 import HeaderLeft from './HeaderLeft';
 
 import { GlobalStyles } from '../constants/styles';
-import LoginScreen from '../screens/LoginScreen';
+
 import Feed from '../screens/main/Feed';
 import NewWorkout from '../screens/main/NewWorkout';
 import OrderExercises from '../components/Workout/pre/OrderExercise';
 import InExercise from '../components/Workout/active/InExercise';
 import WorkoutComplete from '../screens/main/WorkoutComplete';
 import MoreExerciseInfo from '../components/Workout/active/details/MoreExerciseInfo';
+import LoginScreen from '../screens/auth/LoginScreen';
 
 
 const Stack = createStackNavigator();
@@ -22,10 +23,10 @@ export const MainNavigator = () => {
         <Stack.Navigator
         screenOptions={{headerTintColor: GlobalStyles.colors.primary500}}
         >
-            {/* <Stack.Screen
+            <Stack.Screen
                 name="login"
                 component={LoginScreen}
-            /> */}
+            />
             <Stack.Screen
                 name="Feed"
                 component={Feed}
