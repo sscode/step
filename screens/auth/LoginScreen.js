@@ -1,5 +1,5 @@
 import { ImageBackground, KeyboardAvoidingView, StyleSheet, Text, TextInput, View } from 'react-native'
-import React, { useContext, useLayoutEffect, useState } from 'react'
+import React, { useContext, useEffect, useLayoutEffect, useState } from 'react'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../util/firebase/firebase'
 import { userContext } from '../../store/userContext'
@@ -26,22 +26,16 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
       })
   }, [navigation])
 
-  useLayoutEffect(() => {
-    const checkLoggedIn = async () => {
-      const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
-      if (isLoggedIn === 'true') {
-        addUser(auth.currentUser);
+  useEffect(() => {
 
-        // Clear input fields
-        setEmail('');
-        setPassword('');
-
-        //navigate to feed
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        addUser(user);
         navigation.navigate('Feed', { screen: 'Feed' });
       }
-    };
-  
-    checkLoggedIn();
+    });
+
+    return () => unsubscribe();
   }, [navigation]);
   
   
@@ -119,16 +113,15 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
   
         <View style={styles.buttonContainer}>
           <PrimaryButton
-            style={styles.buttons}
+            style={'green'}
             mode='full'
             isLoading={isLoading}
             onPress={handleLogin}
             title='Login'
           />
           
-  
           <PrimaryButton
-            style={styles.buttons}
+            style={'green'}
             mode='flat'
             isLoading={isLoading}
             onPress={handleSignup}

@@ -1,9 +1,6 @@
 ## Prolift
 
 # Need to launch
-- user page Login/Create
-- user page logout/Delete
-- delete exercises
 
 # Improvements
 - edite name of exercise without losing history. Get history by ID and not by name.
@@ -15,12 +12,16 @@
 - Correct time/date to timezone and not UTC-0
 - custom color code exercise by type
 - close bottomSheet on save
+- user page Delete user actually delete
 
 
 # bugs
+- User logout not clearing state correctly
+- delete exercises. It works but throws an error.
 
 
 # Done
+- user page Login/Create
 - clear text to 0 when clicked
 - Correct Sum of LBS in summaries
 - Add SumTotal of lbs

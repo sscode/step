@@ -34,17 +34,22 @@ function ExerciseContextProvider({ children }) {
     const newExercise = {
       id: exercises.id,
       name: exercises.name,
+      color: exercises.color,
     };
     dispatch({ type: 'ADD_EXERCISE', payload: newExercise });
   }
 
   function editExercise(exerciseDetails) {
-    console.log('editExercise context :', exerciseDetails);
-    const { exerciseId, editedName, activeColor } = exerciseDetails;
+    // console.log('editExercise context :', exerciseDetails);
+    const { exerciseId, activeColor } = exerciseDetails;
     dispatch({
       type: 'EDIT_EXERCISE',
-      payload: { exerciseId, editedName, activeColor },
+      payload: { exerciseId, activeColor },
     });
+  }
+
+  function deleteExercise(exerciseId) {
+    dispatch({ type: 'DELETE_EXERCISE', payload: exerciseId.exerciseId });
   }
   
 
@@ -61,6 +66,7 @@ function ExerciseContextProvider({ children }) {
     addSet: addSet,
     clearSets: clearSets,
     addExercise: addExercise,
+    deleteExercise: deleteExercise,
     clearExercises: clearExercises,
     updateData: updateData,
     deleteSet: deleteSet,

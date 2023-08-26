@@ -51,6 +51,25 @@ export const addSetToFirebase = async (userId, set) => {
       console.error('Error editing exercise:', error);
     }
   };
+
+  export const deleteExerciseFromFirebase = async (userId, exerciseId) => {
+    try {
+      const response = await axios.delete(
+        `${baseURL}/users/${userId}/exercises/${exerciseId}.json`
+      );
+  
+      if (response.status === 200) {
+        console.log('Exercise deleted successfully:', exerciseId);
+        return true;
+      } else {
+        console.error('Error deleting exercise:', response);
+        return false;
+      }
+    } catch (error) {
+      console.error('Error deleting exercise:', error);
+      return false;
+    }
+  };
   
 
   export const getUserData = async (userId) => {

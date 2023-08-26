@@ -6,14 +6,17 @@ import { userContext } from '../../store/userContext';
 import PrimaryButton from '../../UI/PrimaryButton';
 
 function Logout({email}){
-    const { user, addUser } = useContext(userContext);
+    const { user, userLogout } = useContext(userContext);
     const navigation = useNavigation();
 
 
     const logoutHandler = async () => {
-        // console.log(userCtx.user[0].email)
-        addUser([]);
-        await AsyncStorage.setItem('isLoggedIn', 'false');
+        userLogout();
+
+        console.log('logout :', user)
+
+        await AsyncStorage.removeItem('isLoggedIn');
+
         navigation.navigate('login', { screen: 'login' });    }
 
     return( 

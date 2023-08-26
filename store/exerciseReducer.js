@@ -13,7 +13,7 @@ export function exerciseReducer(state, action) {
           if (exercise.id === action.payload.exerciseId) {
             return {
               ...exercise,
-              name: action.payload.editedName,
+              // name: action.payload.editedName,
               color: action.payload.activeColor,
             };
           }
@@ -22,7 +22,14 @@ export function exerciseReducer(state, action) {
         return {
           ...state,
           Exercises: editedExercises,
-        };      
+        };   
+    case 'DELETE_EXERCISE':
+    // console.log('action.payload :', action.payload);
+      const filteredExercises = state.Exercises.filter(
+        (exercise) => exercise.id !== action.payload
+      );
+      // console.log('filteredExercises :', filteredExercises);
+      return { ...state, Exercises: filteredExercises };   
     case 'CLEAR_EXERCISES':
         return { ...state, Exercises: [] };
     case 'UPDATE_DATA':

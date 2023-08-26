@@ -32,8 +32,9 @@ const NewWorkout = ({ navigation }) => {
   }, []);
 
   const handleAddExercise = async () => {
+    console.log('Adding exercise. ', activeColor);
     const newExerciseFirebaseId = await addExercise(userId, newExerciseName, activeColor);
-    exerciseCtx.addExercise({id: newExerciseFirebaseId, name: newExerciseName});
+    exerciseCtx.addExercise({id: newExerciseFirebaseId, name: newExerciseName, color: activeColor});
     setModalVisible(false);
     setNewExerciseName('');
   };

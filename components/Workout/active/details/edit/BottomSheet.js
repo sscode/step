@@ -4,8 +4,9 @@ import EditName from './EditName'
 import SetColor from './SetColor'
 import DeleteExercise from './DeleteExercise'
 import SaveExercise from './SaveExercise'
-import { editExercise } from '../../../../../util/firebase/http'
+import { deleteExerciseFromFirebase, editExercise } from '../../../../../util/firebase/http'
 import { ExerciseContext } from '../../../../../store/exerciseContext'
+import { useNavigation } from '@react-navigation/native'
 
 const {height} = Dimensions.get('window')
 
@@ -15,24 +16,44 @@ const BottomSheet = ({exerciseName, exerciseId, exerciseColor}) => {
     const userId = exerciseCtx.exerciseData.User.id
     const exercises = exerciseCtx.exerciseData.Exercises;
 
+    const navigation = useNavigation();
+
 
     const [activeColor, setActiveColor] = useState(exerciseColor);
     // const [editedName, setEditedName] = useState(exerciseName);
+
+    const navigateToList = () => {
+        navigation.navigate('NewWorkout', {screen: 'NewWorkout'})
+    }
 
 
     const saveHandler = async () => {
         try {
             //update firebase
-            await editExercise(userId, exerciseId, editedName, activeColor) 
+            await editExercise(userId, exerciseId, activeColor) 
             
             //call context
-            exerciseCtx.editExercise({exerciseId, editedName, activeColor})
+            exerciseCtx.editExercise({exerciseId, activeColor})
+            navigateToList()
         
         } catch (error) {
-            
+            console.log(error)
         }
-
     }
+
+    const deleteHandler = async () => {
+        try {
+            //update firebase
+            await deleteExerciseFromFirebase(userId, exerciseId)
+            //call context
+            exerciseCtx.deleteExercise({exerciseId})
+            navigateToList()
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 
   return (
     <View style={styles.container}>
@@ -48,7 +69,9 @@ const BottomSheet = ({exerciseName, exerciseId, exerciseColor}) => {
             setEditedName={setEditedName}
             /> */}
             <View style={styles.buttons}>
-                <DeleteExercise /> 
+                <DeleteExercise 
+                deleteHandler={deleteHandler}
+                /> 
                 <SaveExercise 
                 saveHandler={saveHandler}
                 />

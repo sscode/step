@@ -17,7 +17,7 @@
       ]
     ],
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/Splash-2.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
