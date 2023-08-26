@@ -6,15 +6,16 @@ import { userContext } from '../../store/userContext'
 import PrimaryButton from '../../UI/PrimaryButton'
 import { GlobalStyles } from '../../constants/styles'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ExerciseContext } from '../../store/exerciseContext'
 
 const LoginScreen = ({navigation = { navigate: () => {} }}) => {
-    const userCtx = useContext(userContext)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState('')
 
     const { addUser } = useContext(userContext);
+    const { updateUser } = useContext(ExerciseContext);
 
 
     useLayoutEffect(() => {
@@ -30,7 +31,11 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
 
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
+        //to userctx
         addUser(user);
+        //add user to workoutctx
+        updateUser(user.uid)
+        // console.log(user.uid)
         navigation.navigate('Feed', { screen: 'Feed' });
       }
     });

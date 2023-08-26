@@ -12,7 +12,7 @@ import WorkoutStyle from '../../components/Workout/active/WorkoutStyle';
 const NewWorkout = ({ navigation }) => {
 
   const exerciseCtx = useContext(ExerciseContext);
-  const userId = exerciseCtx.exerciseData.User.id
+  const userId = exerciseCtx.exerciseData.User
   const [toggleState, setToggleState] = useState(false);
     
   const exercises = exerciseCtx.exerciseData.Exercises;

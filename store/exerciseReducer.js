@@ -41,6 +41,9 @@ export function exerciseReducer(state, action) {
     case 'DELETE_SET':
         const filteredSets = state.Sets.filter((set) => set.id !== action.payload);
         return { ...state, Sets: filteredSets };
+    case 'UPDATE_USER':
+        // console.log('USER action.payload :', action.payload);
+        return { ...state, User: action.payload };
     default:
         return state;
     }

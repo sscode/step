@@ -5,7 +5,7 @@ export const ExerciseContext = createContext({
   exerciseData: {
     Sets: [],
     Exercises: [],
-    User: { id: 'Stuart' },
+    User: { id: '' },
   },
   getSetHistory: () => {},
   addNewSet: () => {},
@@ -15,7 +15,7 @@ function ExerciseContextProvider({ children }) {
   const [exerciseState, dispatch] = useReducer(exerciseReducer, {
     Sets: [],
     Exercises: [],
-    User: { id: 'stusim' },
+    // User: { id: 'stusim' },
   });
 
   function addSet(newSet) {
@@ -61,6 +61,10 @@ function ExerciseContextProvider({ children }) {
     dispatch({ type: 'UPDATE_DATA', payload: { exercises, sets } });
   }
 
+  function updateUser(userId) {
+    dispatch({ type: 'UPDATE_USER', payload: userId });
+  }
+
   const value = {
     exerciseData: exerciseState,
     addSet: addSet,
@@ -71,6 +75,7 @@ function ExerciseContextProvider({ children }) {
     updateData: updateData,
     deleteSet: deleteSet,
     editExercise: editExercise,
+    updateUser: updateUser,
   };
 
   return (

@@ -4,7 +4,7 @@ export function userReducer(state, action) {
         return [action.payload, ...state];
         
       case 'LOGOUT':
-        return []; // Clear user state on logout
+        return [];
   
       default:
         return state;

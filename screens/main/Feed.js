@@ -12,15 +12,15 @@ import { AntDesign } from '@expo/vector-icons';
 const Feed = ({ navigation }) => {
 
     const exerciseCtx = useContext(ExerciseContext);
-    const userId = exerciseCtx.exerciseData.User.id
+    const userId = exerciseCtx.exerciseData.User
+
+    console.log('Feed.js: ', userId);
     
     useEffect(() => {
-
         //header
         navigation.setOptions({
             headerShown: false,
         });
-
 
         const getData = async () => {
           console.log('Getting data.');

@@ -11,7 +11,7 @@ function userReducer(state, action) {
         case 'ADD':
             return [ action.payload, ...state];
         case 'LOGOUT':
-            return []; // Clear user state on logout
+            return []; 
         default:
             return state;
     }
@@ -31,7 +31,7 @@ function UserContextProvider({ children }) {
     const value = {
         user: userState,
         addUser: addUser,
-        userLogout: userLogout // Include the userLogout function in the value
+        userLogout: userLogout
     };
 
     return (
