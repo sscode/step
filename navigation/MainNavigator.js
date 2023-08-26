@@ -1,9 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import HeaderRight from './HeaderRight';
-import HeaderLeft from './HeaderLeft';
-
 import { GlobalStyles } from '../constants/styles';
 
 import Feed from '../screens/main/Feed';
@@ -13,6 +10,7 @@ import InExercise from '../components/Workout/active/InExercise';
 import WorkoutComplete from '../screens/main/WorkoutComplete';
 import MoreExerciseInfo from '../components/Workout/active/details/MoreExerciseInfo';
 import LoginScreen from '../screens/auth/LoginScreen';
+import UserScreen from '../screens/main/User';
 
 
 const Stack = createStackNavigator();
@@ -31,10 +29,13 @@ export const MainNavigator = () => {
                 name="Feed"
                 component={Feed}
             />
-            {/* <Stack.Screen
-                name="user"
-                component={UserScreen}
-            /> */}
+            <Stack.Screen
+            name={'User'}
+            component={UserScreen}
+            options={{ 
+                headerTransparent: true, 
+            }}
+            />
             <Stack.Screen
                 name="NewWorkout"
                 component={NewWorkout}

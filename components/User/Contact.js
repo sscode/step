@@ -9,7 +9,7 @@ function Contact(){
         <View style={styles.container}>
             <Text
             style={styles.text}
-            >For help, please contact admin@ergbase.com</Text>
+            >For help, please contact admin@proliftapp.com</Text>
         </View>
     )
 }

@@ -7,6 +7,7 @@ import { ExerciseContext } from '../../store/exerciseContext';
 import MainBG from '../../UI/MainBG';
 import PrimaryButton from '../../UI/PrimaryButton';
 import { getUserData } from '../../util/firebase/http';
+import { AntDesign } from '@expo/vector-icons';
 
 const Feed = ({ navigation }) => {
 
@@ -61,12 +62,25 @@ const Feed = ({ navigation }) => {
   const startNewWorkout = () => {
     navigation.navigate('NewWorkout');
   };
+
+  const openUser = () => {
+    navigation.navigate('User', { screen: 'User' })
+  };
   
   return (
     <MainBG>
       <View style={styles.container}>
-        <Logout />
-        <PrimaryButton title="New Workout" onPress={startNewWorkout} />
+        {/* <Logout /> */}
+        <View style={styles.headerContainer}>
+          <AntDesign 
+          onPress={openUser}
+          name="user" size={24} color="white" />
+          <View style={styles.buttonContainer}>
+            <PrimaryButton 
+            style={'green'}
+            title="New Workout" onPress={startNewWorkout} />
+          </View>
+        </View>
         <SummaryList />
       </View>
     </MainBG>
@@ -82,5 +96,16 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     backgroundColor: GlobalStyles.colors.lightGray,
     paddingTop: 48,
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    paddingHorizontal: 24,
+    // marginBottom: 24,
+  },
+  buttonContainer: {
+    width: '60%',
   },
 });

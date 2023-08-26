@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { userContext } from '../../store/userContext';
 import PrimaryButton from '../../UI/PrimaryButton';
 
-function Logout({email}){
+function DeleteUser({email}){
     const { user, addUser } = useContext(userContext);
     const navigation = useNavigation();
 
@@ -20,14 +20,14 @@ function Logout({email}){
         <View style={styles.container}>
             <PrimaryButton
             onPress={logoutHandler}
-            title={`Logout`}
-            style={'green'}
+            title={`Delete`}
+            style={'red'}
             />
         </View>
     )
 }
 
-export default Logout;
+export default DeleteUser;
 
 const styles = StyleSheet.create({
     container: {

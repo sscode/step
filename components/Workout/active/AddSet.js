@@ -26,6 +26,11 @@ const AddSet = ({exerciseName}) => {
 
 
   const addSetHandler = async () => {
+
+    if(reps === '0'){
+      return;
+    }
+
     const newSet = {
       exerciseName: exerciseName,
       lbs: parseFloat(weight),

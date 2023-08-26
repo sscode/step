@@ -23,7 +23,11 @@ const WorkoutComplete = ({ navigation }) => {
         <Text style={styles.title}>Workout Complete!</Text>
         <Text style={styles.subTitle}>{today}</Text>
         <TodayStats />
-        <PrimaryButton title="Go to Feed" onPress={() => navigation.navigate('Feed')} />
+        <View style={styles.buttonContainer}>
+          <PrimaryButton 
+          style={'green'}
+          title="Go to Feed" onPress={() => navigation.navigate('Feed')} />
+        </View>
         </View>
     </MainBG>
   );
@@ -48,7 +52,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginTop: 8,
     marginBottom: 32,
-  }
+  },
+  buttonContainer: {
+    width: '80%',
+    marginTop: 32,
+  },
 });
 
 export default WorkoutComplete;

@@ -14,6 +14,7 @@
 - lbs and weights correction (to weight) and include lbs & kilos
 - Correct time/date to timezone and not UTC-0
 - custom color code exercise by type
+- close bottomSheet on save
 
 
 # bugs

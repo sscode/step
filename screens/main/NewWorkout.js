@@ -72,15 +72,22 @@ const NewWorkout = ({ navigation }) => {
     <MainBG>
         <View style={styles.container}>
         <View style={styles.buttonsContainer}>
-            <PrimaryButton title={'Add Exercise'} onPress={() => setModalVisible(true)} />
+            <PrimaryButton 
+            style={'green'}
+            title={'Add Exercise'} onPress={() => setModalVisible(true)} />
         </View>
         <View style={styles.toggleContainer}>
           {/* <WorkoutStyle toggleState={toggleState} setToggleState={setToggleState}/> */}
         </View>
-        <ExerciseList exercises={exercises} toggleExercise={toggleExercise} selectedExercisesIds={selectedExercisesIds} />
+        <View style={styles.exerciseContainer}>
+          <ExerciseList exercises={exercises} toggleExercise={toggleExercise} selectedExercisesIds={selectedExercisesIds} />
+        </View>
+
         <View style={styles.buttonsContainer}>
             {/* <PrimaryButton title={'Set Order'} onPress={setOrder} style={styles.setOrderButton} /> */}
-            <PrimaryButton title={'Share Workout'} onPress={endWorkout} style={styles.setOrderButton} />
+            <PrimaryButton 
+            style={'green'}
+            title={'Share Workout'} onPress={endWorkout} />
         </View>
         <AddExerciseModal 
         visible={modalVisible} 
@@ -101,6 +108,9 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       paddingTop: 96,
+      alignItems: 'center',
+      justifyContent: 'center',
+
     },
     mainBg: {
       position: 'absolute',
@@ -114,6 +124,12 @@ const styles = StyleSheet.create({
     buttonsContainer: {
       flexDirection: 'row',
       justifyContent: 'center',
+      width: '80%',
+      marginBottom: 20,
+    },
+    exerciseContainer: {
+      flex: 1,
+      width: '90%',
       marginBottom: 20,
     },
     button: {
