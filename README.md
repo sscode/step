@@ -2,6 +2,7 @@
 
 # Need to launch
 
+
 # Improvements
 - edite name of exercise without losing history. Get history by ID and not by name.
 - edit time of exercise
@@ -16,6 +17,7 @@
 
 
 # bugs
+- weird email autocorrect on email signup
 - User logout not clearing state correctly
 - delete exercises. It works but throws an error.
 

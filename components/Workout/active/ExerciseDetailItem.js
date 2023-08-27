@@ -9,7 +9,7 @@ import { deleteSetFromFirebase } from '../../../util/firebase/http';
 
 const ExerciseDetailItem = ({ item }) => {
   const exerciseCtx = useContext(ExerciseContext);
-  const userId = exerciseCtx.exerciseData.User.id;
+  const user = exerciseCtx.exerciseData.User;
   const { deleteSet }  = exerciseCtx;
 
 
@@ -23,7 +23,7 @@ const ExerciseDetailItem = ({ item }) => {
       if (event.translationX < -100) {
         translateX.value = withSpring(0);
         // deleteHandler();
-        runOnJS(deleteSetFromFirebase)(userId, item.id)
+        runOnJS(deleteSetFromFirebase)(user, item.id)
         runOnJS(deleteSet)(item.id);
         console.log('delete set ', item.id);
       } else {
@@ -42,7 +42,7 @@ const ExerciseDetailItem = ({ item }) => {
     const unsubscribe = () => {
       if (translateX.value < -100) {
         console.log('delete set ', item.id);
-        deleteSetFromFirebase(userId, item.id).then((success) => {
+        deleteSetFromFirebase(user, item.id).then((success) => {
           if (success) {
             // Set the translation back to 0 if the deletion is successful
             translateX.value = withSpring(0);
@@ -51,7 +51,7 @@ const ExerciseDetailItem = ({ item }) => {
       }
     };
     return unsubscribe;
-  }, [userId, item.id, translateX]);
+  }, [user, item.id, translateX]);
 
   return (
     <PanGestureHandler onGestureEvent={panGesture}>

@@ -4,6 +4,7 @@ import { userContext } from '../../store/userContext';
 
 const baseURL = `${process.env.REACT_APP_FIREBASE_databaseURL}`;
 
+
 export const addSetToFirebase = async (userId, set) => {
     try {
       const response = await axios.post(
@@ -25,6 +26,7 @@ export const addSetToFirebase = async (userId, set) => {
   };
   
   export const addExercise = async (userId, exerciseName, activeColor) => {
+    console.log('addExercise :', userId, exerciseName, activeColor);
     try {
       const response = await axios.post(
         `${baseURL}/users/${userId}/exercises.json`,

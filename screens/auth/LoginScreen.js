@@ -35,7 +35,7 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
         addUser(user);
         //add user to workoutctx
         updateUser(user.uid)
-        // console.log(user.uid)
+        // console.log(user.email)
         navigation.navigate('Feed', { screen: 'Feed' });
       }
     });
@@ -68,6 +68,7 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
     
         // Save user's login status
         await AsyncStorage.setItem('isLoggedIn', 'true');
+        await AsyncStorage.setItem('email', email);
     
         // Update user context with logged-in user
         addUser(userCredential.user);

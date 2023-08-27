@@ -12,9 +12,9 @@ import { AntDesign } from '@expo/vector-icons';
 const Feed = ({ navigation }) => {
 
     const exerciseCtx = useContext(ExerciseContext);
-    const userId = exerciseCtx.exerciseData.User
+    const user = exerciseCtx.exerciseData.User
 
-    console.log('Feed.js: ', userId);
+    console.log('Feed.js: ', user);
     
     useEffect(() => {
         //header
@@ -24,7 +24,7 @@ const Feed = ({ navigation }) => {
 
         const getData = async () => {
           console.log('Getting data.');
-          const data = await getUserData(userId);
+          const data = await getUserData(user);
           const exercisesArray = [];
           const setsArray = [];
     

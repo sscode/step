@@ -44,6 +44,12 @@ export function exerciseReducer(state, action) {
     case 'UPDATE_USER':
         // console.log('USER action.payload :', action.payload);
         return { ...state, User: action.payload };
+    case 'RESET_CONTEXT':
+      return {
+        Sets: [],
+        Exercises: [],
+        User: { email: '' },
+      };
     default:
         return state;
     }

@@ -5,7 +5,6 @@ import { userContext } from '../../store/userContext';
 
 function Profile({email}){
 
-
     return( 
         <View style={styles.container}>
             <View>

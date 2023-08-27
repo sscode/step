@@ -12,7 +12,7 @@ import WorkoutStyle from '../../components/Workout/active/WorkoutStyle';
 const NewWorkout = ({ navigation }) => {
 
   const exerciseCtx = useContext(ExerciseContext);
-  const userId = exerciseCtx.exerciseData.User
+  const user = exerciseCtx.exerciseData.User
   const [toggleState, setToggleState] = useState(false);
     
   const exercises = exerciseCtx.exerciseData.Exercises;
@@ -32,8 +32,8 @@ const NewWorkout = ({ navigation }) => {
   }, []);
 
   const handleAddExercise = async () => {
-    console.log('Adding exercise. ', activeColor);
-    const newExerciseFirebaseId = await addExercise(userId, newExerciseName, activeColor);
+    console.log('Adding exercise. ', user, newExerciseName, activeColor);
+    const newExerciseFirebaseId = await addExercise(user, newExerciseName, activeColor);
     exerciseCtx.addExercise({id: newExerciseFirebaseId, name: newExerciseName, color: activeColor});
     setModalVisible(false);
     setNewExerciseName('');

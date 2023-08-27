@@ -6,7 +6,9 @@ import { addSetToFirebase } from '../../../util/firebase/http';
 
 const AddSet = ({exerciseName}) => {
   const exerciseCtx = useContext(ExerciseContext);
-  const userId = exerciseCtx.exerciseData.User.id;
+  const user = exerciseCtx.exerciseData.User;
+
+  console.log('AddSet.js: ', user);
 
   //filter to get sets for current exercise
   const setsForCurrentExercise = exerciseCtx.exerciseData.Sets.filter(
@@ -39,7 +41,7 @@ const AddSet = ({exerciseName}) => {
     };
     
     // Add to firebase
-    const newSetFirebaseId = await addSetToFirebase(userId, newSet);
+    const newSetFirebaseId = await addSetToFirebase(user, newSet);
     const newSetWithId = { ...newSet, id: newSetFirebaseId.name };
     
     // Add to context

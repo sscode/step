@@ -5,7 +5,7 @@ export const ExerciseContext = createContext({
   exerciseData: {
     Sets: [],
     Exercises: [],
-    User: { id: '' },
+    User: { email: '' },
   },
   getSetHistory: () => {},
   addNewSet: () => {},
@@ -65,6 +65,12 @@ function ExerciseContextProvider({ children }) {
     dispatch({ type: 'UPDATE_USER', payload: userId });
   }
 
+  function resetContext() {
+    dispatch({ type: 'RESET_CONTEXT' });
+  }
+  
+
+
   const value = {
     exerciseData: exerciseState,
     addSet: addSet,
@@ -76,6 +82,7 @@ function ExerciseContextProvider({ children }) {
     deleteSet: deleteSet,
     editExercise: editExercise,
     updateUser: updateUser,
+    resetContext: resetContext,
   };
 
   return (
