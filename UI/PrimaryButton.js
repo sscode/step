@@ -34,6 +34,7 @@ const PrimaryButton = ({ title, onPress, disabled, small, style }) => {
         isPressed && styles.longPressStyle,
         style === 'red' && styles.redButton,
         style === 'green' && styles.greenButton,
+        style === 'greenDark' && styles.greenDarkButton,
       ]}
       onPressIn={pressAnimation}
       onPress={onPress}
@@ -57,7 +58,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     padding: 10,
-    marginVertical: 20,
     borderWidth: 2,
     borderRadius: 10,
   },
@@ -66,8 +66,12 @@ const styles = StyleSheet.create({
     borderColor: GlobalStyles.colors.red500,
   },
   greenButton: {
-    backgroundColor: GlobalStyles.colors.primary700,
-    borderColor: GlobalStyles.colors.primary500,
+    backgroundColor: GlobalStyles.colors.primary50,
+    borderColor: GlobalStyles.colors.primary,
+  },
+  greenDarkButton: {
+    backgroundColor: GlobalStyles.colors.primary100,
+    borderColor: GlobalStyles.colors.primary,
   },
   smallButton: {
     width: '20%',

@@ -14,6 +14,8 @@
 - custom color code exercise by type
 - close bottomSheet on save
 - user page Delete user actually delete
+- Login Page Paper BG
+- Login Page focus fields for text
 
 
 # bugs

@@ -7,6 +7,7 @@ import PrimaryButton from '../../UI/PrimaryButton'
 import { GlobalStyles } from '../../constants/styles'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ExerciseContext } from '../../store/exerciseContext'
+import LoginHero from './LoginHero'
 
 const LoginScreen = ({navigation = { navigate: () => {} }}) => {
     const [email, setEmail] = useState('')
@@ -79,8 +80,6 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
         setError(error.message.replace('Firebase:', ''));
       }
     };
-    
-    
   
     const clearError = () => {
       setPassword('');
@@ -88,28 +87,27 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
     }
   
     return (
-      <ImageBackground
-        source={require('../../assets/bg1-splash.png')} 
-        style={styles.image}>
       <KeyboardAvoidingView style={styles.container}>
-        
+        <LoginHero />
         <View style={styles.inputContainer}>
-          <TextInput
-            value={email}
-            keyboardType='email-address'
-            placeholder='Email'
-            style={styles.input}
-            placeholderTextColor= '#f0f0f057'
-            onChangeText={setEmail}
-            onFocus={clearError}
-          />
-  
+          <View style={styles.emailInput}>
+            <TextInput
+              value={email}
+              keyboardType='email-address'
+              placeholder='Email'
+              style={styles.input}
+              placeholderTextColor= {GlobalStyles.colors.grey100}
+              onChangeText={setEmail}
+              onFocus={clearError}
+            />
+          </View>
+
           <TextInput
             value={password}
             placeholder='Password'
             secureTextEntry
             style={styles.input}
-            placeholderTextColor= '#f0f0f057'
+            placeholderTextColor= {GlobalStyles.colors.grey100}
             onChangeText={setPassword}
             onFocus={clearError}
           />
@@ -122,63 +120,57 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
             style={'green'}
             mode='full'
             isLoading={isLoading}
-            onPress={handleLogin}
+            // onPress={handleLogin}
             title='Login'
           />
-          
           <PrimaryButton
-            style={'green'}
+            style={'greenDark'}
             mode='flat'
             isLoading={isLoading}
-            onPress={handleSignup}
+            // onPress={handleSignup}
             title='Register'
           />
         </View>
         </KeyboardAvoidingView>
-      </ImageBackground>
     )
   }
 
 export default LoginScreen
 
 const styles = StyleSheet.create({
-    image: {
-        flex: 1,
-        resizeMode: "cover",
-        width: '100%',
-        height: '100%',
-      },
     container: {
         flex: 1,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: GlobalStyles.colors.primary500,
+        backgroundColor: GlobalStyles.colors.grey,
     },
     inputContainer: {
-        width: '60%',
+        width: '80%',
+        marginTop: 48,
+        borderWidth: 1,
+        borderColor: GlobalStyles.colors.grey100,
+        borderRadius: 8,
     },
     input: {
-        // backgroundColor: GlobalStyles.colors.white,
-        color: GlobalStyles.colors.white,
+        color: GlobalStyles.colors.black,
+        fontWeight: 'bold',
         paddingVertical: 12,
         paddingHorizontal: 24,
-        borderWidth: 1,
-        borderColor: GlobalStyles.colors.gray200,
-        borderRadius: 50,
-        marginVertical: 8,
-
+    },
+    emailInput: {
+      borderBottomWidth: 1,
+      borderBottomColor: GlobalStyles.colors.grey100,
     },
     buttonContainer: {
-        width: '60%',
         marginVertical: 24,
+        width: '80%',
+        height: 100,
         display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        // backgroundColor: GlobalStyles.colors.primary500,
+        justifyContent: 'space-between',
     },
     buttons: {
-        marginVertical: 8,
+        marginBottom: 12,
     },
     error: {
         color: GlobalStyles.colors.error500,
