@@ -120,14 +120,14 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
             style={'green'}
             mode='full'
             isLoading={isLoading}
-            // onPress={handleLogin}
+            onPress={handleLogin}
             title='Login'
           />
           <PrimaryButton
             style={'greenDark'}
             mode='flat'
             isLoading={isLoading}
-            // onPress={handleSignup}
+            onPress={handleSignup}
             title='Register'
           />
         </View>

@@ -9,10 +9,10 @@ export const GlobalStyles = {
     red500: '#d84242',
     grey: '#EEF1F3',
     grey100: '#A1A8AC',
-    gray200: '#ffffff78',
-    gray400: '#b2afb9',
-    gray500: '#39324a',
-    gray700: '#110e17',
+    grey200: '#ffffff78',
+    grey400: '#b2afb9',
+    grey500: '#39324a',
+    grey700: '#110e17',
     black: '#252525',
 
     // Swatch colors

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { Modal, View, Text, TextInput, Button, TouchableOpacity, StyleSheet } from 'react-native';
 import { GlobalStyles } from '../../../constants/styles';
 import ColorSwatch from '../../../UI/ColorSwatch';
 
@@ -35,9 +35,12 @@ const AddExerciseModal = ({ visible, onAdd, onCancel, onChangeText, value, activ
             autoFocus={true}
           />
           <View style={styles.modalButtons}>
-            <Button onPress={onCancel} title="Cancel" color={GlobalStyles.colors.gray700} />
-            <Button
-            onPress={addHandler} title="Add" color={GlobalStyles.colors.primary500} />
+            <TouchableOpacity onPress={onCancel} style={styles.cancelButton}>
+                <Text style={styles.buttonTextCancel}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={addHandler} style={styles.addButton}>
+                <Text style={styles.buttonTextAdd}>Add</Text>
+              </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -62,21 +65,56 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
-    color: GlobalStyles.colors.gray500,
+    textAlign: 'center',
+    color: GlobalStyles.colors.grey500,
   },
   modalInput: {
     borderWidth: 1,
-    borderColor: GlobalStyles.colors.gray500,
-    borderRadius: 5,
+    borderColor: GlobalStyles.colors.grey100,
+    borderRadius: 3,
     paddingHorizontal: 10,
-    paddingVertical: 5,
-    marginTop: 16,
+    paddingVertical: 10,
+    marginTop: 25,
     marginBottom: 16,
-    color: GlobalStyles.colors.gray500,
+    backgroundColor: GlobalStyles.colors.grey,
+    color: GlobalStyles.colors.grey500,
+    fontWeight: 'bold',
   },
   modalButtons: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  addButton: {
+    width: '30%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: GlobalStyles.colors.primary,
+    borderRadius: 3,
+    paddingVertical: 10,
+
+
+  },
+  cancelButton: {
+    width: '30%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontWeight: 'bold',
+    borderRadius: 3,
+    paddingVertical: 10,
+    borderColor: GlobalStyles.colors.grey100,
+    borderWidth: 1,
+  },
+  buttonTextAdd: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: GlobalStyles.colors.white,
+  },
+  buttonTextCancel: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: GlobalStyles.colors.grey100,
   },
 });
 
