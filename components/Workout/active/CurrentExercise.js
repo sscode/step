@@ -66,6 +66,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: GlobalStyles.colors.black,
   },
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+    color: GlobalStyles.colors.white,
+  },
 });
 
 export default CurrentExercise;

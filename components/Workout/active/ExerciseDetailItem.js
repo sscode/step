@@ -53,10 +53,12 @@ const ExerciseDetailItem = ({ item }) => {
     return unsubscribe;
   }, [user, item.id, translateX]);
 
+  const time = getShortDateAndTime(item.date).time;
+
   return (
     <PanGestureHandler onGestureEvent={panGesture}>
       <Animated.View style={[styles.row, animatedStyle]}>
-        <Text style={styles.rowText}>{getShortDateAndTime(item.date).time}</Text>
+        <Text style={styles.rowText}>{time}</Text>
         <Text style={styles.rowText}>{item.reps}</Text>
         <Text style={styles.rowText}>{item.lbs}</Text>
       </Animated.View>
