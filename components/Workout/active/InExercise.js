@@ -20,6 +20,8 @@ const InExercise = ({ navigation, route }) => {
   const exerciseId = route.params.exerciseId;
   const exerciseColor = route.params.exerciseColor;
 
+  console.log("Going to this exercice")
+
   //header
   useEffect(() => {
     navigation.setOptions({

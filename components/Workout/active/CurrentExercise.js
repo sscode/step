@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     color: GlobalStyles.colors.black,
-  },å
+  },
 });
 
 export default CurrentExercise;
