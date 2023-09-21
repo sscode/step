@@ -15,9 +15,17 @@ const CurrentExercise = ({ setsForCurrentExercise }) => {
     set.data.sort((a, b) => new Date(b.date) - new Date(a.date));
   });
 
-  const renderSet = ({ item }) => (
-    <ExerciseDetailItem key={item.id} item={item}/>
-  );
+
+  const renderSet = ({ item, section }) => {
+    const isLastSetInSection = section.data.indexOf(item) === section.data.length - 1;
+
+    return (
+      <>
+        <ExerciseDetailItem key={item.id} item={item} />
+        {isLastSetInSection && <View style={styles.lastSection} />}
+      </>
+    );
+  };
 
   const SectionHeader = ({ section }) => (
     <View style={styles.sectionHeader}>
@@ -55,6 +63,8 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingHorizontal: 15,
     backgroundColor: GlobalStyles.colors.grey,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
   },
   sectionHeaderContainer: {
     flexDirection: 'row',
@@ -64,6 +74,7 @@ const styles = StyleSheet.create({
   sectionHeaderText: {
     fontSize: 25,
     fontWeight: 'bold',
+    marginBottom: 10,
     color: GlobalStyles.colors.black,
   },
   item: {
@@ -71,6 +82,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: 44,
     color: GlobalStyles.colors.white,
+  },
+  lastSection: {
+    paddingBottom: 10,
+    marginBottom: 15,
+    backgroundColor: GlobalStyles.colors.grey,
+    borderBottomRightRadius: 8,
+    borderBottomLeftRadius: 8,
   },
 });
 

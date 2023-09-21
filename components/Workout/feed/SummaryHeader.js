@@ -4,11 +4,15 @@ import { GlobalStyles } from '../../../constants/styles';
 
 const SummaryHeader = ({ date, reps, lbs }) => {
   const dateString = new Date(date).toLocaleDateString();
+  const day = new Date(date).toLocaleDateString('en-US', { weekday: 'long' });
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Summary for {dateString}</Text>
+        <View style={styles.headerTextContainer} >
+          <Text style={styles.headerText}>{day}</Text>
+          <Text style={styles.headerText}>{dateString}</Text>
+        </View>
         <View style={styles.subHeader}>
           <Text style={styles.subHeaderText}>Reps: {reps}</Text>
           <Text style={styles.subHeaderText}>lbs: {lbs}</Text>
@@ -21,31 +25,35 @@ const SummaryHeader = ({ date, reps, lbs }) => {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
     marginBottom: 16,
-    borderBottomColor: GlobalStyles.colors.primary500,
+    borderBottomColor: GlobalStyles.colors.primary,
     borderBottomWidth: 1,
   },
   header: {
-    backgroundColor: '#FFF',
-    borderRadius: 10,
-    padding: 16,
+    // borderRadius: 10,
+    paddingHorizontal: 8,
+    paddingVertical: 8,
+  },
+  headerTextContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   headerText: {
     fontSize: 24,
     fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#333',
+    // textAlign: 'center',
+    color: GlobalStyles.colors.black,
   },
   subHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 8,
+    marginTop: 16,
   },
   subHeaderText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: GlobalStyles.colors.gray400,
+    color: GlobalStyles.colors.grey100,
   },
 });
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { GlobalStyles } from '../../../constants/styles';
 
 const SubHeader = () => {
   return (
@@ -23,8 +24,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 16,
-    paddingRight: 16,
+    paddingHorizontal: 8,
     paddingTop: 8,
     paddingBottom: 8,
   },
@@ -40,15 +40,16 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#333',
     textAlign: 'right',
+    color: GlobalStyles.colors.black,
   },
-    headerTextLeft: {
+  headerTextLeft: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#333',
     textAlign: 'left',
+    color: GlobalStyles.colors.black,
     },
+
   statItem: {
     alignItems: 'flex-end',
     marginLeft: 20,
