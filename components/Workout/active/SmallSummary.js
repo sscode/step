@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { GlobalStyles } from '../../../constants/styles';
 
 const SmallSummary = ({ sets }) => {
   const totalSets = sets.length;
@@ -23,15 +24,15 @@ const styles = StyleSheet.create({
   summaryContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: '#fff',
+    backgroundColor: GlobalStyles.colors.grey,
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderBottomWidth: 1,
-    borderColor: '#ddd',
+    borderColor: GlobalStyles.colors.primary,
   },
   summaryText: {
     fontSize: 14,
-    color: '#333',
+    color: GlobalStyles.colors.grey500,
   },
 });
 

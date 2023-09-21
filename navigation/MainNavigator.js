@@ -19,7 +19,8 @@ export const MainNavigator = () => {
 
     return (
         <Stack.Navigator
-        screenOptions={{headerTintColor: GlobalStyles.colors.primary500}}
+        screenOptions={{
+            headerTintColor: GlobalStyles.colors.white}}
         >
             <Stack.Screen
                 name="login"

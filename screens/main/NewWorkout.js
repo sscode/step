@@ -22,14 +22,14 @@ const NewWorkout = ({ navigation }) => {
   const [newExerciseName, setNewExerciseName] = useState('');
   const [activeColor, setActiveColor] = useState('');
 
-  useEffect(() => {
-    //header
-    navigation.setOptions({
-      headerShown: true,
-      headerTransparent: true,
-      headerTitle: '',
-    });
-  }, []);
+  // useEffect(() => {
+  //   //header
+  //   navigation.setOptions({
+  //     headerShown: true,
+  //     headerTransparent: true,
+  //     headerTitle: '',
+  //   });
+  // }, []);
 
   const handleAddExercise = async () => {
     console.log('Adding exercise. ', user, newExerciseName, activeColor);
@@ -111,7 +111,6 @@ const styles = StyleSheet.create({
       paddingTop: 96,
       alignItems: 'center',
       justifyContent: 'center',
-
     },
     mainBg: {
       position: 'absolute',
