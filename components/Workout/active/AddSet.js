@@ -53,7 +53,6 @@ const AddSet = ({exerciseName}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.innerContainer}>
         <View style={styles.inputForm}>
           <View style={styles.inputContainer}>
             <Text style={styles.inputHeader}>Reps</Text>
@@ -66,10 +65,10 @@ const AddSet = ({exerciseName}) => {
               keyboardType="numeric"
               maxLength={3}
               onFocus={() => setReps('')}
-            />
+              />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputHeader}>Weight (lbs)</Text>
+            <Text style={styles.inputHeader}>Weight</Text>
             <TextInput
               style={styles.input}
               placeholder={weight}
@@ -79,13 +78,12 @@ const AddSet = ({exerciseName}) => {
               keyboardType="numeric"
               maxLength={3}
               onFocus={() => setWeight('')}
-            />
+              />
           </View>
         </View>
         <TouchableOpacity style={styles.repeatAddButton} onPress={addSetHandler}>
           <Text style={styles.buttonText}>Add Set</Text>
         </TouchableOpacity>
-      </View>
     </View>
   );
 };
@@ -95,52 +93,48 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     paddingVertical: 16,
-  },
-  innerContainer: {
-    paddingVertical: 16,
-    width: 230,
-    borderColor: GlobalStyles.colors.primary500,
+    // backgroundColor: GlobalStyles.colors.primary,
   },
   inputForm: {
+    left: -5,
+    width: '50%',
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    borderColor: GlobalStyles.colors.primary500,
+    // backgroundColor: GlobalStyles.colors.primary100,
+  },
+  inputContainer: {
+    marginVertical: 16,
+    width: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: 'red',
   },
   inputHeader: {
     color: GlobalStyles.colors.white,
-    fontSize: 8,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  inputContainer: {
-    // borderWidth: 2,
-    // borderColor: GlobalStyles.colors.primary500,
-    // borderRadius: 5,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    // width: '100%',
+    fontSize: 12,
+    // fontWeight: 'small',
   },
   input: {
     paddingVertical: 8,
     textAlign: 'center',
     color: GlobalStyles.colors.white,
-    fontSize: 24,
+    fontSize: 36,
     fontWeight: 'bold',
   },
   repeatAddButton: {
-    width: '100%',
+    width: '70%',
     paddingVertical: 16,
     borderRadius: 5,
-    borderColor: GlobalStyles.colors.primary500,
-    borderWidth: 2,
-    backgroundColor: GlobalStyles.colors.black,
+    borderColor: GlobalStyles.colors.primary,
+    borderWidth: 3,
+    backgroundColor: GlobalStyles.colors.primary50,
     justifyContent: 'center',
     alignItems: 'center',
     elevation: 2,
   },
   buttonText: {
-    fontSize: 18,
-    color: GlobalStyles.colors.primary500,
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: GlobalStyles.colors.white,
   },
 });
 

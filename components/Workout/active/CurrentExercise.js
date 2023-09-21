@@ -23,7 +23,10 @@ const CurrentExercise = ({ setsForCurrentExercise }) => {
     <View style={styles.sectionHeader}>
       {section && section.date && (
         <>
-          <Text style={styles.sectionHeaderText}>{section.date}</Text>
+          <View style={styles.sectionHeaderContainer}>
+            <Text style={styles.sectionHeaderText}>{new Date(section.date).toLocaleDateString('en-US', { weekday: 'long' })}</Text>
+            <Text style={styles.sectionHeaderText}>{new Date(section.date).toLocaleDateString('en-US')}</Text>
+          </View>
           <SmallSummary sets={section.data} />
         </>
       )}
@@ -45,26 +48,24 @@ const CurrentExercise = ({ setsForCurrentExercise }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: GlobalStyles.colors.white,
-    // borderRadius: 5,
   },
   sectionHeader: {
     flexDirection: 'column',
     justifyContent: 'space-between',
     paddingTop: 20,
     paddingHorizontal: 15,
-    backgroundColor: GlobalStyles.colors.white,
+    backgroundColor: GlobalStyles.colors.grey,
+  },
+  sectionHeaderContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   sectionHeaderText: {
-    fontSize: 16,
+    fontSize: 25,
     fontWeight: 'bold',
     color: GlobalStyles.colors.black,
-    // borderRadius: 5,
-  },
-  separator: {
-    height: 1,
-    backgroundColor: '#ddd',
-  },
+  },å
 });
 
 export default CurrentExercise;

@@ -71,12 +71,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: GlobalStyles.colors.white,
+        backgroundColor: GlobalStyles.colors.grey,
         paddingVertical: 8,
-        marginHorizontal: 15,
-        // borderRadius: 5,
-        borderBottomColor: '#ddd',
-        borderBottomWidth: 1,
       },
       rowText: {
         fontSize: 14,
