@@ -22,6 +22,7 @@
 - weird email autocorrect on email signup
 - User logout not clearing state correctly
 - delete exercises. It works but throws an error.
+- deleted exercises still appear on homepage.
 
 
 # Done

@@ -4,6 +4,7 @@ import { GlobalStyles } from '../../../constants/styles';
 import { getShortDateAndTime, groupSetsByDate } from '../../../util/date';
 import ExerciseDetailItem from './ExerciseDetailItem';
 import SmallSummary from './SmallSummary';
+import moment from 'moment-timezone';
 
 const CurrentExercise = ({ setsForCurrentExercise }) => {
 
@@ -27,19 +28,28 @@ const CurrentExercise = ({ setsForCurrentExercise }) => {
     );
   };
 
-  const SectionHeader = ({ section }) => (
-    <View style={styles.sectionHeader}>
-      {section && section.date && (
-        <>
-          <View style={styles.sectionHeaderContainer}>
-            <Text style={styles.sectionHeaderText}>{new Date(section.date).toLocaleDateString('en-US', { weekday: 'long' })}</Text>
-            <Text style={styles.sectionHeaderText}>{new Date(section.date).toLocaleDateString('en-US')}</Text>
-          </View>
-          <SmallSummary sets={section.data} />
-        </>
-      )}
-    </View>
-  );
+  const SectionHeader = ({ section }) => {
+    
+    // Specify the desired time zone
+    // const timeZone = 'America/New_York';
+    const dateMoment = moment(section.date);
+    const dayOfWeek = dateMoment.format('dddd');
+    const formattedDate = dateMoment.format('MM/DD/YYYY');
+
+    return(
+      <View style={styles.sectionHeader}>
+        {section && section.date && (
+          <>
+            <View style={styles.sectionHeaderContainer}>
+              <Text style={styles.sectionHeaderText}>{dayOfWeek}</Text>
+              <Text style={styles.sectionHeaderText}>{formattedDate}</Text>
+            </View>
+            <SmallSummary sets={section.data} />
+          </>
+        )}
+      </View>
+    )
+  };
 
   return (
     <View style={styles.container}>

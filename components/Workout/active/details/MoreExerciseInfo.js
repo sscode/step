@@ -4,6 +4,7 @@ import MainBG from '../../../../UI/MainBG';
 import BottomSheet from './edit/BottomSheet';
 import { AntDesign } from '@expo/vector-icons';
 import { GlobalStyles } from '../../../../constants/styles';
+import Stats from './stats/Stats';
 
 const MoreExerciseInfo = ({ route }) => {
   const { exerciseName } = route.params;
@@ -23,6 +24,9 @@ const MoreExerciseInfo = ({ route }) => {
           <TouchableOpacity onPress={handleEditButtonPress}>
             <AntDesign name="edit" size={24} color="white" />
           </TouchableOpacity>
+        </View>
+        <View style={styles.body}>
+          <Stats exerciseName={exerciseName} />
         </View>
         {bottomSheetVisible && 
         <BottomSheet 
@@ -54,4 +58,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: GlobalStyles.colors.white,
   },
+  body: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  }
 });

@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     paddingHorizontal: 24,
-    // marginBottom: 24,
+    marginBottom: 12,
   },
   buttonContainer: {
     width: '60%',

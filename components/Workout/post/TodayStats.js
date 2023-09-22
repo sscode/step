@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { GlobalStyles } from '../../../constants/styles';
 import { ExerciseContext } from '../../../store/exerciseContext';
 import ExerciseStats from './ExerciseStats';
 
@@ -64,7 +65,7 @@ const TodayStats = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: GlobalStyles.colors.grey,
     paddingVertical: 24,
     paddingHorizontal: 24,
     borderRadius: 10,

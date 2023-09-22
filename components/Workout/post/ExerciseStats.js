@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { GlobalStyles } from '../../../constants/styles';
 
 const ExerciseStats = ({ exerciseName, totalReps, totalLbs }) => (
   <View style={styles.exerciseStats}>
@@ -20,12 +21,12 @@ const styles = StyleSheet.create({
   exerciseName: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#333333',
+    color: GlobalStyles.colors.black,
     marginBottom: 6,
   },
   statText: {
     fontSize: 12,
-    color: '#828282',
+    color: GlobalStyles.colors.grey100,
   },
 });
 

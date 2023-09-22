@@ -44,11 +44,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: GlobalStyles.colors.primary500,
+    color: GlobalStyles.colors.primary,
   },
   subTitle: {
     fontWeight: 'bold',
-    color: GlobalStyles.colors.primary500,
+    color: GlobalStyles.colors.primary,
     fontSize: 14,
     marginTop: 8,
     marginBottom: 32,

@@ -21,6 +21,7 @@
     "expo-status-bar": "~1.4.2",
     "firebase": "^9.17.2",
     "install": "^0.13.0",
+    "moment-timezone": "^0.5.43",
     "react": "18.1.0",
     "react-native": "^0.70.8",
     "react-native-dotenv": "^3.4.8",

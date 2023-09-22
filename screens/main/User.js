@@ -6,6 +6,7 @@ import DeleteUser from '../../components/User/Delete';
 import Logout from '../../components/User/Logout';
 import Profile from '../../components/User/Profile';
 import { userContext } from '../../store/userContext';
+import MainBG from '../../UI/MainBG';
 
 function UserScreen({ navigation }) {
     const userCtx = useContext(userContext);
@@ -17,9 +18,7 @@ function UserScreen({ navigation }) {
     }, [userCtx.user]);
 
     return (
-        <ImageBackground
-            source={require('../../assets/bg-user.png')}
-            style={styles.image}
+        <MainBG
         >
             <View style={styles.container}>
                 <Profile email={userEmail} />
@@ -31,7 +30,7 @@ function UserScreen({ navigation }) {
                     <Contact />
                 </View>
             </View>
-        </ImageBackground>
+        </MainBG>
     );
 }
 
