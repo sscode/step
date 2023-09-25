@@ -1,11 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import TodayStats from '../../components/Workout/post/TodayStats';
 import { GlobalStyles } from '../../constants/styles';
 import MainBG from '../../UI/MainBG';
 import PrimaryButton from '../../UI/PrimaryButton';
+import ConfettiCannon from 'react-native-confetti-cannon';
+
 
 const WorkoutComplete = ({ navigation }) => {
+
+    const [showConfetti, setShowConfetti] = useState(false);
+
 
     // Hide the back button in the header
     useEffect(() => {
@@ -13,9 +18,15 @@ const WorkoutComplete = ({ navigation }) => {
             headerLeft: null,
             headerShown: false,
         });
+        setShowConfetti(true);
         }, []);
 
       const today = new Date().toLocaleDateString();
+
+      const handleAnimationEnd = () => {
+        setShowConfetti(false);
+      };
+      
 
   return (
     <MainBG>
@@ -29,6 +40,19 @@ const WorkoutComplete = ({ navigation }) => {
           title="Go to Feed" onPress={() => navigation.navigate('Feed')} />
         </View>
         </View>
+        {showConfetti && (
+          <ConfettiCannon
+            count={200}
+            origin={{ x: -10, y: -10 }}
+            onAnimationEnd={handleAnimationEnd}
+            fallSpeed={2500}
+            autoStart={true}
+            autoStartDelay={0}
+            fadeOut={true}
+            colors={[GlobalStyles.colors.primary, GlobalStyles.colors.primary50]}
+          />
+        )}
+
     </MainBG>
   );
 };

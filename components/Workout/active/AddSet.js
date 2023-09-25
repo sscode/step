@@ -3,10 +3,13 @@ import { View, Text, TouchableOpacity, TextInput, StyleSheet, Keyboard } from 'r
 import { GlobalStyles } from '../../../constants/styles';
 import { ExerciseContext } from '../../../store/exerciseContext';
 import { addSetToFirebase, updateExerciseLastSet } from '../../../util/firebase/http';
+import { Vibration } from 'react-native';
+
 
 const AddSet = ({exerciseName, exerciseId}) => {
   const exerciseCtx = useContext(ExerciseContext);
   const user = exerciseCtx.exerciseData.User;
+
 
   // console.log('AddSet.js: ', user, exerciseId);
 
@@ -49,6 +52,9 @@ const AddSet = ({exerciseName, exerciseId}) => {
     // Add to context
     exerciseCtx.addSet(newSetWithId);
     exerciseCtx.updateLastSet(exerciseId, newSet.date);
+
+    //vibrate
+    Vibration.vibrate([0, 30]);
 
     // close keyboards
     Keyboard.dismiss();
