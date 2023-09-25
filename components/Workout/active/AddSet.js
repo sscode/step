@@ -2,13 +2,13 @@ import React, { useContext, useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput, StyleSheet, Keyboard } from 'react-native';
 import { GlobalStyles } from '../../../constants/styles';
 import { ExerciseContext } from '../../../store/exerciseContext';
-import { addSetToFirebase } from '../../../util/firebase/http';
+import { addSetToFirebase, updateExerciseLastSet } from '../../../util/firebase/http';
 
-const AddSet = ({exerciseName}) => {
+const AddSet = ({exerciseName, exerciseId}) => {
   const exerciseCtx = useContext(ExerciseContext);
   const user = exerciseCtx.exerciseData.User;
 
-  console.log('AddSet.js: ', user);
+  // console.log('AddSet.js: ', user, exerciseId);
 
   //filter to get sets for current exercise
   const setsForCurrentExercise = exerciseCtx.exerciseData.Sets.filter(
@@ -43,9 +43,12 @@ const AddSet = ({exerciseName}) => {
     // Add to firebase
     const newSetFirebaseId = await addSetToFirebase(user, newSet);
     const newSetWithId = { ...newSet, id: newSetFirebaseId.name };
+    //Add to firebase Exercise lastSet
+    updateExerciseLastSet(user, exerciseId, newSet.date)
     
     // Add to context
     exerciseCtx.addSet(newSetWithId);
+    exerciseCtx.updateLastSet(exerciseId, newSet.date);
 
     // close keyboards
     Keyboard.dismiss();

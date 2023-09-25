@@ -72,7 +72,7 @@ const InExercise = ({ navigation, route }) => {
         <Header exerciseName={exerciseName} />
         <PanGestureHandler onGestureEvent={panGesture}>
           <Animated.View style={[styles.exerciseContainer, animatedStyle]}>
-            <AddSet exerciseName={exerciseName} />
+            <AddSet exerciseName={exerciseName} exerciseId={exerciseId}/>
             <View style={styles.exerciseHistoryContainer}>
               <CurrentExercise
                 exerciseName={exerciseName}

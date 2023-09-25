@@ -38,6 +38,20 @@ export function exerciseReducer(state, action) {
         Sets: action.payload.sets,
         Exercises: action.payload.exercises,
       };
+      case 'UPDATE_LAST_SET':
+        const updatedExercises = state.Exercises.map(exercise => {
+          if (exercise.id === action.payload.exerciseId) {
+            return {
+              ...exercise,
+              lastSet: action.payload.lastSetDate,
+            };
+          }
+          return exercise;
+        });
+        return {
+          ...state,
+          Exercises: updatedExercises,
+        };
     case 'DELETE_SET':
         const filteredSets = state.Sets.filter((set) => set.id !== action.payload);
         return { ...state, Sets: filteredSets };

@@ -27,10 +27,11 @@ export const addSetToFirebase = async (userId, set) => {
   
   export const addExercise = async (userId, exerciseName, activeColor) => {
     console.log('addExercise :', userId, exerciseName, activeColor);
+    const date = new Date();
     try {
       const response = await axios.post(
         `${baseURL}/users/${userId}/exercises.json`,
-        { name: exerciseName, color: activeColor }
+        { name: exerciseName, color: activeColor, lastSet: date }
       );
       const data = response.data;
         console.log('Exercise added successfully:', data);
@@ -53,6 +54,23 @@ export const addSetToFirebase = async (userId, set) => {
       console.error('Error editing exercise:', error);
     }
   };
+
+  export const updateExerciseLastSet = async (userId, exerciseId, lastSetDate) => {
+    try {
+      const updateData = { lastSet: lastSetDate };
+      
+      const exerciseURL = `${baseURL}/users/${userId}/exercises/${exerciseId}.json`;
+  
+      const response = await axios.patch(exerciseURL, updateData);
+  
+      const data = response.data;
+      console.log('Exercise lastSet updated successfully:', data);
+      return data;
+    } catch (error) {
+      console.error('Error updating exercise lastSet:', error);
+    }
+  };
+  
 
   export const deleteExerciseFromFirebase = async (userId, exerciseId) => {
     try {

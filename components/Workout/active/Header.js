@@ -2,12 +2,13 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { GlobalStyles } from '../../../constants/styles';
 import PrimaryButton from '../../../UI/PrimaryButton';
+import Timer from './Timer';
 
 const Header = ({ exerciseName, nextExercise }) => {
   return (
     <View style={styles.header}>
       <Text style={styles.workoutName}>{exerciseName}</Text>
-      {/* <Text style={styles.counter}>1:32</Text> */}
+      <Timer exerciseName={exerciseName}/>
       {/* <PrimaryButton title={'Next'} onPress={nextExercise} small/> */}
     </View>
   );

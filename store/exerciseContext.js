@@ -26,6 +26,11 @@ function ExerciseContextProvider({ children }) {
     dispatch({ type: 'DELETE_SET', payload: setId });
   }
 
+  function updateLastSet(exerciseId, lastSetDate) {
+    // 1. Dispatch action to update the context state
+    dispatch({ type: 'UPDATE_LAST_SET', payload: { exerciseId, lastSetDate } });
+  }
+
   function clearSets() {
     dispatch({ type: 'CLEAR_SETS' });
   }
@@ -83,6 +88,7 @@ function ExerciseContextProvider({ children }) {
     editExercise: editExercise,
     updateUser: updateUser,
     resetContext: resetContext,
+    updateLastSet: updateLastSet,
   };
 
   return (

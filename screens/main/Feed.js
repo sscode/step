@@ -32,7 +32,12 @@ const Feed = ({ navigation }) => {
           if (data.exercises) {
             for (const key in data.exercises) {
               const name = data.exercises[key].name;
-              exercisesArray.push({ id: key, name: name, color: data.exercises[key].color });
+              exercisesArray.push({ 
+                id: key, 
+                name: name, 
+                color: data.exercises[key].color,
+                lastSet: data.exercises[key].lastSet,
+              });
             }
           }
     
@@ -102,7 +107,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     paddingHorizontal: 24,
-    marginBottom: 12,
+    marginVertical: 12,
   },
   buttonContainer: {
     width: '60%',

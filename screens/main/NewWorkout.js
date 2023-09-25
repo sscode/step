@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import AddExerciseModal from '../../components/Workout/pre/AddExerciseModal';
 import { GlobalStyles } from '../../constants/styles';
 import { ExerciseContext } from '../../store/exerciseContext';
@@ -14,22 +15,23 @@ const NewWorkout = ({ navigation }) => {
   const exerciseCtx = useContext(ExerciseContext);
   const user = exerciseCtx.exerciseData.User
   const [toggleState, setToggleState] = useState(false);
+  const [exerciseOrder, setExerciseOrder] = useState([]);
+
     
   const exercises = exerciseCtx.exerciseData.Exercises;
-
+  
   const [selectedExercisesIds, setSelectedExercisesIds] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [newExerciseName, setNewExerciseName] = useState('');
   const [activeColor, setActiveColor] = useState('');
-
-  // useEffect(() => {
-  //   //header
-  //   navigation.setOptions({
-  //     headerShown: true,
-  //     headerTransparent: true,
-  //     headerTitle: '',
-  //   });
-  // }, []);
+  
+  useFocusEffect(
+    React.useCallback(() => {
+      exercises.sort((a, b) => b.lastSet.localeCompare(a.lastSet));
+      setExerciseOrder(exercises);
+      // console.log('NewWorkout.js: ', exercises);
+    }, [exercises])
+  );
 
   const handleAddExercise = async () => {
     console.log('Adding exercise. ', user, newExerciseName, activeColor);
@@ -81,11 +83,10 @@ const NewWorkout = ({ navigation }) => {
           {/* <WorkoutStyle toggleState={toggleState} setToggleState={setToggleState}/> */}
         </View>
         <View style={styles.exerciseContainer}>
-          <ExerciseList exercises={exercises} toggleExercise={toggleExercise} selectedExercisesIds={selectedExercisesIds} />
+          <ExerciseList exercises={exerciseOrder} toggleExercise={toggleExercise} selectedExercisesIds={selectedExercisesIds} />
         </View>
 
-        <View style={styles.buttonsContainer}>
-            {/* <PrimaryButton title={'Set Order'} onPress={setOrder} style={styles.setOrderButton} /> */}
+        <View style={[styles.buttonsContainer, styles.bottom]}>
             <PrimaryButton 
             style={'green'}
             title={'Share Workout'} onPress={endWorkout} />
@@ -125,7 +126,10 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'center',
       width: '80%',
-      marginBottom: 20,
+      marginVertical: 20,
+    },
+    bottom: {
+      paddingBottom: 20,
     },
     exerciseContainer: {
       flex: 1,
