@@ -4,12 +4,14 @@ import { GlobalStyles } from '../../../constants/styles';
 import { ExerciseContext } from '../../../store/exerciseContext';
 import { addSetToFirebase, updateExerciseLastSet } from '../../../util/firebase/http';
 import { Vibration } from 'react-native';
+import { userContext } from '../../../store/userContext';
 
 
 const AddSet = ({exerciseName, exerciseId}) => {
   const exerciseCtx = useContext(ExerciseContext);
   const user = exerciseCtx.exerciseData.User;
 
+  const userCtx = useContext(userContext);
 
   // console.log('AddSet.js: ', user, exerciseId);
 
@@ -54,7 +56,10 @@ const AddSet = ({exerciseName, exerciseId}) => {
     exerciseCtx.updateLastSet(exerciseId, newSet.date);
 
     //vibrate
-    Vibration.vibrate([0, 30]);
+    if(userCtx.haptic){
+      console.log('vibrate');
+      Vibration.vibrate([0, 30]);
+    }
 
     // close keyboards
     Keyboard.dismiss();

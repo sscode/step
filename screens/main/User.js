@@ -5,6 +5,7 @@ import Contact from '../../components/User/Contact';
 import DeleteUser from '../../components/User/Delete';
 import Logout from '../../components/User/Logout';
 import Profile from '../../components/User/Profile';
+import Settings from '../../components/User/Settings';
 import { userContext } from '../../store/userContext';
 import MainBG from '../../UI/MainBG';
 
@@ -21,7 +22,12 @@ function UserScreen({ navigation }) {
         <MainBG
         >
             <View style={styles.container}>
-                <Profile email={userEmail} />
+                <View style={styles.top}>
+                    <Profile email={userEmail} />
+                    <View style={styles.settings}>
+                        <Settings />
+                    </View>
+                </View>
                 <View style={styles.footer}>
                     <View style={styles.buttonContainer}>
                         <DeleteUser email={userEmail} />
@@ -45,6 +51,15 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-between',
+    },
+    top: {
+        width: '100%',
+        height: '45%',
+        alignItems: 'center',
+    },
+    settings: {
+        width: '100%',
+        paddingHorizontal: 24,
     },
     footer: {
         width: '100%',

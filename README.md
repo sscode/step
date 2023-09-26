@@ -6,13 +6,11 @@
 # Improvements
 - edite name of exercise without losing history. Get history by ID and not by name.
 - edit time of exercise
-- sort exercises by most recent
+- user settings: haptic to save to device
 - slide right on exercise page to reveal stats on exercise
 - correct sorting feature on CurrentExercise
 - lbs and weights correction (to weight) and include lbs & kilos
 - Correct time/date to timezone and not UTC-0
-- custom color code exercise by type
-- close bottomSheet on save
 - user page Delete user actually delete
 - Login Page Paper BG
 - Login Page focus fields for text
@@ -26,6 +24,9 @@
 
 
 # Done
+- custom color code exercise by type
+- close bottomSheet on save
+- sort exercises by most recent
 - user page Login/Create
 - clear text to 0 when clicked
 - Correct Sum of LBS in summaries

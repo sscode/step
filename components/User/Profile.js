@@ -8,9 +8,9 @@ function Profile({email}){
     return( 
         <View style={styles.container}>
             <View>
-                {/* <Image 
+                <Image 
                 style={styles.image}
-                source={require('../../assets/profile1.png')}/> */}
+                source={require('../../assets/Profile.png')}/>
             </View>
             <View style={styles.textContainer}>
                 {/* <Text style={styles.text}>Stuart Sim</Text> */}
