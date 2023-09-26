@@ -6,6 +6,12 @@ import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated, { useAnimatedGestureHandler, useAnimatedStyle, useSharedValue, withSpring, runOnUI, runOnJS } from 'react-native-reanimated';
 import { ExerciseContext } from '../../../store/exerciseContext';
 import { deleteSetFromFirebase } from '../../../util/firebase/http';
+import * as Haptics from 'expo-haptics';
+
+const haptic = () => {
+    // console.log('haptic');
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    };
 
 const ExerciseDetailItem = ({ item }) => {
   const exerciseCtx = useContext(ExerciseContext);
@@ -25,6 +31,7 @@ const ExerciseDetailItem = ({ item }) => {
         // deleteHandler();
         runOnJS(deleteSetFromFirebase)(user, item.id)
         runOnJS(deleteSet)(item.id);
+        runOnJS(haptic)();
         console.log('delete set ', item.id);
       } else {
         console.log('swipe right');
@@ -38,20 +45,20 @@ const ExerciseDetailItem = ({ item }) => {
   }));
 
   // Handle asynchronous deletion
-  useEffect(() => {
-    const unsubscribe = () => {
-      if (translateX.value < -100) {
-        console.log('delete set ', item.id);
-        deleteSetFromFirebase(user, item.id).then((success) => {
-          if (success) {
-            // Set the translation back to 0 if the deletion is successful
-            translateX.value = withSpring(0);
-          }
-        });
-      }
-    };
-    return unsubscribe;
-  }, [user, item.id, translateX]);
+//   useEffect(() => {
+//     const unsubscribe = () => {
+//       if (translateX.value < -100) {
+//         console.log('delete set ', item.id);
+//         deleteSetFromFirebase(user, item.id).then((success) => {
+//           if (success) {
+//             // Set the translation back to 0 if the deletion is successful
+//             translateX.value = withSpring(0);
+//           }
+//         });
+//       }
+//     };
+//     return unsubscribe;
+//   }, [user, item.id, translateX]);
 
   const time = getShortDateAndTime(item.date);
 //   console.log('shortDate', time);

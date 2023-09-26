@@ -4,6 +4,7 @@ import { GlobalStyles } from '../../../constants/styles';
 import { ExerciseContext } from '../../../store/exerciseContext';
 import { addSetToFirebase, updateExerciseLastSet } from '../../../util/firebase/http';
 import { Vibration } from 'react-native';
+import * as Haptics from 'expo-haptics';
 import { userContext } from '../../../store/userContext';
 
 
@@ -58,7 +59,12 @@ const AddSet = ({exerciseName, exerciseId}) => {
     //vibrate
     if(userCtx.haptic){
       console.log('vibrate');
-      Vibration.vibrate([0, 30]);
+      // Vibration.vibrate([0, 30]);
+      // Haptics.selectionAsync()
+      Haptics.notificationAsync(
+        Haptics.NotificationFeedbackType.Success
+      )
+      // Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
     }
 
     // close keyboards
