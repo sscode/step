@@ -11,13 +11,8 @@ import MainBG from '../../UI/MainBG';
 
 function UserScreen({ navigation }) {
     const userCtx = useContext(userContext);
+    const userEmail = userCtx.user ? userCtx.user.email : '';
     
-    const [userEmail, setUserEmail] = useState('');
-
-    useEffect(() => {
-        setUserEmail(userCtx.user.length > 0 ? userCtx.user[0].email || '' : '');
-    }, [userCtx.user]);
-
     return (
         <MainBG
         >

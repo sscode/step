@@ -19,13 +19,19 @@ const Timer = ({ exerciseName }) => {
     // Function to format seconds as "mm:ss"
     const formatTime = (seconds) => {
         if (isNaN(seconds)) {
-        return '0:00'; // Handle NaN case
+          return '0:00'; // Handle NaN case
         }
-
+      
         const minutes = Math.floor(seconds / 60);
         const remainingSeconds = seconds % 60;
+      
+        if (minutes > 90) {
+          return '0:00'; // If elapsed time is greater than 90 minutes, show "0:00"
+        }
+      
         return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
-    };
+      };
+      
   
     useEffect(() => {
       let timer;

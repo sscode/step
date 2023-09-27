@@ -40,6 +40,7 @@ function ExerciseContextProvider({ children }) {
       id: exercises.id,
       name: exercises.name,
       color: exercises.color,
+      lastSet: exercises.lastSet,
     };
     dispatch({ type: 'ADD_EXERCISE', payload: newExercise });
   }

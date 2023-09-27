@@ -87,7 +87,7 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
     }
   
     return (
-      <KeyboardAvoidingView style={styles.container}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
         <LoginHero />
         <View style={styles.inputContainer}>
           <View style={styles.emailInput}>

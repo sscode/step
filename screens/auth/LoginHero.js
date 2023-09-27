@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: -30,
+        marginTop: 30,
     },
     header: {
         fontSize: 90,
@@ -39,12 +39,12 @@ const styles = StyleSheet.create({
         color: GlobalStyles.colors.white,
         },
     subheader: {
-        fontSize: 24,
+        fontSize: 18,
         color: GlobalStyles.colors.white,
         },
     image: {
-        width: 75,
-        height: 75,
-        marginTop: 150,
+        width: 50,
+        height: 50,
+        marginVertical: 15,
     },
 })

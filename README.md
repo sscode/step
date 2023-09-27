@@ -1,9 +1,8 @@
 ## Prolift
 
-# Need to launch
-
-
 # Improvements
+- custom font
+- Add Set (buttons to side of reps/weights with +10lbs or +1 rep)
 - edite name of exercise without losing history. Get history by ID and not by name.
 - edit time of exercise
 - user settings: haptic to save to device
@@ -14,9 +13,13 @@
 - user page Delete user actually delete
 - Login Page Paper BG
 - Login Page focus fields for text
+- Badges
+- Email triggers
 
 
 # bugs
+- splashscreen to real screen
+- if 2 new exercises are added in a row, then b.lastSet.localCompare error
 - weird email autocorrect on email signup
 - User logout not clearing state correctly
 - delete exercises. It works but throws an error.
@@ -24,6 +27,7 @@
 
 
 # Done
+- Signup screen keyboard modal covers boxes
 - custom color code exercise by type
 - close bottomSheet on save
 - sort exercises by most recent

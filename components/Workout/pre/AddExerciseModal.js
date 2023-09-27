@@ -33,6 +33,7 @@ const AddExerciseModal = ({ visible, onAdd, onCancel, onChangeText, value, activ
             placeholder="Exercise name"
             style={styles.modalInput}
             autoFocus={true}
+            maxLength={22}
           />
           <View style={styles.modalButtons}>
             <TouchableOpacity onPress={onCancel} style={styles.cancelButton}>
@@ -60,6 +61,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 20,
     width: '80%',
+    marginBottom: 250,
   },
   modalTitle: {
     fontSize: 24,
@@ -92,8 +94,6 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalStyles.colors.primary,
     borderRadius: 3,
     paddingVertical: 10,
-
-
   },
   cancelButton: {
     width: '30%',

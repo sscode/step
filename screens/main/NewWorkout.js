@@ -27,16 +27,19 @@ const NewWorkout = ({ navigation }) => {
   
   useFocusEffect(
     React.useCallback(() => {
+      console.log('NewWorkout.js: running');
       exercises.sort((a, b) => b.lastSet.localeCompare(a.lastSet));
       setExerciseOrder(exercises);
       // console.log('NewWorkout.js: ', exercises);
     }, [exercises])
   );
+  
 
   const handleAddExercise = async () => {
     console.log('Adding exercise. ', user, newExerciseName, activeColor);
-    const newExerciseFirebaseId = await addExercise(user, newExerciseName, activeColor);
-    exerciseCtx.addExercise({id: newExerciseFirebaseId, name: newExerciseName, color: activeColor});
+    const date = new Date();
+    const newExerciseFirebaseId = await addExercise(user, newExerciseName, activeColor, date);
+    exerciseCtx.addExercise({id: newExerciseFirebaseId, name: newExerciseName, color: activeColor, lastSet: date});
     setModalVisible(false);
     setNewExerciseName('');
   };
