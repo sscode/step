@@ -54,7 +54,7 @@ const Stats = ({ exerciseName }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Your Stats</Text>
+      <Text style={styles.header}>Your {exerciseName} Stats</Text>
       <View style={styles.row}>
         <Text style={styles.label}>Max All-Time Lbs:</Text>
         <Text style={styles.value}>{maxAllTimeLbs}</Text>

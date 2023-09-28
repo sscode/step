@@ -6,6 +6,7 @@ import { addSetToFirebase, updateExerciseLastSet } from '../../../util/firebase/
 import { Vibration } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import { userContext } from '../../../store/userContext';
+import InputRow from './InputRow';
 
 
 const AddSet = ({exerciseName, exerciseId}) => {
@@ -35,7 +36,9 @@ const AddSet = ({exerciseName, exerciseId}) => {
 
   const addSetHandler = async () => {
 
-    if(reps === '0'){
+    if (reps <= 0 || weight < 0) {
+      // Display an error message or take appropriate action
+      console.log('Reps and weight must be non-negative values.');
       return;
     }
 
@@ -60,11 +63,9 @@ const AddSet = ({exerciseName, exerciseId}) => {
     if(userCtx.haptic){
       console.log('vibrate');
       // Vibration.vibrate([0, 30]);
-      // Haptics.selectionAsync()
       Haptics.notificationAsync(
         Haptics.NotificationFeedbackType.Success
       )
-      // Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
     }
 
     // close keyboards
@@ -74,32 +75,20 @@ const AddSet = ({exerciseName, exerciseId}) => {
   return (
     <View style={styles.container}>
         <View style={styles.inputForm}>
-          <View style={styles.inputContainer}>
-            <Text style={styles.inputHeader}>Reps</Text>
-            <TextInput
-              style={styles.input}
-              placeholder={reps}
-              placeholderTextColor={GlobalStyles.colors.white}
-              value={reps}
-              onChangeText={setReps}
-              keyboardType="numeric"
-              maxLength={3}
-              onFocus={() => setReps('')}
-              />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.inputHeader}>Weight</Text>
-            <TextInput
-              style={styles.input}
-              placeholder={weight}
-              placeholderTextColor={GlobalStyles.colors.white}
-              value={weight}
-              onChangeText={setWeight}
-              keyboardType="numeric"
-              maxLength={3}
-              onFocus={() => setWeight('')}
-              />
-          </View>
+          <InputRow
+            label="Reps"
+            value={reps}
+            placeholder={reps}
+            onChangeText={setReps}
+            amount={1}
+          />
+          <InputRow
+          label="Weight"
+          value={weight}
+          placeholder={weight}
+          onChangeText={setWeight}
+          amount={5}
+          />
         </View>
         <TouchableOpacity style={styles.repeatAddButton} onPress={addSetHandler}>
           <Text style={styles.buttonText}>Add Set</Text>
@@ -116,32 +105,13 @@ const styles = StyleSheet.create({
     // backgroundColor: GlobalStyles.colors.primary,
   },
   inputForm: {
-    left: -5,
-    width: '50%',
-    flexDirection: 'row',
+    // width: '100%',
+    // flexDirection: 'column',
     // backgroundColor: GlobalStyles.colors.primary100,
-  },
-  inputContainer: {
-    marginVertical: 16,
-    width: '50%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    // backgroundColor: 'red',
-  },
-  inputHeader: {
-    color: GlobalStyles.colors.white,
-    fontSize: 12,
-    // fontWeight: 'small',
-  },
-  input: {
-    paddingVertical: 8,
-    textAlign: 'center',
-    color: GlobalStyles.colors.white,
-    fontSize: 36,
-    fontWeight: 'bold',
+    marginBottom: 16,
   },
   repeatAddButton: {
-    width: '70%',
+    width: '60%',
     paddingVertical: 16,
     borderRadius: 5,
     borderColor: GlobalStyles.colors.primary,

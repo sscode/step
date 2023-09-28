@@ -1,16 +1,23 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MainBG from '../../../../UI/MainBG';
 import BottomSheet from './edit/BottomSheet';
 import { AntDesign } from '@expo/vector-icons';
 import { GlobalStyles } from '../../../../constants/styles';
 import Stats from './stats/Stats';
 
-const MoreExerciseInfo = ({ route }) => {
+const MoreExerciseInfo = ({ navigation, route }) => {
   const { exerciseName } = route.params;
   const { exerciseId } = route.params;
   const { exerciseColor } = route.params;
   const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
+
+  useEffect(() => {
+    //header
+    navigation.setOptions({
+      headerTitle: 'Exercise Details',
+    });
+  }, []);
 
   const handleEditButtonPress = () => {
     setBottomSheetVisible(!bottomSheetVisible);

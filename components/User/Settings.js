@@ -8,12 +8,13 @@ const Settings = () => {
 
   // Initialize addSetVibration with the value from userCtx.haptic
   const [addSetVibration, setAddSetVibration] = useState(userCtx.haptic);
+  const [weightLbs, setWeightLbs] = useState(true);
 
   // Function to toggle the Add Set Vibration setting
   const toggleAddSetVibration = () => {
     const updatedValue = !addSetVibration; // Toggle the value
-    setAddSetVibration(updatedValue); // Update the local state
-    userCtx.updateHaptic(updatedValue); // y
+    setAddSetVibration(updatedValue); 
+    userCtx.updateHaptic(updatedValue); 
     console.log('updatedValue', updatedValue);
   };
 
@@ -24,26 +25,41 @@ const Settings = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.settingLabel}>Add Set Vibration</Text>
-      <Switch
-        value={addSetVibration}
-        onValueChange={toggleAddSetVibration}
-        thumbColor={addSetVibration ? GlobalStyles.colors.primary : '#f4f3f4'}
-      />
+        <View style={styles.settingRow}>
+            <Text style={styles.settingLabel}>Add Set Vibration</Text>
+            <Switch
+                value={addSetVibration}
+                onValueChange={toggleAddSetVibration}
+                thumbColor={addSetVibration ? GlobalStyles.colors.primary : '#f4f3f4'}
+            />
+        </View>
+        {/* <View style={styles.settingRow}>
+            <Text style={styles.settingLabel}>Weight in Lbs</Text>
+            <Switch
+                value={addSetVibration}
+                // onValueChange={toggleAddSetVibration}
+                thumbColor={addSetVibration ? GlobalStyles.colors.primary : '#f4f3f4'}
+            />
+        </View> */}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    alignItems: 'center',
-    justifyContent: 'space-between',
     backgroundColor: GlobalStyles.colors.grey,
     borderRadius: 5,
   },
+    settingRow: {
+        paddingHorizontal: 16,
+        paddingVertical: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    borderBottomColor: GlobalStyles.colors.grey100,
+    borderBottomWidth: 1,
+    },
   settingLabel: {
     fontSize: 18,
   },

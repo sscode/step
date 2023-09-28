@@ -2,6 +2,7 @@
 
 # Improvements
 - custom font
+- Card Alignment "Reps" and "lbs" to edge
 - Add Set (buttons to side of reps/weights with +10lbs or +1 rep)
 - edite name of exercise without losing history. Get history by ID and not by name.
 - edit time of exercise

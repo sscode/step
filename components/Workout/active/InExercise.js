@@ -58,6 +58,8 @@ const InExercise = ({ navigation, route }) => {
       } else if (event.translationX > 100) {
         console.log('swipe right');
         translateX.value = withSpring(0);
+      } else {
+        translateX.value = withSpring(0);
       }
     },
   });
