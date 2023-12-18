@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "prolift",
-    "slug": "prolift",
-    "version": "1.1.2",
+    "name": "Step with Friends",
+    "slug": "step-with-friends",
+    "version": "1.1.5",
     "orientation": "portrait",
     "icon": "./assets/iconprolift.png",
     "userInterfaceStyle": "light",
@@ -28,7 +28,7 @@
       "**/*"
     ],
     "ios": {
-      "buildNumber": "1.1.2",
+      "buildNumber": "1.1.5",
       "supportsTablet": true,
       "bundleIdentifier": "com.prolift.mobile",
       "infoPlist": {
