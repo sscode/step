@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: 40,
         height: 40,
-        backgroundColor: 'pink',
+        backgroundColor: '#6dff37',
         borderRadius: 8,
     },
 })

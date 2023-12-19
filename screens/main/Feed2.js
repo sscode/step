@@ -1,10 +1,18 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../../components/Header/Header'
 import Group from '../../components/Feed/Group'
 import NavContainer from '../../components/BottomNav/NavContainer'
 
-const Feed2 = () => {
+const Feed2 = ({navigation}) => {
+
+    useEffect(() => {
+        //header
+        navigation.setOptions({
+            headerShown: false,
+        });
+    }
+    , [navigation])
 
     const groupData = [
         {

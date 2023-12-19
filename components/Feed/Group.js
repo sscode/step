@@ -5,6 +5,8 @@ import Member from './Member'
 import { GlobalStyles } from '../../constants/styles'
 
 const Group = ({groupData}) => {
+
+
   return (
     <View style={styles.groupList}>
         <FlatList

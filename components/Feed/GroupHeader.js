@@ -1,11 +1,30 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { TouchableOpacity, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native';
 
 const GroupHeader = ({groupData}) => {
+
+    const navigation = useNavigation();
+
+    const pressHandler = () => {
+        console.log(groupData.groupName)
+        navigation.navigate('EditGroup', {groupData})
+    }
+
+
   return (
     <View style={styles.container}>
-        <Text style={styles.header}>🐧</Text>
-      <Text style={[styles.header, styles.right]}>{groupData.groupName}</Text>
+        <View style={styles.leftContainer}>
+            <Text style={styles.header}>🐧</Text>
+            <Text style={[styles.header, styles.right]}>{groupData.groupName}</Text>
+        </View>
+        <View style={styles.rightContainer}>
+            <TouchableOpacity
+            onPress={pressHandler}
+            >
+                <Text>...</Text>
+            </TouchableOpacity>
+        </View>
     </View>
   )
 }
@@ -17,8 +36,22 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         width: '100%',
+    },
+    leftContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        width: '50%',
+    },
+    rightContainer: {
+        width: '50%',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
     },
     header: {
         fontSize: 24,
