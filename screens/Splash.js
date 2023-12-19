@@ -8,14 +8,14 @@ const SplashScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <ImageBackground 
+      {/* <ImageBackground 
       source={require('../assets/ergbg.png')} 
-      style={styles.image}>
+      style={styles.image}> */}
         <View style={styles.containerInner}>
           <Text style={styles.header}>Welcome to Workout</Text>
-          <LoginScreen navigation={navigation} />
+          {/* <LoginScreen navigation={navigation} /> */}
         </View>
-      </ImageBackground>
+      {/* </ImageBackground> */}
     </View>
   );
 };

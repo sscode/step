@@ -91,7 +91,7 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
         <LoginHero />
         <View style={styles.inputContainer}>
           <View style={styles.emailInput}>
-            <TextInput
+            {/* <TextInput
               value={email}
               keyboardType='email-address'
               placeholder='Email'
@@ -99,10 +99,10 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
               placeholderTextColor= {GlobalStyles.colors.grey100}
               onChangeText={setEmail}
               onFocus={clearError}
-            />
+            /> */}
           </View>
 
-          <TextInput
+          {/* <TextInput
             value={password}
             placeholder='Password'
             secureTextEntry
@@ -110,7 +110,7 @@ const LoginScreen = ({navigation = { navigate: () => {} }}) => {
             placeholderTextColor= {GlobalStyles.colors.grey100}
             onChangeText={setPassword}
             onFocus={clearError}
-          />
+          /> */}
         </View>
   
         {error ? <Text style={styles.error}>{error}</Text> : null}

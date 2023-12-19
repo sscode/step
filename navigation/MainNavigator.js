@@ -11,6 +11,7 @@ import WorkoutComplete from '../screens/main/WorkoutComplete';
 import MoreExerciseInfo from '../components/Workout/active/details/MoreExerciseInfo';
 import LoginScreen from '../screens/auth/LoginScreen';
 import UserScreen from '../screens/main/User';
+import Feed2 from '../screens/main/Feed2';
 
 
 const Stack = createStackNavigator();
@@ -23,9 +24,13 @@ export const MainNavigator = () => {
             headerTintColor: GlobalStyles.colors.white}}
         >
             <Stack.Screen
+                name="Feed2"
+                component={Feed2}
+            />
+            {/* <Stack.Screen
                 name="login"
                 component={LoginScreen}
-            />
+            /> */}
             <Stack.Screen
                 name="Feed"
                 component={Feed}
