@@ -1,20 +1,60 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-import { useRoute } from '@react-navigation/native'; // Import useRoute from '@react-navigation/native'
+import React, { useEffect } from 'react';
+import { useRoute } from '@react-navigation/native';
+import Header from '../../components/Header/Header';
+import MemberEdit from '../../components/Edit/MemberEdit';
+import { GlobalStyles } from '../../constants/styles';
 
-const EditGroup = () => {
-    const route = useRoute(); // Use useRoute to access route parameters
+const EditGroup = ({navigation}) => {
+    const route = useRoute();
     const { groupData } = route.params;
+    const memberSteps = groupData.stepsPerUser;
 
-    console.log(groupData);
+    useEffect(() => {
+        //header
+        navigation.setOptions({
+            headerShown: true,
+            headerStyle: {
+                backgroundColor: GlobalStyles.colors1.primary,
+            },
+        });
+    }
+    , [navigation])
+    
+    
 
     return (
         <View>
-            <Text>{groupData.groupName}</Text>
+            <Header />
+            <View style={styles.container}>
+                    <Text>{groupData.groupName}</Text>
+                    {Object.keys(memberSteps).map((key) => (
+                        <MemberEdit
+                            member={key}
+                            key={key}
+                        />
+                    ))}
+            </View>
         </View>
     );
 };
 
 export default EditGroup;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    container: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        backgroundColor: GlobalStyles.colors1.grey100,
+        paddingHorizontal: 8,
+    },
+    innerContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '90%',
+        backgroundColor: 'blue',
+    },
+});

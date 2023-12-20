@@ -4,6 +4,7 @@ export const GlobalStyles = {
     black: '#252525',
     grey100: '#F8F8F8',
     grey200: '#D9D9D9',
+    error: '#FF0000',
   },
   colors: {
     white: '#ffffff',

@@ -6,10 +6,10 @@ import { GlobalStyles } from '../../constants/styles'
 
 const Group = ({groupData}) => {
 
-
   return (
     <View style={styles.groupList}>
         <FlatList
+        showsVerticalScrollIndicator={false}
         data={groupData}
         renderItem={({item}) => {
             return (
@@ -40,13 +40,15 @@ const styles = StyleSheet.create({
         width: '100%',
         // backgroundColor: GlobalStyles.colors1.primary,
         alignItems: 'center',
+        paddingHorizontal: 8,
+        marginTop: 12,
         marginBottom: 160,
     },
     group: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '95%',
+        width: '100%',
         backgroundColor: GlobalStyles.colors1.grey100,
         paddingHorizontal: 8,
         marginBottom: 16,
