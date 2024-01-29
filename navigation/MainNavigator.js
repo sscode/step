@@ -13,6 +13,7 @@ import LoginScreen from '../screens/auth/LoginScreen';
 import UserScreen from '../screens/main/User';
 import Feed2 from '../screens/main/Feed2';
 import EditGroup from '../screens/main/EditGroup';
+import Recorder from '../screens/main/Recorder';
 
 
 const Stack = createStackNavigator();
@@ -24,6 +25,12 @@ export const MainNavigator = () => {
         screenOptions={{
             headerTintColor: GlobalStyles.colors.white}}
         >
+            <Stack.Screen
+                name="Recording"
+                component={Recorder}
+                options={{ 
+                    headerTransparent: true, 
+            }} />
             <Stack.Screen
                 name="Feed2"
                 component={Feed2}
